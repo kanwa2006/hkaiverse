@@ -1,0 +1,30 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\acer\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\acer\OneDrive\Desktop\ResultFlow_Task1_submission\prototype
+plugins: anyio-4.14.2, asyncio-1.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 20 items
+
+test_resultflow.py::test_case1_normal PASSED                             [  5%]
+test_resultflow.py::test_case2_missing_information PASSED                [ 10%]
+test_resultflow.py::test_case3_duplicate PASSED                          [ 15%]
+test_resultflow.py::test_case4_unauthorized PASSED                       [ 20%]
+test_resultflow.py::test_case5_failed_step_and_recovery PASSED           [ 25%]
+test_resultflow.py::test_grade_replacement_a_to_c_same_course PASSED     [ 30%]
+test_resultflow.py::test_grade_replacement_pending_then_publish_sequence PASSED [ 35%]
+test_resultflow.py::test_effective_grade_unchanged_while_pending PASSED  [ 40%]
+test_resultflow.py::test_sync_failure_does_not_change_effective_grade PASSED [ 45%]
+test_resultflow.py::test_sync_failure_stale_then_recovery PASSED         [ 50%]
+test_resultflow.py::test_unapproved_cannot_publish PASSED                [ 55%]
+test_resultflow.py::test_advance_cannot_publish_or_skip PASSED           [ 60%]
+test_resultflow.py::test_deadline_flag_is_flag_only PASSED               [ 65%]
+test_resultflow.py::test_audit_tamper_detected PASSED                    [ 70%]
+test_resultflow.py::test_audit_includes_timestamps PASSED                [ 75%]
+test_resultflow.py::test_retry_sync_unauthorized PASSED                  [ 80%]
+test_resultflow.py::test_unknown_key_safe PASSED                         [ 85%]
+test_resultflow.py::test_missing_student_id_safe PASSED                  [ 90%]
+test_resultflow.py::test_invalid_role_denied PASSED                      [ 95%]
+test_resultflow.py::test_duplicate_different_type_not_duplicate PASSED   [100%]
+
+============================= 20 passed in 0.06s ==============================

@@ -1,0 +1,14 @@
+# Python cache -- never commit these
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
