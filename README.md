@@ -25,14 +25,14 @@
 
 ```mermaid
 flowchart LR
-    A([Student submits\nimprovement attempt]) --> B[REGISTERED]
+    A(["Student submits<br/>improvement attempt"]) --> B[REGISTERED]
     B --> C[EXAM_COMPLETED]
     C --> D[RESULT_PROCESSING]
     D --> E[UNDER_VERIFICATION]
     E --> F[AWAITING_APPROVAL]
-    F --> G{Approver\ndecision}
-    G -->|Approve| H([PUBLISHED\nGrade synced to placement])
-    G -->|Reject| I([Attempt closed\nno grade change])
+    F --> G{"Approver<br/>decision"}
+    G -->|Approve| H(["PUBLISHED<br/>Grade synced to placement"])
+    G -->|Reject| I(["Attempt closed<br/>no grade change"])
     style H fill:#22c55e,color:#fff
     style I fill:#ef4444,color:#fff
     style G fill:#f59e0b,color:#fff
@@ -58,15 +58,15 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A([Course portal\nscreenshots\nSems I–VII]) --> B[52 baseline courses\n+ 1 proposed lab\n(53 comparison rows)]
-    B --> C[Audit 12 redesign\nreasons — CURRICULUM_AUDIT.md]
-    C --> D{Decision per course}
+    A(["Course portal<br/>screenshots<br/>Sems I-VII"]) --> B["52 baseline courses<br/>+ 1 proposed lab<br/>53 comparison rows"]
+    B --> C["Audit 12 redesign<br/>reasons"]
+    C --> D{"Decision<br/>per course"}
     D -->|KEEP| E[40 courses unchanged]
     D -->|UPDATE| F[9 courses improved]
-    D -->|REDUCE| G[3 courses reduced\n-3 credits]
-    D -->|ADD| H[1 new lab added\n+3 credits]
-    E & F & G & H --> I([Proposed total\n167 credits\nnet = 0])
-    J([3 job descriptions\nACHNET · JPMorgan\nJoveo]) --> K[Gap analysis\nJOB_DESCRIPTION_COMPARISON.md]
+    D -->|REDUCE| G["3 courses reduced<br/>-3 credits"]
+    D -->|ADD| H["1 new lab added<br/>+3 credits"]
+    E & F & G & H --> I(["Proposed total<br/>167 credits<br/>net = 0"])
+    J(["3 job descriptions<br/>ACHNET / JPMorgan<br/>Joveo"]) --> K["Gap analysis<br/>JOB_DESCRIPTION_COMPARISON.md"]
     K --> F & H
     style I fill:#22c55e,color:#fff
     style J fill:#3b82f6,color:#fff
