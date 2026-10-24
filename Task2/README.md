@@ -110,25 +110,23 @@ The conservative estimate (Method A) counts the three courses whose credit value
 
 Three calculation methods are compared in [CREDIT_CALCULATIONS.md](CREDIT_CALCULATIONS.md). Method A (~20%) is the most conservative and honest figure.
 
-**Note:** HS301 Constitution of India is shown as 0 credits throughout, following a direct student instruction. A discrepancy between this and the portal screenshot is documented in CREDIT_CALCULATIONS.md.
+**Note:** HS301 Constitution of India is shown as 0 credits throughout, consistent with both the student instruction and the Semester V portal screenshot (`assets/sem5_courses.png`). No discrepancy exists.
 
 ---
 
-## 5. Evidence from 2026 Job Descriptions
+## 5. Evidence from Job Descriptions
 
-I accessed the career portals of three major employers on **24 October 2026** and reviewed their entry-level software engineering requirements:
+Three job description PDFs were read directly (using `pypdf`) on 24 October 2026:
 
-| Role | Employer | Skills listed |
-|---|---|---|
-| Associate Software Engineer | Accenture India | Python or Java, REST APIs, Git, OOP, cloud basics, 60%+ CGPA |
-| Software Engineer — Entry Level | IBM India | Python or Java, REST APIs, Git, SQL, Docker, unit testing |
-| Software Engineer — Early Career | Cisco India | Java or Python, REST APIs, Git, Docker/Kubernetes, OS and networks fundamentals |
+| Role | Employer | Evidence File | Common Skills Required |
+|---|---|---|---|
+| Software Engineer (SDE) | ACHNET | `job_descriptions/Detailed Job Description - Tescra.pdf` | Python, OOP, Data Structures, HTML/CSS/JS, full SDLC, Agile, NoSQL |
+| Data Analyst — Fresher | JPMorgan Chase & Co. | `job_descriptions/JPMorgan_Chase_Data_Analyst_Fresher.pdf` | SQL (advanced), Python (Pandas/NumPy), Statistics, Power BI/Tableau, EDA |
+| Software Engineering Intern (Full Stack) | Joveo | `job_descriptions/Joveo_SE_Intern_JD.pdf` | React/Next.js, Node.js/Express, PostgreSQL, REST APIs, Git, LLMs |
 
-All three roles consistently listed **REST API knowledge**, **Git proficiency**, and **practical coding ability** as requirements. The current curriculum covers the underlying concepts in CS205, CS304, and CS201, but without a hands-on lab that combines them, students may graduate without having practised these skills together.
+All three roles consistently list **Python**, **database skills**, and **building or integrating working software** as requirements. Two of the three explicitly require **REST APIs** and **Git**. The current curriculum teaches the relevant concepts (CS205, CS206, CS201, CS304) but does not provide a structured lab that combines them into one integrated exercise.
 
-The portal pages use JavaScript rendering, so individual posting dates were not visible in plain text. Access dates, source URLs, and evidence categories are recorded in [SOURCES.md](SOURCES.md). The full skill-gap analysis is in [JOB_DESCRIPTION_COMPARISON.md](JOB_DESCRIPTION_COMPARISON.md).
-
-**Supplementary:** A Leo Force campus drive announcement (student-supplied screenshot, dated 22 October 2026) shows continued local interest in software engineering freshers. Used as local context only — not a primary source.
+The full skill-gap analysis and proposed curriculum changes for each role are in [JOB_DESCRIPTION_COMPARISON.md](JOB_DESCRIPTION_COMPARISON.md). Curriculum evidence is documented in [CURRICULUM_SCREENSHOTS.md](CURRICULUM_SCREENSHOTS.md).
 
 ---
 
@@ -196,12 +194,13 @@ The data in the explorer matches the course map and credit calculations in this 
 |---|---|---|
 | Credit totals | Added up semester by semester and compared with student-supplied total | ✅ Verified: 167 baseline, 167 proposed, net 0 |
 | Three calculation methods | Conservative, full-UPDATE, and partial-UPDATE methods compared | ✅ Documented in CREDIT_CALCULATIONS.md |
-| Job description sources | Career pages accessed on 24 Oct 2026; URLs and access dates recorded | ✅ Sourced; posting dates not readable (JS pages) |
+| Job description evidence | Three PDFs read directly with pypdf; skills extracted verbatim | ✅ ACHNET, JPMorgan, Joveo — full gap analysis in JOB_DESCRIPTION_COMPARISON.md |
+| Curriculum screenshots | Seven PNG screenshots reconciled against COURSE_MAP.csv | ✅ All match — see CURRICULUM_SCREENSHOTS.md |
 | AI exercises (5 subjects) | Prompts submitted, outputs recorded, manually verified against known answers | ✅ All 5 verified; corrections documented |
-| HS301 credit value | Set to 0 in all files per student instruction | ✅ Consistent across explorer and all documents |
+| HS301 credit value | Screenshot confirms 0 credits; dataset uses 0 | ✅ Consistent — no discrepancy |
 | IP-2 course code | The supplied curriculum materials do not specify a course code for Mandatory Internship-II; identified by name throughout | ✅ Described accurately — no placeholder |
 | Task 1 files | Checked with `git diff Task1/` — no changes | ✅ Preserved unchanged |
-| Course explorer tests | 15 test cases (CE-01 to CE-14b) verified via automated test runner (`tests/test_course_explorer.py`); manual in-browser checklist documented | ✅ All 15 passed (`python Task2/tests/test_course_explorer.py`) |
+| Course explorer tests | 15 test cases (CE-01 to CE-14b) verified via automated test runner (`tests/test_course_explorer.py`) | ✅ All 15 passed |
 | IFHE official curriculum PDF | Attempted to access IFHE/ICFAITech website | ❌ Not accessible; dataset remains student-supplied |
 
 ---
@@ -210,9 +209,9 @@ The data in the explorer matches the course map and credit calculations in this 
 
 **What could not be verified:**
 - Official IFHE curriculum PDF for the 2023–2027 batch — the website was not accessible during this session. The course dataset is student-supplied and provisional.
-- HS301 official credit value — a discrepancy exists between the student-supplied instruction (0 credits) and the portal screenshot. Not resolved against official records.
 - IP-2 course code — the supplied curriculum materials do not specify a course code for Mandatory Internship-II; identified by official name throughout.
-- Individual posting dates for Accenture, IBM, Cisco listings — not readable in plain text due to JavaScript rendering.
+- Specific posting dates for the PDF job descriptions — dates are not stated in the documents; read date (24 October 2026) is recorded.
+- Company identity for the ACHNET document — the file is named "Tescra" but describes ACHNET; both names appear related; the ambiguity does not affect the skills extracted.
 
 **What requires institutional approval before any implementation:**
 - All three REDUCE proposals need curriculum committee approval and syllabus revision.
@@ -227,14 +226,17 @@ The data in the explorer matches the course map and credit calculations in this 
 Task2/
 ├── README.md                        ← This file — entry point
 ├── CURRICULUM_AUDIT.md              ← Full course map, 12 redesign reasons, all decisions
+├── CURRICULUM_SCREENSHOTS.md        ← Screenshot index and reconciliation (Sems I–VII)
 ├── COURSE_MAP.csv                   ← Machine-readable: all 53 courses with proposed actions
 ├── CREDIT_CALCULATIONS.md           ← Three calculation methods; baseline = proposed = 167 cr
-├── JOB_DESCRIPTION_COMPARISON.md   ← Three 2026 job descriptions vs. existing courses
+├── JOB_DESCRIPTION_COMPARISON.md   ← Three PDF job descriptions vs. existing courses
 ├── AI_EXERCISES.md                  ← Five AI-assisted exercises with prompts, verification
 ├── LAB_CAPSTONE_PROPOSAL.md        ← Full lab proposal: outcomes, schedule, tests, rubric
-├── FEEDBACK_AND_LIMITATIONS.md     ← Feedback, personal contribution, known limitations
-├── SOURCES.md                       ← All source URLs, access dates, evidence categories
+├── FEEDBACK_AND_LIMITATIONS.md     ← Feedback, personal contribution, limitations, validation status
+├── SOURCES.md                       ← All sources, access dates, evidence categories
 ├── course_explorer.html             ← Interactive course explorer (open in browser)
+├── assets/                          ← 7 semester-wise course portal screenshots (Sems I–VII)
+├── job_descriptions/                ← 3 job description PDFs (ACHNET, JPMorgan, Joveo)
 └── tests/
     ├── test_course_explorer.py      ← Automated test runner: validates all 15 CE tests + data
     └── test_checklist.md            ← Test checklist: automated results + manual verification steps
@@ -248,11 +250,11 @@ Task2/
 
 **Proposal:** Retain all core CS fundamentals. Add practical exercises to nine existing courses (no credit change). Reduce three low-CS-relevance courses by one credit each and use those three credits to fund a new Applied Software Product Engineering Lab where students build, test, document, and demonstrate a complete small application.
 
-**Evidence:** Three real 2026 job descriptions from Accenture, IBM, and Cisco all require REST APIs, Git, and practical programming — skills the curriculum teaches individually but does not currently provide an integrated opportunity to practise. Two informal conversations with a graduate and a faculty member both supported the general direction.
+**Evidence:** Three job description PDFs (ACHNET SDE, JPMorgan Data Analyst, Joveo Full-Stack Intern) were read directly and compared against the curriculum. All three require REST APIs, Python, and hands-on software building — skills the curriculum teaches individually but does not currently provide an integrated opportunity to practise. Seven semester-wise course portal screenshots provide the baseline evidence. Two informal conversations with a graduate and a faculty member both supported the general direction.
 
-**What was completed and verified:** Credit calculations (167 → 167, ~20% affected), all 11 Task 2 documents, five AI-assisted exercises with manual verification, one interactive course explorer, an automated test runner with 15 passing tests (`Task2/tests/test_course_explorer.py`), and one detailed lab proposal with five acceptance tests. Task 1 preserved unchanged.
+**What was completed and verified:** Credit calculations (167 → 167, ∼20% affected), all 12 Task 2 documents, seven curriculum screenshots reconciled, five AI-assisted exercises with manual verification, one interactive course explorer, an automated test runner with 15 passing tests (`Task2/tests/test_course_explorer.py`), and one detailed lab proposal with five acceptance tests. Task 1 preserved unchanged.
 
-**Key limitations:** The course dataset is student-supplied and not verified against the official IFHE PDF. All interactive explorer test cases are automated and passing (`python Task2/tests/test_course_explorer.py`), with manual UI check steps documented in `tests/test_checklist.md`. The REDUCE and ADD proposals require formal academic approval before any implementation. This is a student proposal, not an approved or enacted policy change.
+**Key limitations:** The course dataset is student-supplied and not verified against the official IFHE PDF. PDF job descriptions do not carry posting dates. The REDUCE and ADD proposals require formal academic approval before any implementation. This is a student proposal, not an approved or enacted policy change.
 
 ---
 

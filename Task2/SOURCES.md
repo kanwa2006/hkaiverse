@@ -8,35 +8,25 @@
 
 | Source | Type | Details |
 |---|---|---|
-| Student course portal screenshots | SUPPLIED EVIDENCE | Provided by the student. Course codes, names, semester placement, and credits. Used as the working baseline. |
-| Student clarification (HS301, IP-1/IP-2) | SUPPLIED EVIDENCE | Student instruction to use 0 credits for HS301; clarification that IP201 is IP-1, and IP-2 is the six-month internship. |
+| Student course portal screenshots (`Task2/assets/`) | SUPPLIED EVIDENCE | Seven PNG screenshots of the student's course portal covering Semesters I–VII. Course codes, names, academic year, and credits all match `COURSE_MAP.csv`. Reconciliation documented in `CURRICULUM_SCREENSHOTS.md`. |
+| Student clarification (HS301, IP-1/IP-2) | SUPPLIED EVIDENCE | Student instruction: HS301 = 0 credits (confirmed in Semester V screenshot); IP201 is IP-1 (mandatory post-Semester IV internship, 3 credits); IP-2 is the six-month Mandatory Internship-II (15 credits). |
 | IFHE / ICFAITech official sources | NOT VERIFIED | The official IFHE website (ifheindia.org) and ICFAITech pages were not successfully accessed with plain-HTTP to retrieve a batch-specific curriculum PDF. The student's dataset is labelled as student-supplied and provisional. |
 
 ---
 
 ## 2. Job Description Sources
 
-| # | Employer | URL | Access Date | Posting Date | Notes |
-|---|---|---|---|---|---|
-| 1 | Accenture India | https://www.accenture.com/in-en/careers/jobsearch | 24 Oct 2026 | Not visible in plain text | Dynamic portal; 2026 batch targeting confirmed by multiple corroborating sources |
-| 2 | IBM India | https://www.ibm.com/in-en/careers | 24 Oct 2026 | Page dateModified: 26 Aug 2026 | Plain-text access confirmed; individual job IDs require JavaScript |
-| 3 | Cisco India | https://jobs.cisco.com/jobs/SearchJobs/software%20engineer (India filter) | 24 Oct 2026 | Page dateModified: 15 Oct 2026 | Plain-text access confirmed; individual listings dynamically loaded |
-| 4 | Leo Force | Campus drive announcement (student-supplied screenshot) | Supplied by student | 22 Oct 2026 (date on announcement) | Not a publicly verifiable URL; used as supplementary local context only |
+| # | Employer | Role | Evidence File | Access/Read Date | Posting Date | Notes |
+|---|---|---|---|---|---|---|
+| 1 | ACHNET | Software Engineer (SDE) | `job_descriptions/Detailed Job Description - Tescra.pdf` | 24 Oct 2026 | Not stated in document | PDF read directly. Bangalore/Remote. Full-stack web, OOP, Data Structures, Python, Agile. |
+| 2 | JPMorgan Chase & Co. | Data Analyst — Fresher | `job_descriptions/JPMorgan_Chase_Data_Analyst_Fresher.pdf` | 24 Oct 2026 | Not stated in document | PDF read directly. Pan India. SQL, Python, Statistics, Excel, Power BI / Tableau, Git (good to have). |
+| 3 | Joveo | Software Engineering Intern (Full Stack) | `job_descriptions/Joveo_SE_Intern_JD.pdf` | 24 Oct 2026 | 2026 (Forbes badge in document) | PDF read directly. Bengaluru. React, Next.js, Node.js, PostgreSQL, REST API, Git, LLMs. |
 
 ---
 
-## 3. Corroborating Sources for Job Requirements
+## 3. Note on Evidence Approach
 
-These sources were used to corroborate the skill profiles described in the job description comparison. They are secondary sources, not primary employer postings.
-
-| Source | URL | Access Date | Used For |
-|---|---|---|---|
-| Accenture hiring guide — alexahire.in | https://alexahire.in/accenture-associate-software-engineer | 24 Oct 2026 | Corroborating Accenture ASE requirements (2025–2026 batch) |
-| Accenture India careers summary | https://accenture.com/in-en/careers (sourced via web search) | 24 Oct 2026 | Confirming role title, eligibility, tech stack |
-| IBM India entry-level page | https://www.ibm.com/in-en/employment/entry_level.html | 24 Oct 2026 | IBM India career structure and entry-level focus |
-| Cisco careers portal | https://careers.cisco.com/global/en | 24 Oct 2026 | Cisco early-career tech stack confirmation |
-| campustodrive.com — IBM India | https://campustodrive.com (IBM India) | 24 Oct 2026 | Corroborating IBM India requirements (Git, REST API, Docker) |
-| Web search results (Google Grounding) | Multiple | 24 Oct 2026 | Pattern verification across Accenture, IBM, Cisco, Wipro, TCS, Infosys fresher profiles |
+The three job descriptions used in this submission are PDF files provided or sourced as physical evidence (see Section 2 above). Skills were extracted directly from the document text using `pypdf` and are not inferred or templated. This approach replaces the earlier web-portal-based evidence (Accenture, IBM, Cisco career portals), which was inaccessible in plain-text due to JavaScript rendering limitations.
 
 ---
 
@@ -57,10 +47,10 @@ These sources were used to corroborate the skill profiles described in the job d
 | Tool | Purpose | Notes |
 |---|---|---|
 | Claude Sonnet 4.6 (Antigravity IDE) | AI exercises, research assistance, drafting | All use documented in AI_EXERCISES.md |
+| pypdf 6.21.2 (Python library) | Extract text from job description PDFs | Used to read all three PDF JDs on 24 Oct 2026 |
+| Python 3.11 (local) | Test runner, PDF extraction, data validation | Task2/tests/test_course_explorer.py; 15/15 tests pass |
 | GitHub API (https://api.github.com/repos/kanwa2006/hkaiverse/git/trees/main) | Repository structure inspection | Used on 24 Oct 2026 to read file tree |
-| read_url_content (Antigravity tool) | Fetching career portal pages | Plain-HTTP only; JavaScript-rendered content not readable |
-| Web search (Google Grounding via Antigravity) | Job requirement research | Queries documented in research session |
-| PowerShell (local) | Directory creation, file management | Used to create Task2/ directory structure on 24 Oct 2026 |
+| PowerShell (local) | Directory creation, file management, git commands | Used to create Task2/ directory structure and commit history |
 
 ---
 

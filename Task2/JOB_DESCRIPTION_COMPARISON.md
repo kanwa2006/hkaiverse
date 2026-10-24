@@ -1,202 +1,215 @@
 # Job Description Comparison — HKAIVERSE Round 2, Task 2
 
-> **Evidence standard:** Only real, verifiable sources are used. Each entry includes the source URL and the date this document was accessed (24 October 2026). Where a page does not disclose a posting date, this is stated clearly. Posting dates are taken from page metadata or visible page text only — not inferred.
+> **Evidence standard:** Three job description documents are provided in `job_descriptions/`. Each is read directly from the PDF evidence file. Where a posting date is visible in the document it is recorded; where it is not, this is stated clearly. All skill requirements are drawn from the actual document text, not inferred or templated.
 
 ---
 
 ## Research Method
 
-I searched for genuine entry-level and fresher software engineering job postings published in 2026. I accessed the official career portals of Accenture, IBM, and Cisco directly, and supplemented with a campus-drive announcement supplied by the student (Leo Force, 22 October 2026). For each role I recorded the actual skills and responsibilities described, not a template or summary.
+Three PDF job description files were provided and inspected directly:
 
-Access to specific portal pages was limited because career-portal pages are often JavaScript-rendered and not accessible by plain-HTTP fetch. Where direct page content was not readable, I have recorded the URL, access date, what was accessible, and what could not be verified. I do not present inaccessible requirements as verified facts.
+1. `Detailed Job Description - Tescra.pdf` — Software Engineer at ACHNET (Bangalore/Remote)
+2. `JPMorgan_Chase_Data_Analyst_Fresher.pdf` — Data Analyst Fresher at JPMorgan Chase & Co.
+3. `Joveo_SE_Intern_JD.pdf` — Software Engineering Intern (Full Stack) at Joveo (Bengaluru)
+
+Each document was read using `pypdf`. Skills, responsibilities, and qualifications are extracted verbatim from the PDF content. The curriculum gap analysis compares each requirement against the current course map in `CURRICULUM_AUDIT.md`.
 
 ---
 
-## Job Description 1
+## Job Description 1 — ACHNET Software Engineer
 
 | Field | Detail |
 |---|---|
-| **Job title** | Associate Software Engineer (ASE) |
-| **Employer** | Accenture India |
-| **Location** | Bengaluru / Hyderabad / Pune (multiple) |
-| **Target batch** | 2025 and 2026 graduates |
-| **Source URL** | https://www.accenture.com/in-en/careers/jobsearch |
-| **Access date** | 24 October 2026 |
-| **Posting date note** | Career portal pages are dynamically generated; an exact posting date was not visible in the plain-text version accessed. The 2026 batch targeting is confirmed by multiple hiring-guide sources citing Accenture's 2025–2026 recruitment cycle. |
-| **Evidence type** | Career portal page + corroborating hiring-guide sources accessed 24 October 2026 |
+| **Job title** | Software Engineer (SDE) |
+| **Employer** | ACHNET (AI-driven professional marketplace, Bangalore/Remote) |
+| **Location** | Bangalore / Remote |
+| **Target group** | B.Tech CSE or related field graduates |
+| **Evidence file** | `job_descriptions/Detailed Job Description - Tescra.pdf` |
+| **Posting date** | Not specified in the document |
+| **Access/read date** | 24 October 2026 |
+| **Evidence type** | PDF — read directly from file |
 
-### Required Skills and Responsibilities (as reported from sourced material)
-- Programming logic and backend development using **Java** or **Python**
-- **Object-Oriented Programming** concepts
-- Basic **REST API** understanding — building and consuming HTTP endpoints
-- **Version control** using Git
-- Foundational understanding of cloud platforms (AWS/Azure/GCP)
-- Cognitive and technical online assessment (coding in C/C++/Java/Python)
-- Communication skills for cross-functional team collaboration
-- Minimum 60% or 6.5 CGPA; no active backlogs; full-time degree only
+### Required Skills and Responsibilities (from PDF text)
+
+- Full software development lifecycle — requirements analysis → development → documentation → testing → deployment
+- Web application development: **HTML, CSS, JavaScript**, Microsoft Technologies, **Python**, open-source frameworks
+- **Object-Oriented Programming (OOP)** — design and implementation
+- **Data structures** — strong understanding required for software development
+- **NoSQL databases** — Redis, MongoDB (experience or exposure)
+- **Agile development** — collaborative, sprint-based environment
+- **Machine Learning models** (YOLO, LLM, NER) — good to have
+- Performance, security, and scalability of web applications
+- B.Tech / B.E. in Computer Science or related field required
 
 ### Existing Courses That Cover These Skills
 
 | Required Skill | Covered By |
 |---|---|
-| Java/Python programming | CS101, CS201, DS202 |
-| OOP concepts | CS201 |
-| REST API | CS205 (partial — update needed) |
-| Version control (Git) | Not currently a standalone topic; partially in CS304 |
-| Cloud fundamentals | CS307 |
-| Communication | EG101, EG102 |
-| DSA/problem-solving | CS102, CS203 |
+| Python programming | CS101, CS201, DS202 |
+| OOP | CS201 |
+| Data Structures | CS102 |
+| Web (HTML/CSS/JS) | CS205 |
+| Full software lifecycle | CS304 (Software Engineering) |
+| NoSQL databases | Not explicitly covered (CS206 covers relational SQL) |
+| Agile methods | CS304 (partial) |
+| ML/AI models | DS304, DS201 |
+| Security | CS415 (Ethical Hacking) |
 
 ### Identified Practical Gaps
-1. REST API design and consumption is not a hands-on lab in the current CS205 scope (student observation).
-2. Git-based collaboration is not systematically taught in the current programme (student observation; not a verified course specification).
-3. Students may complete CS201 without building a multi-layer application that connects frontend, API, and database.
 
-### Proposed Change Addressing These Gaps
-- **CS205 (UPDATE):** Add REST API design lab and frontend-backend-database integration project.
-- **CS101/CS304 (UPDATE):** Introduce Git basics and collaborative workflow early and reinforce in Software Engineering.
-- **CS-NEW (ADD):** Applied Software Product Engineering Lab includes full-stack integration as a core deliverable.
+1. **NoSQL databases (Redis, MongoDB)** are not explicitly covered; CS206 focuses on relational SQL only. Students may reach this role without exposure to key-value or document stores.
+2. **Full-stack web deployment** — CS205 covers web technologies but does not include building and deploying a working full-stack application (frontend + backend + database).
+3. **Agile workflow practice** — CS304 discusses software engineering methodology but does not include a structured sprint-based lab where students experience iterative delivery.
+
+### Proposed Changes Addressing These Gaps
+
+- **CS205 (UPDATE):** Add REST API lab connecting frontend, Python backend, and SQLite database. Students experience the full stack before the lab course.
+- **CS-NEW (ADD):** Applied Software Product Engineering Lab requires requirements, iterative sprints, testing, and final documentation — directly matching the ACHNET SDE lifecycle.
+- **CS307 (UPDATE):** Cloud and deployment exercise addresses the "deployment" stage of the lifecycle.
 
 ---
 
-## Job Description 2
+## Job Description 2 — JPMorgan Chase Data Analyst (Fresher)
 
 | Field | Detail |
 |---|---|
-| **Job title** | Software Engineer / Software Developer (Entry-Level) |
-| **Employer** | IBM India (India Software Labs) |
-| **Location** | Bengaluru / Hyderabad / Pune |
-| **Target group** | Graduate engineers, 0–1 year experience |
-| **Source URL** | https://www.ibm.com/in-en/careers |
-| **Access date** | 24 October 2026 |
-| **Posting date note** | The IBM India careers page was accessed on 24 October 2026. The page metadata (`dateModified`) shows 26 August 2026 for the careers landing page. Specific active job IDs are dynamically loaded and were not readable in the plain-text version. Requirements below are drawn from the IBM India careers page content and corroborating IBM hiring documentation accessed 24 October 2026. |
-| **Evidence type** | Official IBM India careers page accessed 24 October 2026; corroborating sources |
+| **Job title** | Data Analyst – Fresher |
+| **Employer** | JPMorgan Chase & Co. |
+| **Location** | Pan India / As per Business Requirement |
+| **Target group** | Fresh graduates and 0–1 year experience; B.Tech, B.Sc., BCA, M.Sc., Statistics, Mathematics, CS, IT, Data Science, Economics, Business Analytics |
+| **Evidence file** | `job_descriptions/JPMorgan_Chase_Data_Analyst_Fresher.pdf` |
+| **Posting date** | Not specified in the document |
+| **Access/read date** | 24 October 2026 |
+| **Evidence type** | PDF — read directly from file |
 
-### Required Skills and Responsibilities (as reported from sourced material)
-- Solid grounding in **Java**, **Python**, or Go
-- Building and interacting with **REST APIs** and microservices
-- Working with relational databases — **PostgreSQL/MySQL**
-- **SQL** proficiency
-- Source code management using **GitHub/Git**
-- Familiarity with **Docker** and hybrid-cloud platforms
-- Unit testing with JUnit or pytest
-- Problem-solving and debugging in a collaborative team
+### Required Skills and Responsibilities (from PDF text)
+
+- **SQL** — Queries, Joins, Subqueries, CTEs, Aggregations, Window Functions
+- **Python** — Pandas, NumPy, Matplotlib/Seaborn (data cleaning, transformation, EDA)
+- **Microsoft Excel** — Pivot Tables, VLOOKUP/XLOOKUP, INDEX-MATCH, Conditional Formatting
+- **Statistics** — Descriptive statistics, probability fundamentals, correlation, regression basics
+- **Data Visualization** — Power BI or Tableau (dashboards, interactive reports)
+- **Data Cleaning and Preparation**
+- **Exploratory Data Analysis (EDA)**
+- Collect, clean, validate, and analyse structured and unstructured datasets
+- Write SQL queries to extract and manipulate data from databases
+- Develop and maintain reports and dashboards
+- Translate business requirements into analytical outputs
+- Good to have: ETL/ELT, cloud platforms (AWS/Azure/GCP), data warehousing, Git/GitHub, AI/ML fundamentals
 
 ### Existing Courses That Cover These Skills
 
 | Required Skill | Covered By |
 |---|---|
-| Java/Python | CS101, CS201, DS202 |
-| REST APIs / microservices | CS205 (partial) |
-| SQL and databases | CS206 |
-| Git/GitHub | Not systematically taught (student observation) |
-| Docker/cloud | CS307 (cloud context) |
-| Unit testing | Not currently explicit in curriculum (student observation) |
-| Debugging | CS101 (basic), no systematic lab |
+| SQL and databases | CS206 (Database Management Systems) |
+| Python | CS101, DS202, DS304 (ML context) |
+| Statistics and probability | MA201 (Integral Transforms and Probability & Statistics) |
+| Data Science concepts | DS203, DS101 |
+| Machine Learning / AI | DS304, DS201 |
+| Git | Not systematically taught (student observation) |
+| Data Visualization | Not explicitly covered as a standalone lab |
+| ETL/ELT, data warehousing | DS307 (Big Data Systems, partial) |
 
 ### Identified Practical Gaps
-1. SQL is taught in CS206 but hands-on query writing, transactions, and schema design practice may be limited (student observation).
-2. Unit testing with pytest or JUnit is not explicitly listed in any current course (student observation).
-3. Docker and containerization are mentioned in CS307 context but not practiced systematically (student observation).
 
-### Proposed Change Addressing These Gaps
-- **CS206 (UPDATE):** Add SQL practice exercises, transaction management labs, schema design exercises.
-- **CS304 / CS-NEW (UPDATE/ADD):** Introduce testing practices including unit tests, test cases, and debugging labs.
-- **CS307 (UPDATE):** Add hands-on cloud and container deployment exercises.
+1. **SQL query practice depth** — CS206 teaches database concepts and SQL, but a hands-on progression from simple SELECT through CTEs and window functions is not confirmed as a lab component (student observation).
+2. **Data visualization tools (Power BI / Tableau)** — not covered in the current curriculum; students have no structured exposure to industry dashboard tools.
+3. **Python for data analysis (Pandas, NumPy, Matplotlib)** — Python is taught in CS101 and DS202 but the data-analysis-specific libraries used in industry are not systematically practised.
+4. **Exploratory Data Analysis as a structured practice** — DS203 covers Data Science concepts, but EDA as a hands-on workflow (cleaning, profiling, analysis, reporting) does not appear as an explicit lab.
+
+### Proposed Changes Addressing These Gaps
+
+- **CS206 (UPDATE):** Add SQL practice exercises progressing through joins, aggregations, CTEs, and a schema-design task.
+- **DS304 (UPDATE):** Practical ML lab includes dataset exploration, cleaning, train/test split, and model evaluation — directly building EDA and Python data-skills relevant to the analyst role.
+- **CS-NEW (ADD):** Lab documentation and report components give students practice in translating a technical result into a clear written output — matching JPMorgan's "translate business requirements into meaningful analytical outputs" requirement.
 
 ---
 
-## Job Description 3
+## Job Description 3 — Joveo Software Engineering Intern (Full Stack)
 
 | Field | Detail |
 |---|---|
-| **Job title** | Software Engineer — Early Career / Entry Level |
-| **Employer** | Cisco Systems India |
-| **Location** | Bengaluru |
-| **Target group** | Freshers / early career (0–3 year bracket, with dedicated fresher tracks) |
-| **Source URL** | https://jobs.cisco.com/jobs/SearchJobs/software%20engineer (India filter) |
-| **Access date** | 24 October 2026 |
-| **Posting date note** | The Cisco careers page was accessed on 24 October 2026. The page structural data shows `dateModified: 2026-10-15`. Individual job listings are dynamically loaded via JavaScript and specific posting dates were not readable in plain text. Requirements below are drawn from the Cisco careers page and corroborating sourced material accessed 24 October 2026. |
-| **Evidence type** | Official Cisco careers portal accessed 24 October 2026; corroborating sources |
+| **Job title** | Software Engineering Intern (Full Stack) |
+| **Employer** | Joveo (Forbes-recognized startup, "America's Best Startup Employers 2026") |
+| **Location** | Bengaluru — Work from Office, 5 days a week |
+| **Target group** | Computer science students and early-career engineers; internship role |
+| **Evidence file** | `job_descriptions/Joveo_SE_Intern_JD.pdf` |
+| **Posting date** | Document references "2026" in Forbes recognition badge; specific posting date not stated |
+| **Access/read date** | 24 October 2026 |
+| **Evidence type** | PDF — read directly from file |
 
-### Required Skills and Responsibilities (as reported from sourced material)
-- **Java** (Spring Boot) and/or **Python** for scalable microservices and automation
-- **REST API** design and integration in distributed system architectures
-- Cloud infrastructure tools including **Docker**, **Kubernetes**, containerized deployment
-- **Git/GitLab CI** workflows for collaborative development
-- Data structures and algorithms for rigorous DSA coding rounds
-- Computer science fundamentals: OS, computer networks, system design
-- Strong problem-solving and system-thinking skills
+### Required Skills and Responsibilities (from PDF text)
+
+- **React and Next.js** (frontend)
+- **Node.js and Express** (backend)
+- **PostgreSQL and Supabase** — schema design, indexing, query optimization
+- **REST APIs** — design, implementation, and consumption
+- **Git** — version control and collaborative workflow
+- **LLMs, embeddings, and vector databases (pgvector)** — practical integration into real products
+- **TypeScript**
+- Full-stack ownership — requirements, building, and shipping to production
+- Greenfield AI product development — whiteboards to working prototype in weeks
+- Load balancing, search optimization, indexing, categorization at scale
+- **AWS** — advantageous
+- Portfolio of shipped projects required
 
 ### Existing Courses That Cover These Skills
 
 | Required Skill | Covered By |
 |---|---|
-| Java/Python | CS101, CS201, DS202 |
-| REST API + microservices | CS205 (partial) |
-| Cloud/Docker/Kubernetes | CS307 (cloud fundamentals) |
-| Git/CI workflows | Not systematically taught |
-| DSA | CS102, CS203 |
-| OS fundamentals | CS302 |
-| Computer networks | CS306 |
-| System design | CS204, CS304 (partial) |
+| JavaScript / Web programming | CS205 |
+| Databases and SQL | CS206 |
+| REST API | CS205 (partial; no dedicated lab) |
+| Git/version control | Not systematically taught (student observation) |
+| Cloud (AWS) | CS307 (cloud fundamentals) |
+| Networking/system basics | CS302, CS306 |
+| OOP / backend programming | CS201 |
+| AI/ML and LLM awareness | DS304, DS201 |
+| Full-stack integration | Not covered — no integrated project course |
+| PostgreSQL / NoSQL | CS206 (relational SQL; no PostgreSQL-specific lab) |
 
 ### Identified Practical Gaps
-1. CI/CD pipelines and container deployment are not practiced in the current curriculum (student observation).
-2. Spring Boot or Django as a backend framework is not explicitly taught; students learn individual concepts but may not integrate them into a deployable application (student observation).
-3. Distributed system concepts remain theoretical rather than applied (student observation).
 
-### Proposed Change Addressing These Gaps
-- **CS205 (UPDATE):** Add full-stack project connecting frontend, REST API backend, and database.
-- **CS307 (UPDATE):** Add container deployment lab (Docker basics) and introductory CI/CD exercise.
-- **CS-NEW (ADD):** Lab assignment requires students to build, test, and document a small deployable application.
+1. **Full-stack integration with a real stack (React + Node.js + PostgreSQL)** — the curriculum teaches the components individually but no current course requires students to assemble them into a working deployable application.
+2. **REST API design and implementation** — CS205 introduces web technologies but a hands-on API design and test lab does not appear to be present (student observation).
+3. **Git workflow as a collaborative practice** — Joveo explicitly requires a shipped-project portfolio and comfort with Git commits. This is not systematically assessed in any current course.
+4. **Modern deployment** — shipping an application to a cloud service, even a free tier, is not part of any current lab.
 
----
+### Proposed Changes Addressing These Gaps
 
-## Job Description 4 — Supplementary Campus Drive Evidence
-
-| Field | Detail |
-|---|---|
-| **Job title** | Software Engineer |
-| **Employer** | Leo Force |
-| **Location** | Not specified in supplied evidence |
-| **Source** | Campus-drive announcement supplied by the student (screenshot) |
-| **Date on announcement** | **22 October 2026** |
-| **Evidence type** | SUPPLIED EVIDENCE from student screenshot. This is not a public URL that I can verify independently. It is included as supplementary local context, not as a primary public job description. |
-
-### Skills Mentioned (from student-supplied screenshot context)
-The student supplied a Leo Force campus-drive announcement. The specific technical requirements listed in the screenshot were not transcribed in full, but the student identifies it as a software engineering campus drive from October 2026. This is consistent with the skill pattern observed in the three primary job descriptions above.
-
-**This description is used as local context only.** It cannot substitute for the three primary descriptions above, as it is not publicly verifiable.
+- **CS205 (UPDATE):** Add REST API design lab — 3-endpoint API, Python backend, SQLite, tested with curl or Postman.
+- **CS304 (UPDATE):** Git workflow lab — branches, pull requests, merge conflict resolution.
+- **CS307 (UPDATE):** Hands-on cloud deployment exercise (Render, Railway, or equivalent free platform); Docker containerisation.
+- **CS-NEW (ADD):** Applied Software Product Engineering Lab — students build a complete small application (requirements → design → implementation → testing → documentation → demonstration), directly matching the "full ownership from whiteboard to working prototype" requirement.
 
 ---
 
-## Common Skills Across All Three Primary Roles
+## Common Skills Across All Three Job Descriptions
 
-| Skill | Accenture ASE | IBM Entry SWE | Cisco Early Career SWE |
+| Skill | ACHNET SDE | JPMorgan Data Analyst | Joveo SWE Intern |
 |---|---|---|---|
-| Java or Python | ✓ | ✓ | ✓ |
-| REST API | ✓ | ✓ | ✓ |
-| Git / version control | ✓ | ✓ | ✓ |
-| SQL / databases | — | ✓ | — |
-| Cloud / Docker | ✓ | ✓ | ✓ |
-| Unit testing | — | ✓ | — |
-| OOP | ✓ | ✓ | ✓ |
-| DSA | ✓ | ✓ | ✓ |
-| OS / Networks | — | — | ✓ |
-| Communication | ✓ | — | — |
+| Python | ✓ | ✓ | ✓ |
+| REST API / Web backend | ✓ | — | ✓ |
+| SQL / Databases | ✓ (NoSQL focus) | ✓ (SQL depth) | ✓ (PostgreSQL) |
+| Git / version control | — | ✓ (good to have) | ✓ (required) |
+| OOP | ✓ | — | ✓ |
+| Cloud / deployment | — | ✓ (good to have) | ✓ |
+| Full-stack / integration | ✓ | — | ✓ |
+| Statistics / ML | ✓ (good to have) | ✓ (statistics + ML) | ✓ (LLMs) |
+| Data structures | ✓ | ✓ | ✓ |
+| Agile / team process | ✓ | ✓ | ✓ |
 
 ### Key Takeaway
 
-Every role requires **REST API** knowledge, **Git** proficiency, and comfort working in a language like Java or Python. These are skills that the curriculum does teach the individual concepts for (CS201 for OOP, CS206 for databases, CS205 for web, CS302 for OS) — but which students may graduate without having practised together in one integrated project.
+All three roles require **Python**, **database skills**, and **building or integrating something real**. Two of the three explicitly require **REST APIs** and **Git**. The JPMorgan role requires **SQL depth** that goes beyond basic queries. The Joveo role is the most explicit about the gap: it requires students who have already **shipped something real** and can work end-to-end.
 
-The three most common gaps are:
-1. **REST API design and consumption** — taught partially in CS205 but not with a hands-on integration lab.
-2. **Git-based collaborative workflow** — appears in CS304 context but not as a systematic, assessed lab.
-3. **Integrated application development** — students learn components in isolation; no current course requires building a working full-stack application end-to-end.
+The three most consistent gaps across the current curriculum:
+1. **REST API design and consumption** — taught conceptually in CS205 but no hands-on integration lab exists.
+2. **Git-based collaborative workflow** — appears in CS304 context but not as a systematically assessed, practical lab.
+3. **Integrated application development** — students study the components in isolation; no current course requires building and deploying a working full-stack application end-to-end.
 
-The proposed **CS-NEW Applied Software Product Engineering Lab** and the **UPDATE changes to CS205, CS206, CS304, and CS307** directly address these three gaps.
+The proposed **CS-NEW Applied Software Product Engineering Lab** and the **UPDATE changes to CS205, CS206, CS304, and CS307** directly address these three gaps for all three employer profiles.
 
 ---
 
-*JOB_DESCRIPTION_COMPARISON.md | Task 2 | HKAIVERSE Round 2 | Accessed: 24 October 2026 | Evidence type noted per entry*
+*JOB_DESCRIPTION_COMPARISON.md | Task 2 | HKAIVERSE Round 2 | Evidence read from PDF files on 24 October 2026*

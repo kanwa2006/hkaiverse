@@ -30,7 +30,7 @@
 The IFHE/ICFAITech official website was not accessible via plain-HTTP in this session. I could not independently download a batch-specific curriculum PDF for the 2023–2027 cohort. The dataset used in this report is therefore **student-supplied and provisional** for regulatory purposes.
 
 This does not affect the substance of the proposal. The supplied course list is used as-is, with the following confirmed corrections:
-- **HS301 Constitution of India:** Shown as 0 credits (student-supplied instruction). The student's screenshot appears to show a different value. This discrepancy is documented in `CREDIT_CALCULATIONS.md`. The 0-credit value is used throughout this report.
+- **HS301 Constitution of India:** Shown as 0 credits per student instruction. The Semester V portal screenshot (`assets/sem5_courses.png`) also shows HS301 with 0 credits. No discrepancy exists; the 0-credit value is used consistently throughout this report.
 - **IP-1 (IP201):** Confirmed as the mandatory approximately two-month internship placed after Semester IV. The portal labels the relevant section "ST-II" but the student confirms this is IP-1.
 - **IP-2:** Confirmed as the six-month mandatory internship worth 15 credits placed in Semester VIII. The supplied curriculum materials do not specify a course code; it is identified here as Mandatory Internship-II.
 
@@ -169,13 +169,13 @@ This does not affect the substance of the proposal. The supplied course list is 
 Current courses teach programming, databases, web, and networks separately. Students may pass all of them without ever building a working application that connects a frontend, a REST API, a database, and error handling in one system. This gap shows up immediately in a first job.
 
 ### Reason 2 — REST API Skills Are Not Systematically Practised
-Every entry-level software engineering job description I reviewed in October 2026 (Accenture, IBM, Cisco) listed REST API knowledge as a requirement. The current CS205 Web-Enabled Technologies course covers web concepts, but a hands-on lab where students design and test a REST API connected to a database does not appear to be present (student observation). This is a practical gap.
+All three job descriptions reviewed (ACHNET SDE, JPMorgan Data Analyst, Joveo Full-Stack Intern) list REST API knowledge or web backend skills as a core requirement. The current CS205 Web-Enabled Technologies course covers web concepts, but a hands-on lab where students design and test a REST API connected to a database does not appear to be present (student observation). This is a practical gap.
 
 ### Reason 3 — Git and Version Control Are Not Assessed
 Git-based collaboration is listed as a requirement in every job posting reviewed. Students in CS304 Software Engineering may encounter Git in theory, but there is no course where students are assessed on using Git for collaborative development. This means students may apply for roles without the basic workflow knowledge that every engineering team uses daily.
 
 ### Reason 4 — No Systematic Unit Testing Practice
-Unit testing (pytest, JUnit) is expected by IBM India and Cisco. The current curriculum covers software testing concepts in CS304, but does not appear to include a lab where students write, run, and interpret test cases for their own code. Students should practise this in every programming course, not only learn about it once.
+Hands-on software testing is expected in all three reviewed job descriptions — Joveo expects working shipped code, JPMorgan expects data quality checks, and the ACHNET JD lists testing as part of the full development lifecycle. The current curriculum covers software testing concepts in CS304, but does not appear to include a lab where students write, run, and interpret test cases for their own code. Students should practise this in every programming course, not only learn about it once.
 
 ### Reason 5 — Assessment Weighted Towards Theoretical Examination
 The student-reported assessment pattern (50% internal, 50% external, external entirely theoretical) means that a student can score well without ever demonstrating a working system. Practical engineering ability requires demonstrating, explaining, and debugging — not only answering written questions.

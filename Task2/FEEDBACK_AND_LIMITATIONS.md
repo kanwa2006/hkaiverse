@@ -58,15 +58,15 @@ I did not invent feedback, statistics, job descriptions, or test results. Where 
 
 ### Curriculum Data Limitations
 - The course dataset is student-supplied. I do not have access to the official printed or PDF syllabus for the 2023–2027 batch.
-- HS301 is shown as 0 credits per my instruction; the screenshot shows a different value. The official regulation has not been verified.
+- HS301 is recorded as 0 credits. The Semester V portal screenshot (`assets/sem5_courses.png`) also shows HS301 with 0 credits, so the data is consistent with the source.
 - IP-2 course code: the supplied curriculum materials do not specify a course code for Mandatory Internship-II. It is identified by name throughout this report.
 - Prerequisites listed in this report are recommended academic dependencies, not officially mandated prerequisites.
 
 ### Job Description Limitations
-- The three primary job descriptions are sourced from official career portal pages (Accenture, IBM, Cisco) accessed on 24 October 2026.
-- These portals use JavaScript rendering. Plain-HTTP access retrieved page structure and metadata but not all individual job listings.
-- Specific posting dates for individual listings were not visible in plain text. The access date (24 October 2026) is confirmed; posting dates are noted as unconfirmed where applicable.
-- The Leo Force campus drive announcement is student-supplied evidence and not independently verifiable as a public listing.
+- The three job descriptions are sourced from PDF files read directly with `pypdf`. Skills are extracted verbatim from the document text.
+- Posting dates are not stated in any of the three PDFs; the document read date (24 October 2026) is recorded instead.
+- The ACHNET document is named "Tescra" in the file name but describes the ACHNET organisation; both names appear to refer to the same company or a related entity. This ambiguity is noted but does not affect the skills extracted from the document.
+- The JPMorgan and Joveo documents do not carry official company letterheads or unique job IDs that could be independently verified online.
 
 ### Calculation Limitations
 - The 19.8% figure (Method A) sits at the lower boundary of the 20–25% target. A fully defensible result within the target range would require either more credit-allocation changes or confirmation that UPDATE redesigns genuinely meet the threshold.
@@ -90,18 +90,19 @@ I did not invent feedback, statistics, job descriptions, or test results. Where 
 
 ---
 
-## 4. Outstanding Validation Needs
+## 4. Validation Status
 
-| Item | Status | What is needed |
-|---|---|---|
-| Official batch-specific curriculum document | Not verified | IFHE or ICFAITech to confirm 2023–2027 B.Tech CSE course list |
-| HS301 credit value | Discrepancy (screenshot vs. supplied correction) | Student to verify with academic office |
-| IP-2 course code | Not confirmed | Student to obtain from portal or academic records |
-| REDUCE proposals (3 courses) | Proposed only | Requires formal academic approval before implementation |
-| ADD (new lab) | Proposed only | Requires curriculum committee approval and resource planning |
-| Assessment reform (60/40 practical split) | Proposed only | Requires review of applicable university assessment regulations |
-| Graduate survey | Not done | Structured survey of 2021–2025 graduates would provide better evidence |
-| Job posting dates | Partially confirmed | Individual listing dates not visible in plain text; access date confirmed |
+| Item | Status |
+|---|---|
+| Curriculum screenshots vs. COURSE_MAP.csv | ✓ Verified — all seven screenshots reconciled in `CURRICULUM_SCREENSHOTS.md` |
+| HS301 credit value | ✓ Consistent — screenshot shows 0; dataset uses 0 |
+| Credit calculation (baseline and proposed) | ✓ Verified — automated test CE-08 confirms 167 / 167 / net 0 |
+| Course explorer data alignment | ✓ Verified — all 15 automated test cases pass (`test_course_explorer.py`) |
+| Job description skills vs. curriculum map | ✓ Done — three PDFs read directly; gap analysis in `JOB_DESCRIPTION_COMPARISON.md` |
+| IP-2 course code | Not confirmed in available materials — identified by name throughout |
+| Official IFHE batch syllabus document | Not verified — the official PDF could not be accessed; dataset remains student-supplied |
+| REDUCE and ADD proposals | Proposed only — require formal curriculum committee approval before implementation |
+| Assessment reform (60/40 practical split) | Proposed only — requires university assessment regulations review |
 
 ---
 
