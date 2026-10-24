@@ -1,0 +1,25 @@
+# Python cache -- never commit these
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Local secrets & environments
+.env
+*.env
+*.local
+credentials.json
+secrets/
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Archives
+*.zip
+*.tar.gz

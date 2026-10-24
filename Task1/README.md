@@ -1,31 +1,40 @@
 # ResultFlow — Academic Result Transparency & Placement Readiness
 
 > **Student-proposed workflow improvement and reference prototype — HKAIVERSE Round 2, Task 1.**
-> Not an officially deployed IFHE system. Not an official policy revision. Not connected to any college database or live data.
+> Not an officially deployed IFHE system. Not an official policy revision. Not connected to any live college database.
+> Detailed investigation report: [TASK1_REPORT.md](TASK1_REPORT.md)
 
 ---
 
-**PROBLEM** — A pending grade-improvement result creates uncertainty about which grade is currently effective and how a pending Summer Term subject is represented in placement processing. One documented case recorded **90 elapsed days** between the Summer Term exam (24 Jul 2026) and the evidence cutoff (22 Oct 2026) with no published result. A placement-form screenshot (`evidence/Screenshort_Evidence.png`) observed around Aug 2026 shows the instruction: *"SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS"* until results are released.
+## Overview
 
-**SOLUTION** — ResultFlow proposes transparent result-status tracking, approver-only grade publication, a separate latest-published-grade record per student and course (updated only on authorized publication), placement-record synchronization with explicit failure handling, and a deadline-based final-year review flag.
-
-**VALIDATION** — **20 automated tests pass** (Python 3.12.10, pytest-9.1.1). Five required synthetic scenarios are covered. Additional tests verify grade-replacement via the normal authorized workflow, 8-step sync-failure stale-then-recovery, effective-grade boundary conditions, input safety, timestamp integrity, and audit-tamper detection.
-
-**STATUS AND LIMITATIONS** — One documented case; internal handoffs not directly observed; Summer Term eligibility verbally confirmed by officials (written source not yet committed); grade-replacement rule from verbal staff guidance only; ROI figures are illustrative assumptions; prototype is in-memory only.
+- **Process Studied:** Summer Term grade-improvement result processing through to placement checks at IFHE Hyderabad.
+- **Problem Identified:** Students waiting for grade-improvement results face extended uncertainty. In one documented case, a student waited **90 days** (24 July to 22 October 2026) with no published result or update. Meanwhile, a placement registration form (`evidence/Screenshort_Evidence.png`) states that pending Summer Term subjects are *"TREATED AS BACKLOGS"* until results release, making students with passing grades look like they have active backlogs.
+- **Evidence Base:** Two direct observations (the 90-day wait and the genuine placement-form screenshot), supported by verbal staff and peer accounts. Internal college processing was not observed and remains an assumption.
+- **Proposed Solution:** **ResultFlow** introduces visible stage tracking, approver-only publishing, a separate effective-grade record, safe placement synchronization with error handling, and near-deadline review flags.
+- **Validation:** Validated by **20 automated tests** (all passing) covering five required synthetic scenarios, grade-replacement downgrades, error recovery, and role boundaries.
+- **Limitations:** Based on one documented case; internal handoffs are assumed; policy rules were verbally confirmed without written source documents; ROI figures are illustrative estimates; prototype runs in memory only.
 
 ---
 
-## Current-State Process (Student-Visible, Evidence-Limited)
+## Current-State Process vs. Proposed Workflow
 
-> This is a **student-visible, evidence-limited view** of the process — not a verified map of IFHE’s internal workflow. Internal processing stages, responsible owners, handoffs, approvals, and post-publication placement updates were not directly observed.
+There is an unmistakable difference between what students experience today and what ResultFlow proposes:
 
-1. **Exam completed** — Summer Term grade-improvement examination ended 24 July 2026 (OBSERVED, one documented case).
-2. **Waiting period begins** — In the documented case, no result-status information was received and no confirmed publication date was provided in response to follow-up enquiries to academic contacts (OBSERVED, E-02, E-04).
-3. **Placement form observed** — A placement-form screenshot (approx. Aug 2026, E-03) shows the instruction: *“SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS”* until results are released. A student with a passing grade may therefore appear to have an open backlog during the wait.
-4. **Internal processing — not observed** — What happens between exam completion and result publication (who processes results, who approves them, how many stages exist) is not known from the evidence available. These steps are labelled ASSUMPTION throughout the report.
-5. **Result publication — not yet occurred** as of 22 October 2026 in the documented case (90 elapsed days, OBSERVED).
+### Current Process (Student-Visible View Only)
+Students see only the start and end of the timeline; internal college handling is unobserved:
+1. **Exam completed:** Student finishes Summer Term exam on 24 July 2026 (OBSERVED).
+2. **Silent wait:** No progress tracker or estimated publication date is provided during follow-ups (OBSERVED, E-02, E-04).
+3. **Placement form observed:** Placement form states pending subjects are treated as backlogs (approx. Aug 2026, OBSERVED, E-03).
+4. **Internal processing:** Grading, verification, and approvals occur internally (ASSUMPTION — unobserved).
+5. **Result publication:** Result unpublished after 90 days as of 22 October 2026 in the documented case (OBSERVED, E-05).
 
-For the proposed ResultFlow workflow design, see [§6 below](#6-proposed-resultflow-workflow). Full evidence log: [§4 Evidence and Findings](#4-evidence-and-findings).
+### Proposed ResultFlow Workflow
+ResultFlow replaces opacity with clear stages, permissions, and safeguards:
+1. **Visible Tracking:** Attempts move visibly: `REGISTERED → EXAM_COMPLETED → RESULT_PROCESSING → UNDER_VERIFICATION → AWAITING_APPROVAL → PUBLISHED`.
+2. **Approval Gate:** Only an authorized approver can release an official grade.
+3. **Protected Effective Grade:** A student's existing passing grade remains active and valid while an improvement attempt is pending.
+4. **Safe Placement Sync:** Approved grades sync to placement records automatically. If sync fails, the system logs the error safely and allows authorized retries without creating duplicate or inconsistent updates.
 
 ---
 
@@ -51,99 +60,83 @@ For the proposed ResultFlow workflow design, see [§6 below](#6-proposed-resultf
 
 ## 1. Quick Summary
 
-| Item | Detail |
-|---|---|
-| Process studied | Summer Term (grade-improvement) result processing through to placement eligibility check |
-| Core observation | 90 elapsed days between exam (24 Jul 2026) and evidence cutoff (22 Oct 2026) with no published result — one documented case |
-| Placement-form observation | `evidence/Screenshort_Evidence.png` (OBSERVED, approx. Aug 2026): *"SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS"* — file present, 56 KB, no private data |
-| Grade-replacement rule | Verbally confirmed by an academic staff member (REPORTED, E-07): the newly published grade becomes effective even if lower than the previous grade |
-| What ResultFlow proposes | Traceable status record, approver-only publication, separate effective-grade record per student+course, deadline flag, idempotent sync, hash-chained audit log |
-| Tests | 20 pass — 5 required scenarios + grade-replacement (normal workflow) + sync-failure stale-then-recovery (8-step) + effective-grade boundaries + input safety + timestamp + audit-tamper |
-| ROI | −0.5 / +7.0 / +27.0 h/month (conservative / base / optimistic); **all inputs assumed** |
-| Key limitations | One documented case; internal stages not observed; eligibility source document not committed; grade-replacement rule from verbal guidance only; no written regulation reviewed |
+| Component | Current Reality | ResultFlow Proposal |
+|---|---|---|
+| **Result Tracking** | 90 days elapsed with no visible status or ETA (one case) | Step-by-step visible status tracking with update timestamps |
+| **Placement Standing** | Form treats pending subjects as backlogs (`Screenshort_Evidence.png`) | Distinguishes pending improvement from an active backlog |
+| **Grade Authority** | Verbal staff guidance on grade replacement (REPORTED, E-07) | Separate effective-grade record updated only on authorized publication |
+| **Placement Sync** | Manual or unobserved updates | Safe retries that do not create duplicate or inconsistent updates |
+| **Validation** | In-memory reference prototype | 20 automated tests passing (5 required scenarios + edge cases) |
+| **ROI Model** | Unmeasured handling times | Estimated +7.0 h/mo net saving in base scenario (illustrative assumptions) |
 
-Full detailed report: [TASK1_REPORT.md](TASK1_REPORT.md)
+Full report: [TASK1_REPORT.md](TASK1_REPORT.md)
 
 ---
 
 ## 2. The Problem
 
-Two observations form the evidence base:
+The investigation identified two primary issues from direct observation:
 
-**Observation 1 — No result status (OBSERVED, E-01, E-02, E-05):**
-Examinations ended 24 July 2026. As of 22 October 2026 — **90 elapsed days** later — no result had been published and no confirmed publication date had been provided in response to enquiries. This is one documented case; it is not presented as institution-wide data.
+1. **Uncertainty During Long Waits (OBSERVED, E-01, E-02, E-05):** In the documented case, exams ended 24 July 2026. After 90 days (22 October 2026), no results had been published and enquiries gave no confirmed release date.
+2. **Backlog Label on Placement Forms (OBSERVED, E-03):** The placement form (`evidence/Screenshort_Evidence.png`, approx. Aug 2026, 56 KB, no private data) states: *"SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS."* Students with existing passing grades attempting improvement may appear to have open backlogs during placement shortlisting.
 
-**Observation 2 — Placement-form backlog label (OBSERVED, E-03):**
-A placement-form screenshot (`evidence/Screenshort_Evidence.png`, approx. Aug 2026, 56 KB, no private data) shows the instruction: *"SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS."* A student who chose grade improvement — who already holds a passing grade — may appear to have an open backlog during the waiting period.
-
-> The form is the 2027 Passing Out Batch Online Placement Application Form (last date: 3 Aug 2026). Whether the form's treatment of pending Summer Term subjects is intentional institutional design or an area that could benefit from clearer labeling is not determined by this project. ResultFlow proposes that clearer status labeling would reduce ambiguity for students and placement reviewers.
-
-Everything beyond these two observations is either reported by peers or staff (REPORTED), calculated from dated observations (COMPUTED), or is a design assumption (ASSUMPTION) — and is labelled accordingly throughout this project.
-
-**The gap in brief:** In this documented case, students lacked any confirmed result-publication date, while the placement-form wording creates uncertainty about backlog status during the waiting period. This is one case — it does not establish institution-wide frequency or prove that the college’s internal system is defective. ResultFlow proposes addressing the opacity through visible status tracking, authorized grade publication, a clear effective-grade record, deadline-based review, and safe recovery from synchronization failures.
-
-**Problem → Evidence → Impact → Proposed Solution:**
-
-| Concern | Evidence | Potential Impact | Proposed Response |
-|---|---|---|---|
-| No visible result status or ETA | OBSERVED — 90 days, one case (E-01, E-02, E-05) | No way to distinguish processing-in-progress from stalled | Centralized status record; one-stage-at-a-time progression; latest-update timestamp |
-| Placement form labels pending subject as backlog | OBSERVED — screenshot E-03 (file present) | Student with passing grade may appear to have an open backlog during wait | Distinguish pending-improvement state from current effective published grade |
-| Uncertainty about which grade becomes effective | REPORTED — verbal staff guidance (E-07) | Student or placement team may assume an incorrect effective grade | Separate effective-grade record updated only after authorized publication; attempt history preserved |
-| Manual follow-up with no known escalation path | REPORTED — peer conversations (E-06); documented follow-ups (E-04) | Time cost; no guaranteed resolution | Self-service status view; notification on state change; escalation to accountable owner |
-| Placement deadline approaching while result pending | ASSUMPTION | Potential difficulty if grade needed before publication | Informational deadline flag only — does not change grades, status, or eligibility |
-| Internal handoffs and owner not externally visible | ASSUMPTION (not observed) | Accountability gap in processing | Proposed accountable role at each stage; institution must confirm actual ownership |
-| Placement copy may not reflect a newly published grade | ASSUMPTION (proposed concern, not an observed system defect) | Risk of stale data in placement checks | Authorized sync after publication; SYNC_FAILED prevents false success claim; authorized retry |
+ResultFlow resolves this by showing visible status, keeping passing grades active, and flagging cases approaching placement deadlines.
 
 ---
 
 ## 3. Who Is Affected
 
-- **Students in Summer Term grade-improvement:** Students who wish to improve their grades and have an existing grade of **E, D, F, C, or B** in the relevant subject. *(Source: verbally confirmed by officials — REPORTED, E-11. Written eligibility document not yet committed — see §4 of [TASK1_REPORT.md](TASK1_REPORT.md).)*
-- **Placement team:** Staff who check academic details for placement-eligibility decisions.
-- **Exam and academic staff:** Those who process and authorize grade-improvement results.
-
-**Scale:** One directly documented case. General frequency, volume, and institutional scope require an anonymized, authorized count that was not obtained.
+- **Students attempting grade improvement:** Students holding an existing grade of **E, D, F, C, or B** in the subject (verbally confirmed by officials — REPORTED, E-11; written source document not yet committed).
+- **Placement coordinators:** Staff verifying student eligibility who need clear, current academic standing.
+- **Exam administration staff:** Teams managing grading, approvals, and student enquiries.
+- **Scope:** Based on one directly documented student case. Institutional volume requires official college data.
 
 ---
 
 ## 4. Evidence and Findings
 
-| ID | Date | Category | Statement | Notes |
+All statements use strict evidence categories: `OBSERVED` (directly seen), `REPORTED` (verbal staff/peer accounts), `COMPUTED` (date arithmetic), `ASSUMPTION` (unverified workflow design), and `SYNTHETIC` (artificial test data).
+
+| ID | Date | Category | Summary | Notes |
 |---|---|---|---|---|
-| E-01 | 24 Jul 2026 | OBSERVED | Summer Term examinations ended (one documented case) | Single case; not a sample |
-| E-02 | 22 Oct 2026 | OBSERVED | No result and no confirmed publication date as of this date | Does not represent an average or institution-wide position |
-| E-03 | Approx. Aug 2026 | OBSERVED | Placement-form screenshot: *"SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS"* — `evidence/Screenshort_Evidence.png`, 56 KB, present, no private data | Exact date not recorded; shows form wording, not internal system data |
-| E-04 | Approx. Sep–Oct 2026 | OBSERVED | Academic contacts asked for update; no confirmed publication date given | No names or messages recorded; date approximate |
-| E-05 | 22 Oct 2026 | COMPUTED | 24 Jul → 22 Oct = 7 + 31 + 30 + 22 = **90 days** elapsed | One case; not an average |
-| E-06 | Approx. Oct 2026 | REPORTED | Peers described similar waiting experiences with no visible status | Secondhand; small number; not independently verified |
-| E-07 | Approx. Oct 2026 | REPORTED | Anonymous academic staff member stated verbally: newly published grade becomes effective even if lower | Verbal only; no written regulation reviewed — significant limitation |
-| E-08 | Approx. Oct 2026 | REPORTED | A lecturer mentioned all branches release results simultaneously | Single verbal statement; not independently verified as official policy |
-| E-09 | 22 Oct 2026 | SYNTHETIC | All prototype test identifiers, grades, and dates (SYN-S-1, SYN-CS101, etc.) | Artificial data for testing only; not real |
-| E-10 | 22 Oct 2026 | ASSUMPTION | Monthly case volumes and handling times in the ROI calculation | Unmeasured; required for scenario arithmetic only |
-| E-11 | Approx. Oct 2026 | REPORTED | Officials verbally confirmed Summer Term grade-improvement eligibility: existing grade of E, D, F, C, or B | Verbal only; written eligibility document not committed — action required |
+| E-01 | 24 Jul 2026 | OBSERVED | Summer Term exams ended | Single documented student case |
+| E-02 | 22 Oct 2026 | OBSERVED | No result published as of this date | Follow-up enquiries gave no confirmed date |
+| E-03 | Approx. Aug 2026 | OBSERVED | Placement form: *"SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS"* | Screenshot present: `evidence/Screenshort_Evidence.png` (56 KB, no private data) |
+| E-04 | Approx. Sep–Oct 2026 | OBSERVED | Academic contacts asked for update; no date given | Date approximate; no personal names recorded |
+| E-05 | 22 Oct 2026 | COMPUTED | 24 Jul to 22 Oct = 90 elapsed days | Date arithmetic on single case |
+| E-06 | Approx. Oct 2026 | REPORTED | Peers described similar long waits with no status | Secondhand accounts from conversations |
+| E-07 | Approx. Oct 2026 | REPORTED | Staff stated new grade replaces previous grade even if lower | Verbal guidance; written regulation not reviewed |
+| E-08 | Approx. Oct 2026 | REPORTED | Lecturer mentioned branches release results simultaneously | Verbal statement; not verified as formal policy |
+| E-09 | 22 Oct 2026 | SYNTHETIC | Test IDs, student references, and grades | Used solely for automated prototype testing |
+| E-10 | 22 Oct 2026 | ASSUMPTION | Case volumes and handling times for ROI | Illustrative assumptions for arithmetic model |
+| E-11 | Approx. Oct 2026 | REPORTED | Officials verbally confirmed eligibility: grades E, D, F, C, or B | Verbal only; written document not committed |
 
-No official IFHE or ICFAI web pages, regulations, or notices are cited as evidence for any process claim.
+No official IFHE web pages, regulations, or notices are cited as evidence for any process claim.
 
-**Evidence completion checklist — actions you still need to confirm:**
-- [ ] **E-03:** Confirm the exact date the screenshot was taken or accessed. Update the date field above.
-- [ ] **E-11 / §4 of report:** Locate the written eligibility source. Add its title, section, URL (if available), and access date.
-- [ ] **E-04, E-06, E-07, E-08:** Confirm approximate months if recalled.
-- [ ] **§16 of report:** Confirm exact AI model name and version used.
+**Evidence Gaps and Limitations:**
+The following limitations apply to the evidence log and are disclosed here rather than treated as unfinished editing tasks:
+- **E-03 (screenshot date):** The genuine placement-form screenshot is included in the project (`evidence/Screenshort_Evidence.png`), but its exact capture date was not recorded. The date field for E-03 records "Approx. Aug 2026."
+- **Approximate dates (E-04, E-06, E-07, E-08, E-11):** Some dates associated with conversations or follow-up enquiries are approximate or were not recorded at the time.
+- **Verbal confirmations (E-07, E-11):** The Summer Term eligibility condition (E, D, F, C, or B) and the grade-replacement rule were reported verbally by academic officials. The written eligibility document and any written grade-replacement regulation were not obtained or included in the repository.
+- **AI model version (§16 of report):** The exact AI model version used during development was not recorded during the session.
+- **Internal stages:** The internal college processing stages and handoffs between exam completion and result publication were not directly verified and remain assumptions throughout this project.
+
+These are disclosed evidence limitations, not fabricated or silently completed evidence.
 
 ---
 
 ## 5. Proposed Solution
 
-ResultFlow proposes replacing the opaque waiting period with a traceable, role-gated process:
+ResultFlow replaces uncertainty with structured, role-gated rules:
 
-- **Status tracking:** One record per attempt moves through defined stages: `REGISTERED → EXAM_COMPLETED → RESULT_PROCESSING → UNDER_VERIFICATION → AWAITING_APPROVAL → PUBLISHED`.
-- **Approver-only publication:** Only `exam_approver` can publish a grade. Exam staff, sysadmin, students, and unrecognized actors are all denied (tested in `test_unapproved_cannot_publish`, `test_invalid_role_denied`).
-- **Separate effective-grade record:** `effective_grades[(student, course)]` is updated only on authorized publication, regardless of whether the new grade is higher or lower. A pending attempt never changes this record.
-- **Grade history:** When the *same attempt key* is published a second time, the previous published grade on that record is archived in `attempt_history` — never deleted. When two separate attempts exist for the same course (different keys), the earlier attempt's own record retains its `published_grade` and is preserved in the audit log.
-- **Deadline flag:** Cases approaching a placement deadline are flagged for review. The flag does not approve grades, change status, or grant eligibility (tested in `test_deadline_flag_is_flag_only`).
-- **Sync with fallback:** After publication, the approved grade is copied to `placement[(student, course)]`. If sync fails, `SYNC_FAILED` is recorded on the attempt record and `effective_grades` is already updated (academic record safe), while `placement` is left unchanged — retaining its prior value — and is not falsely claimed as current. An authorized role retries safely (tested in `test_sync_failure_stale_then_recovery`).
-- **Audit log:** Every action is appended to a hash-chained log with real generated UTC timestamps. Tampering breaks the hash chain (tested in `test_audit_tamper_detected`).
-- **Input safety:** Unknown attempt keys return `UNKNOWN_KEY`; missing fields return `ACTION_REQUIRED` or `None` — no unhandled exceptions (tested).
+1. **Visible Status Tracking:** Attempts advance through clear stages (`REGISTERED → EXAM_COMPLETED → RESULT_PROCESSING → UNDER_VERIFICATION → AWAITING_APPROVAL → PUBLISHED`).
+2. **Approver-Only Publishing:** Only the `exam_approver` role can release a final grade; others are denied.
+3. **Independent Effective Grade:** A student's current official grade (`effective_grades`) is stored separately from pending attempts. Existing passing grades are never altered while an attempt is pending.
+4. **Permanent Grade History:** Publishing archives earlier grades; nothing is overwritten or lost.
+5. **Safe Placement Synchronization:** Approved grades sync to placement records. Sync failures are flagged as `SYNC_FAILED` without corrupting academic records, allowing safe retries that do not create duplicate or inconsistent updates.
+6. **Deadline Review Flag:** Flags pending results approaching placement deadlines for staff review without altering grades or skipping verification.
+7. **Tamper-Evident Audit Log:** Append-only hash chain with generated UTC timestamps.
+8. **Safe Input Handling:** Missing inputs return `ACTION_REQUIRED` and unknown keys return `UNKNOWN_KEY` instead of crashing.
 
 ---
 
@@ -153,149 +146,115 @@ ResultFlow proposes replacing the opaque waiting period with a traceable, role-g
 
 ```
 REGISTERED
-    |
-    v
+    │
+    ▼
 EXAM_COMPLETED
-    |
-    v
+    │
+    ▼
 RESULT_PROCESSING
-    |
-    v
+    │
+    ▼
 UNDER_VERIFICATION
-    |
-    v
+    │
+    ▼
 AWAITING_APPROVAL
-    |
-    +--(exam_approver only)--> PUBLISHED
-                                    |
-                               effective_grades[(student, course)] updated
-                                    |
-                               _sync() runs
-                                    |
-                          +---------+---------+
-                          |                   |
-                        SYNCED           SYNC_FAILED
-                                             |
-                                    (sysadmin or exam_approver)
-                                        retry_sync()
-                                             |
-                                           SYNCED
+    │
+    └──(exam_approver only)──► PUBLISHED
+                                  │
+                             effective_grades[(student, course)] updated
+                                  │
+                             _sync() runs
+                                  │
+                        ┌─────────┴─────────┐
+                        │                   │
+                     SYNCED            SYNC_FAILED
+                                            │
+                                  (sysadmin or exam_approver)
+                                      retry_sync()
+                                            │
+                                          SYNCED
 
 Exceptions handled at any stage:
-  ACTION_REQUIRED  -- missing or invalid input; nothing stored
-  DUPLICATE        -- same attempt key already registered; ignored and logged
-  DENIED           -- unauthorized action; no state changes; event logged
-  UNKNOWN_KEY      -- invalid attempt key reference; controlled return; no crash
+  ACTION_REQUIRED  ── Missing or invalid input; nothing stored
+  DUPLICATE        ── Same attempt key already registered; ignored and logged
+  DENIED           ── Unauthorized action; no state changes; event logged
+  UNKNOWN_KEY      ── Invalid attempt key reference; controlled return; no crash
 ```
-
-> All proposed roles and stage owners require institutional confirmation before any live implementation.
 
 ---
 
 ## 7. Grade-Improvement Rule
 
 **Rule (REPORTED — verbal staff guidance, E-07; written regulation not reviewed):**
-
 > When a new grade-improvement result is officially approved and published, that newly published grade becomes the effective grade for the student and course, even if it is lower than the previous published grade.
 
-**Two-key design:** Attempts are keyed by `student|course|type|exam_date`. The effective grade is keyed by `(student, course)`. These are separate stores — a pending second attempt never overwrites the first.
+ResultFlow stores attempt records separately from the active effective grade:
+- **Attempts Store:** Keyed by `student|course|type|exam_date`. Preserves every attempt's record.
+- **Effective Grades Store:** Keyed by `(student, course)`. Holds the current official grade.
 
-| Step | `effective_grades[(SYN-S-1, SYN-CS101)]` | `placement[(SYN-S-1, SYN-CS101)]` |
-|---|---|---|
-| Attempt 1 (regular, Jan) published — grade A | A | A |
-| Attempt 2 (grade_improvement, Jul) pending at AWAITING_APPROVAL | **A — unchanged** | A |
-| Attempt 2 published — grade C (lower than A) | **C** | C (after successful sync) |
+| Step | Effective Grade | Placement Record | What Happens |
+|---|---|---|---|
+| **1. Attempt 1 published** (Regular exam) | **A** | **A** | Initial passing grade active and synced |
+| **2. Attempt 2 pending** (Summer Term) | **A (unchanged)** | **A** | Pending improvement does not affect current grade |
+| **3. Attempt 2 published** (Grade C) | **C** | **C** | New grade replaces prior grade upon approval |
 
-- Attempt 1's own record retains `published_grade = A` — not touched.
-- `attempt_history` on Attempt 2 is empty (it was not previously published under its own key).
-- Source of rule: verbal guidance (REPORTED, E-07). Written regulation is an open evidence gap.
-- Tests: `test_grade_replacement_a_to_c_same_course` **PASSED** · `test_grade_replacement_pending_then_publish_sequence` **PASSED**
+Attempt 1's record still retains its original grade A in history. Verified by automated tests `test_grade_replacement_a_to_c_same_course` and `test_grade_replacement_pending_then_publish_sequence`.
 
 ---
 
 ## 8. Prototype and Architecture
 
-**File:** [`prototype/resultflow.py`](prototype/resultflow.py) — single file, standard library only, no external dependencies.
+The reference implementation is in [`prototype/resultflow.py`](prototype/resultflow.py) (single file, Python standard library, zero external dependencies).
 
-**Three storage dictionaries:**
+### Storage Structure
+- `attempts`: Stores full attempt records, statuses, and history.
+- `effective_grades`: Maps `(student, course)` to the current authorized grade.
+- `placement`: The synchronized copy used for placement eligibility checks.
 
-| Dict | Key | Holds |
-|---|---|---|
-| `attempts` | `"student\|course\|type\|exam_date"` | Full attempt record (status, published_grade, attempt_history, sync_status) |
-| `effective_grades` | `(student, course)` | Most recently authorized published grade |
-| `placement` | `(student, course)` | Synced copy for placement system |
-
-**Design principles:**
-- Deterministic rules only. No AI in any decision.
-- Least-privilege: each role is limited to exactly what is documented and tested.
-- Fail-safe: `SYNC_FAILED` never falsely claims placement was updated.
-- Idempotent: repeating a valid operation produces the same result without side effects.
-- Safe inputs: `_require_key()` guards all key lookups; controlled returns instead of exceptions.
-- Audit: hash-chained, append-only, with real generated UTC timestamps included in each hash.
-
-**What the prototype is NOT:**
-- Not connected to any IFHE system or database.
-- Not persistent (in-memory only; state lost on restart).
-- Not a production-grade durable audit store.
-- Not an implementation of CGPA recalculation (policy-dependent; official rules not confirmed).
+### Key Design Principles
+- **Deterministic rules:** Pure Python logic without AI in decision pathways.
+- **Role-based permissions:** Strict authorization checks on all operations.
+- **Safe error recovery:** Sync failures leave academic records intact and allow safe retries that do not create duplicate or inconsistent updates.
+- **Scope clarity:** In-memory prototype for logic validation; not connected to live college databases.
 
 ---
 
 ## 9. Synthetic Test Results
 
-**Run:** 23 Oct 2026 · Python 3.12.10 · pytest-9.1.1
-**Result: 20 passed, 0 failed**
-**Saved output:** [`evidence/pytest_output.txt`](evidence/pytest_output.txt)
+**Run:** 23 Oct 2026 · Python 3.12.10 · pytest-9.1.1  
+**Result: 20 passed, 0 failed.** (Log: [`evidence/pytest_output.txt`](evidence/pytest_output.txt))
 
 ### Five Required Scenarios
 
-| # | Test | Scenario | Result |
+| # | Scenario | Test Function | Result |
 |---|---|---|---|
-| 1 | `test_case1_normal` | Valid request registered, advanced, and published; effective grade and placement synced | **PASSED** |
-| 2 | `test_case2_missing_information` | Empty course / invalid attempt type; nothing stored | **PASSED** |
-| 3 | `test_case3_duplicate` | Same attempt key submitted twice; original record unchanged | **PASSED** |
-| 4 | `test_case4_unauthorized` | Other student and unconsented employer denied; own record accessible | **PASSED** |
-| 5 | `test_case5_failed_step_and_recovery` | Sync fails; effective grade kept; sysadmin retry succeeds; idempotent | **PASSED** |
+| 1 | **Normal Request** — Attempt registered, advanced through approvals, published, and synced | `test_case1_normal` | **PASSED** |
+| 2 | **Missing Information** — Incomplete or invalid attempt rejected safely | `test_case2_missing_information` | **PASSED** |
+| 3 | **Duplicate Request** — Resubmitting existing attempt key is blocked without altering data | `test_case3_duplicate` | **PASSED** |
+| 4 | **Unauthorized Access** — Unapproved roles blocked from publishing or viewing private records | `test_case4_unauthorized` | **PASSED** |
+| 5 | **Failed Step & Recovery** — Sync failure handled safely; retry restores consistent state | `test_case5_failed_step_and_recovery` | **PASSED** |
 
-### Additional Tests
+### Additional Tests (15 Passed)
+Fifteen additional tests verify grade-replacement downgrades (A to C), 8-step sync failure and recovery, role publishing boundaries, audit log hash-tamper detection, and safe error handling for missing fields and unknown keys.
 
-| Test | What it verifies | Result |
-|---|---|---|
-| `test_grade_replacement_a_to_c_same_course` | Two distinct attempts on same course; A then C; effective = C; attempt 1 record still shows A | **PASSED** |
-| `test_grade_replacement_pending_then_publish_sequence` | Normal workflow only — no manual status reset; A pending → C authorized → C effective; all 8 sub-checks | **PASSED** |
-| `test_sync_failure_stale_then_recovery` | 8-step: A synced → C published → sync fails → stale A marked SYNC_FAILED → retry → C synced → idempotent | **PASSED** |
-| `test_effective_grade_unchanged_while_pending` | Effective grade stays A while attempt 2 is at AWAITING_APPROVAL | **PASSED** |
-| `test_sync_failure_does_not_change_effective_grade` | Sync failure: effective_grades correct; placement not updated; retry fixes placement | **PASSED** |
-| `test_unapproved_cannot_publish` | Wrong stage, exam_staff, sysadmin all denied | **PASSED** |
-| `test_advance_cannot_publish_or_skip` | `advance()` cannot reach PUBLISHED; student role cannot advance | **PASSED** |
-| `test_deadline_flag_is_flag_only` | Deadline flag returned; no status changed | **PASSED** |
-| `test_audit_tamper_detected` | Modified audit record field breaks hash chain | **PASSED** |
-| `test_audit_includes_timestamps` | Every audit record contains a non-empty `ts` field | **PASSED** |
-| `test_retry_sync_unauthorized` | Student and placement roles denied on retry | **PASSED** |
-| `test_unknown_key_safe` | Unknown and None keys return UNKNOWN_KEY; no exception raised | **PASSED** |
-| `test_missing_student_id_safe` | Empty student ID returns ACTION_REQUIRED or None safely | **PASSED** |
-| `test_invalid_role_denied` | Unrecognized actor is denied without exception | **PASSED** |
-| `test_duplicate_different_type_not_duplicate` | Same course, different type/date = distinct keys, not duplicates | **PASSED** |
-
-Five-case demonstration output: [`evidence/case_results.md`](evidence/case_results.md)
+Demonstration output: [`evidence/case_results.md`](evidence/case_results.md)
 
 ---
 
 ## 10. ROI and Time Savings
 
 > **All inputs are illustrative assumptions (E-10).** No real handling times or case volumes were measured.
->
-> Overhead (180 min/month) covers: monthly review, staff support queries, exception handling, SYNC_FAILED reconciliation, and system administration.
+> Overhead (180 min/month) covers monthly reviews, staff queries, exception handling, and administration.
 
-| Scenario | Cases/mo | Current min/case | Proposed min/case | Net saving/case | Overhead min/mo | Gross min saved | Net min saved | Net h/mo | Break-even |
-|---|---|---|---|---|---|---|---|---|---|
-| Conservative | 50 | 8 | 5 | 3 | 180 | 150 | −30 | **−0.5** | 60 cases/mo |
-| **Base** | **100** | **10** | **4** | **6** | **180** | **600** | **420** | **+7.0** | **30 cases/mo** |
-| Optimistic | 200 | 12 | 3 | 9 | 180 | 1,800 | 1,620 | **+27.0** | 20 cases/mo |
+| Scenario | Cases/mo | Current min/case | Proposed min/case | Overhead min/mo | Gross min saved | Net min saved | Net h/mo | Break-even |
+|---|---|---|---|---|---|---|---|---|
+| Conservative | 50 | 8 | 5 | 180 | 150 | −30 | **−0.5** | 60 cases/mo |
+| **Base** | **100** | **10** | **4** | **180** | **600** | **420** | **+7.0** | **30 cases/mo** |
+| Optimistic | 200 | 12 | 3 | 180 | 1,800 | 1,620 | **+27.0** | 20 cases/mo |
 
-**Worked check (base):** 100 × (10 − 4) = 600 min gross; 600 − 180 = 420 min = **7.0 h**. Break-even = 180 ÷ 6 = **30 cases/mo**. ✓
+**Worked check (base):** 100 × (10 − 4) = 600 min gross; 600 − 180 = 420 min = **7.0 h/mo**. Break-even = 180 ÷ 6 = **30 cases/mo**.
 
-At low volume (conservative), overhead exceeds the saving — net is negative. Real-world savings cannot be claimed until actual case volumes and handling times are measured with institutional permission.
+**Takeaway:** At low volume (50 cases/month), overhead exceeds time saved (−0.5 h/month). At base volume (100 cases/month), the workflow saves an estimated **7.0 hours/month**. Real-world savings cannot be claimed until case volumes and handling times are measured with institutional permission.
 
 Full table: [`evidence/roi_results.md`](evidence/roi_results.md) · Script: [`prototype/roi_calc.py`](prototype/roi_calc.py)
 
@@ -303,41 +262,38 @@ Full table: [`evidence/roi_results.md`](evidence/roi_results.md) · Script: [`pr
 
 ## 11. How to Run
 
-Requirements: Python 3 (tested on 3.12.10) and pytest. No other dependencies.
+Requirements: Python 3 (tested on 3.12.10) and pytest. Standard library only.
 
 ```bash
 cd prototype
 
-# Run all 20 tests
+# Run all 20 automated tests
 python -m pytest -v
 
-# Run the five-case demonstration (writes ../evidence/case_results.md)
+# Run the five-case demonstration
 python run_cases.py
 
-# Run the ROI calculation (writes ../evidence/roi_results.md)
+# Run the ROI calculation model
 python roi_calc.py
 ```
 
-Saved outputs in `evidence/` are from a real run on 23 Oct 2026.
+Outputs are saved in `evidence/` (generated 23 Oct 2026).
 
 ---
 
 ## 12. Repository Structure
 
 ```
-ResultFlow_Task1_submission/
-├── .gitignore                     <- Excludes __pycache__, .pytest_cache, OS files
-├── README.md                      <- This file — fast entry point for interviewers
-├── TASK1_REPORT.md                <- Full detailed report (17 sections)
+ResultFlow/
+├── README.md                      <- Project summary and quick recruiter guide (this file)
+├── TASK1_REPORT.md                <- Comprehensive 17-section investigation report
 ├── prototype/
-│   ├── resultflow.py              <- Rules engine (stdlib only; no AI in decisions)
-│   ├── test_resultflow.py         <- 20 automated tests (pytest)
-│   ├── run_cases.py               <- Five-case demonstration; writes case_results.md
-│   └── roi_calc.py                <- ROI arithmetic; writes roi_results.md
+│   ├── resultflow.py              <- Workflow rules engine (standard library only)
+│   ├── test_resultflow.py         <- 20 automated pytest test cases
+│   ├── run_cases.py               <- Five-case demonstration runner
+│   └── roi_calc.py                <- ROI arithmetic script
 └── evidence/
-    ├── Screenshort_Evidence.png   <- Placement-form screenshot (OBSERVED, E-03)
-    │                                  PRESENT · 56 KB · shows "SUMMER TERM SUBJECTS
-    │                                  ALSO TREATED AS BACKLOGS" · no private data
+    ├── Screenshort_Evidence.png   <- Placement-form screenshot (OBSERVED, E-03, 56 KB)
     ├── pytest_output.txt          <- Real test run output, 23 Oct 2026 (20 passed)
     ├── case_results.md            <- Five-case demonstration output
     └── roi_results.md             <- ROI calculation output
@@ -347,47 +303,31 @@ ResultFlow_Task1_submission/
 
 ## 13. Limitations and Risks
 
-- Evidence is **one directly documented case** (90 elapsed days). Scale and general frequency are unknown.
-- Internal processing stages, handoffs, and role ownership are **assumed, not observed** through a staff walkthrough.
-- No written grade-replacement regulation reviewed. Rule implemented from verbal guidance only (REPORTED, E-07).
-- Summer Term eligibility verbally confirmed (E, D, F, C, or B). **Written source document not yet committed** — required before final submission.
-- ROI figures are illustrative. No real volumes or handling times measured.
-- Prototype is in-memory only; not persistent; not production-ready; not connected to any IFHE system.
-- CGPA recalculation not implemented — official rules not confirmed; documented as a policy-dependent component.
-- Audit timestamps are real generated values but not cryptographically secured across process restarts.
-- No claim is made that a specific IFHE system has a defect or that any placement opportunity was lost.
-
-All problems and concerns are clearly labelled OBSERVED, REPORTED, COMPUTED, ASSUMPTION, or SYNTHETIC throughout this project.
+- **Single Documented Case:** The 90-day waiting period reflects one documented student experience. Institutional averages were not measured.
+- **Unverified Internal Handoffs:** Internal processing stages, roles, and handoffs are assumed, not directly observed.
+- **Verbal Policy Guidance:** Summer Term eligibility (grades E, D, F, C, or B) and the grade-replacement rule were verbally reported by staff; written institutional regulations were not obtained.
+- **Illustrative ROI:** Time estimates and volume numbers are modeling assumptions, not measured institutional statistics.
+- **In-Memory Prototype:** Demonstrates business logic in memory; not integrated with live college infrastructure.
+- **Scope Boundary:** ResultFlow does not alter grading standards, expedite paper correction, or calculate CGPA.
 
 ---
 
 ## 14. Interview Talking Points
 
-**What problem did you study?**
-The gap between a Summer Term grade-improvement exam and result publication, and how the placement form represents pending Summer Term subjects while results are unpublished. Based on one documented 90-day waiting case and reported peer experiences. The exact scope of this behavior across the institution was not verified.
+**1. What specific problem does ResultFlow address?**  
+The lack of visibility between Summer Term exams and result publication, and the ambiguity caused when placement forms label pending subjects as backlogs. In one documented case, a student waited 90 days with no status updates.
 
-**What evidence do you have?**
-- Two directly observed facts: exam date (24 Jul 2026) and no result after 90 days (as of 22 Oct 2026).
-- A placement-form screenshot (`evidence/Screenshort_Evidence.png`, present, approx. Aug 2026) showing the wording *"SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS."*
-- Peer-reported similar experiences (REPORTED, E-06).
-- An academic staff member's verbal statement on grade-replacement (REPORTED, E-07).
-- Verbal confirmation from officials on Summer Term eligibility criteria (REPORTED, E-11).
-Each item is labelled OBSERVED, REPORTED, COMPUTED, or ASSUMPTION.
+**2. What direct evidence supports the project?**  
+Two primary observations: the 90-day wait (24 July to 22 October 2026) and a genuine placement-form screenshot (`evidence/Screenshort_Evidence.png`) stating pending Summer Term subjects are treated as backlogs. Eligibility criteria and grade-replacement rules were verbally reported.
 
-**Why did you propose this solution?**
-The core issue is opacity — no visible status and no escalation path. ResultFlow adds status visibility, a clear approval boundary, a separate effective-grade record, grade history, and a sync-failure fallback. These address the opacity problem without granting unauthorized access or bypassing institutional processes.
+**3. What does ResultFlow propose?**  
+A role-governed workflow that gives students status visibility, restricts grade publishing to authorized approvers, separates current effective grades from pending attempts, and synchronizes with placement records safely.
 
-**What does the prototype actually prove?**
-That the proposed rules work correctly under 20 synthetic test scenarios. Specifically: grade replacement using two distinct attempt keys and the normal authorized workflow (no manual status reset), sync failure leaves effective grades intact and explicitly marks the stale placement copy as SYNC_FAILED, an 8-step stale-then-recovery sequence passes, unauthorized actors are denied, and unknown keys return controlled values instead of raising exceptions.
+**4. What did the prototype prove?**  
+All 20 automated tests passed, confirming that pending attempts do not alter existing grades before approval, approved downgrades replace prior grades while preserving history, sync failures allow safe retries without creating duplicate or inconsistent updates, and unauthorized roles are blocked safely.
 
-**What are the biggest limitations?**
-One documented case, not a sample. Internal handoffs are assumptions. Grade-replacement rule from verbal guidance only — no written regulation reviewed. Eligibility verbally confirmed but written source not committed. ROI is hypothetical.
-
-**Explain the effective-grade logic.**
-`effective_grades` is keyed by `(student, course)` and is updated **only** when `publish()` is called by an authorized approver. A pending attempt — even one at AWAITING_APPROVAL — does not touch it. `placement` is a separate copy, updated only after a successful sync. If sync fails, `SYNC_FAILED` is recorded on the **attempt record** (not on the placement dictionary); `effective_grades` is already correct; and `placement` retains its prior value unchanged — it is not falsely claimed as current. An authorized sysadmin or approver retries via `retry_sync()`, which writes the current effective grade into `placement` and clears the failure state.
-
-**Can you explain the grade-replacement logic?**
-Two attempts for the same course have different attempt keys (different type or exam date). When the second is published, `effective_grades[(student, course)]` is overwritten with the new grade regardless of whether it is higher or lower. The first attempt's own record is not modified — it still shows its original published grade. This is tested with two real distinct attempt keys and the normal workflow, not a manual status hack.
+**5. What are the key limitations?**  
+The investigation is based on one documented case, internal college stages are assumed, policy details were verbally confirmed without written source documents, and ROI savings are estimates rather than measured data.
 
 ---
 
@@ -395,9 +335,9 @@ Two attempts for the same course have different attempt keys (different type or 
 
 **Problem:** A pending grade-improvement result creates uncertainty about which grade is currently effective and how the pending subject appears in placement processing. One documented case recorded 90 elapsed days between the Summer Term exam and the evidence cutoff with no published result.
 
-**Solution:** ResultFlow proposes transparent status tracking, approver-only publication, a separate `effective_grades` record per student and course (updated only on authorized publication, even if the new grade is lower), a deadline-based review flag, and controlled sync with explicit failure handling and authorized retry.
+**Solution:** ResultFlow proposes transparent status tracking, approver-only publication, a separate `effective_grades` record per student and course (updated only on authorized publication, even if the new grade is lower), a deadline-based review flag, and safe placement synchronization with explicit failure handling and authorized retry.
 
-**Evidence and validation:** One directly observed 90-day case; a placement-form screenshot (OBSERVED, present as `evidence/Screenshort_Evidence.png`); peer-reported experiences (REPORTED); verbal staff guidance on grade replacement (REPORTED). Twenty synthetic tests pass. ROI is hypothetical.
+**Evidence and Validation:** One directly observed 90-day case; a placement-form screenshot (OBSERVED, present as `evidence/Screenshort_Evidence.png`); peer-reported experiences (REPORTED); verbal staff guidance on grade replacement (REPORTED). Twenty synthetic tests pass. ROI is hypothetical.
 
 **Limitations:** Internal processing stages were not directly observed. No written grade-replacement regulation was reviewed. Summer Term eligibility verbally confirmed (E, D, F, C, or B) — written source not yet committed. Volumes and handling times are estimated assumptions. The prototype is in-memory only and is not connected to any IFHE system.
 

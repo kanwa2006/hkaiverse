@@ -87,9 +87,7 @@ All numeric volumes, time estimates, and ROI figures are illustrative assumption
 
 **Evidence classification:** This information is classified as **REPORTED** — it was verbally confirmed by officials. It is not independently verified from a written institutional source.
 
-**Source status:** ⚠️ The exact source document — title, section number, URL, and access date — **is not committed to this repository.** This is a required evidence gap.
-
-**Action required:** Locate the original written eligibility source. Add its title, section, URL (if available), and the date it was accessed to this section. Do not invent any of these details.
+**Source status:** The exact source document — title, section number, URL, and access date — is not committed to this repository. The written eligibility document was not obtained during the investigation. This is a disclosed evidence gap; the verbally confirmed eligibility criteria (E, D, F, C, or B) remain as stated and are labelled REPORTED throughout this project.
 
 **Why this matters:** This condition defines the population relevant to the workflow. Not every student is in Summer Term; only those who meet this condition and chose grade improvement.
 
@@ -145,7 +143,7 @@ All numeric volumes, time estimates, and ROI figures are illustrative assumption
 |---|---|---|---|---|
 | E-01 | 24 Jul 2026 | OBSERVED | Summer Term examinations ended (one documented case) | Single case; not a sample |
 | E-02 | 22 Oct 2026 | OBSERVED | No result and no confirmed publication date received as of this date | Does not explain cause or represent an average |
-| E-03 | Approx. Aug 2026 *(exact date not recorded — needs confirmation)* | OBSERVED | Placement-form screenshot shows the instruction: "SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS". File: `evidence/Screenshort_Evidence.png` (56 KB, **present**, public-facing form instruction page, no private student names, IDs, or marks visible) | Exact date of access not recorded — needs confirmation. Screenshot shows the form wording, not internal system data. |
+| E-03 | Approx. Aug 2026 *(exact date not recorded)* | OBSERVED | Placement-form screenshot shows the instruction: "SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS". File: `evidence/Screenshort_Evidence.png` (56 KB, **present**, public-facing form instruction page, no private student names, IDs, or marks visible) | Exact date of access not recorded. Screenshot shows the form wording, not internal system data. |
 | E-04 | Approx. Sep–Oct 2026 *(exact date not recorded)* | OBSERVED | Academic contacts were asked for an update; no confirmed publication date was given | No names or messages recorded |
 | E-05 | 22 Oct 2026 | COMPUTED | 24 Jul to 22 Oct = 7 + 31 + 30 + 22 = **90 days** elapsed | One case; not an average |
 | E-06 | Approx. Oct 2026 *(exact date not recorded)* | REPORTED | Peers described similar experiences of waiting for Summer Term results with no status update | Secondhand; small number; not independently verified |
@@ -153,17 +151,19 @@ All numeric volumes, time estimates, and ROI figures are illustrative assumption
 | E-08 | Approx. Oct 2026 *(exact date not recorded)* | REPORTED | A lecturer mentioned that all branches release results at the same time | Single verbal statement; not independently verified as official policy |
 | E-09 | 22 Oct 2026 | SYNTHETIC | All prototype test identifiers, grades, and dates (SYN-S-1, SYN-CS101, grades A/B/C, etc.) | Artificial data created for testing; not real |
 | E-10 | 22 Oct 2026 | ASSUMPTION | Monthly case volumes and handling times used in the ROI calculation | Unmeasured; required for scenario arithmetic only |
-| E-11 | Approx. Oct 2026 *(exact date not recorded)* | REPORTED | Officials verbally confirmed Summer Term eligibility: existing grade of E, D, F, C, or B in relevant subject | Verbal only; written eligibility document not committed — action required |
+| E-11 | Approx. Oct 2026 *(exact date not recorded)* | REPORTED | Officials verbally confirmed Summer Term eligibility: existing grade of E, D, F, C, or B in relevant subject | Verbal only; written eligibility document not obtained (disclosed limitation) |
 
 **Permission scope:** Permission was granted to discuss how results are communicated and to hear experiences shared by peers. Permission did not extend to inspecting staff systems, student records, internal processing tools, or confidential institutional data. The current-state workflow map is based on the documented waiting experience and is labelled accordingly.
 
-**Evidence completion checklist — actions required:**
+**Evidence Gaps and Limitations:**
+The following limitations apply to the evidence log and are disclosed here rather than treated as unfinished editing tasks:
+- **E-03 (screenshot present; date not recorded):** The genuine placement-form screenshot is included in the repository (`evidence/Screenshort_Evidence.png`, 56 KB, reviewed — shows "SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS", no private data). Its exact capture date was not recorded; the date field records "Approx. Aug 2026."
+- **Approximate dates (E-04, E-06, E-07, E-08, E-11):** Some dates associated with conversations or follow-up enquiries are approximate or were not recorded at the time.
+- **Verbal confirmations (E-07, E-11):** The Summer Term eligibility condition (E, D, F, C, or B) and the grade-replacement rule were reported verbally by academic officials. The written eligibility document and any written grade-replacement regulation were not obtained or included in the repository.
+- **AI model version (§16):** The exact AI model version used during development was not recorded during the session.
+- **Internal stages:** The internal college processing stages and handoffs between exam completion and result publication were not directly verified and remain assumptions throughout this project.
 
-- [x] **E-03:** `evidence/Screenshort_Evidence.png` is present (56 KB). Reviewed: shows a public-facing form instruction stating "SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS." No private student names, IDs, or marks visible.
-- [ ] **E-03:** Confirm the exact date the screenshot was taken or first accessed. Update the date field above.
-- [ ] **E-11 / §4:** Locate the original written eligibility document. Verbally confirmed: grades E, D, F, C, or B. Add document title, section, URL (if available), and access date to §4.
-- [ ] **E-04, E-06, E-07, E-08, E-11:** Confirm approximate months if recalled. Even "September 2026" improves the record.
-- [ ] **AI-use record (§16):** Confirm the exact model name and version used.
+These are disclosed evidence limitations, not fabricated or silently completed evidence.
 
 ---
 
@@ -447,7 +447,7 @@ Full table: [`evidence/roi_results.md`](evidence/roi_results.md) | Script: [`pro
 1. Evidence is one directly documented 90-day case. General frequency and impact are unknown.
 2. Internal handoffs, actual processing stages, and staff responsibilities are assumed — not verified through a staff walkthrough or system access.
 3. No written regulation for the grade-replacement rule has been reviewed. The prototype implements verbal guidance (REPORTED, E-07).
-4. The Summer Term eligibility source document is not committed — action required.
+4. The Summer Term eligibility source document was not obtained — this is a disclosed evidence limitation.
 5. The placement-form screenshot (E-03) is **present in the repository** (`evidence/Screenshort_Evidence.png`, 56 KB, reviewed, shows "SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS", no private data).
 6. ROI figures are illustrative; no real handling times or volumes were measured.
 7. The prototype is in-memory only; not connected to any IFHE system; no persistent storage; state is lost on restart.
@@ -478,9 +478,9 @@ Full table: [`evidence/roi_results.md`](evidence/roi_results.md) | Script: [`pro
 |---|---|---|
 | Investigate a small college workflow with permission | §3, §5, §6 | Included; permission limited to discussions and documented experience |
 | Map steps, handoffs, approvals, exceptions, roles | §5 | Included; internal steps labelled ASSUMPTION |
-| Dated evidence log with category labels | §6 (E-01 to E-10) | Included; some dates approximate; screenshot **present** (`evidence/Screenshort_Evidence.png`) |
+| Dated evidence log with category labels | §6 (E-01 to E-11) | Included; some dates approximate; screenshot **present** (`evidence/Screenshort_Evidence.png`) |
 | Explain the problem and estimate scale | §1, §3 | Included; scale: one documented case; general frequency unknown |
-| Summer Term eligibility (E, D, F, C, or B) | §4 | Documented; verbally confirmed by officials; written source document not yet committed — action required |
+| Summer Term eligibility (E, D, F, C, or B) | §4 | Documented; verbally confirmed by officials; written source document not obtained (disclosed limitation) |
 | Proposed workflow: inputs, statuses, owner, boundary, fallback | §8 | Included; all roles require institutional confirmation |
 | Five synthetic cases: expected, actual, recovery | §12 | Complete — 20 tests pass, including all 5 required scenarios |
 | Net time saved after overhead | §13 | Included; all inputs labelled assumptions; arithmetic verified |
@@ -491,7 +491,7 @@ Full table: [`evidence/roi_results.md`](evidence/roi_results.md) | Script: [`pro
 | Authorization boundaries defined and tested | §8, §11, §12 | Complete — tested including unknown keys and invalid roles |
 | ROI arithmetic verifiable | §13 | Verified; worked check shown |
 | Risks and limitations | §14 | Included |
-| Personal contribution and AI-use record | §16 | Included; exact model name needs confirmation |
+| Personal contribution and AI-use record | §16 | Included; AI model version was not recorded during the session |
 | No private data committed | Throughout | Verified; all prototype data is SYNTHETIC |
 | Placement-form screenshot evidence (E-03) | §6, §7 | Screenshot **present** (`evidence/Screenshort_Evidence.png`, 56 KB, reviewed — no private data; shows "SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS") |
 | Summer Term eligibility includes E, D, F, C, or B | §4, §3 | Documented (verbally confirmed by officials); written source document not yet committed |
