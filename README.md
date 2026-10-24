@@ -97,10 +97,10 @@ flowchart TD
 
 ## Release and Commit
 
-**Latest commit (HEAD):** [`58a00d0`](https://github.com/kanwa2006/hkaiverse/commit/58a00d01579af5f5215d55492d008db497b6ec1a)
-Full SHA: `58a00d01579af5f5215d55492d008db497b6ec1a`
+**Final commit (HEAD):** [`8a019be`](https://github.com/kanwa2006/hkaiverse/commit/8a019be7e0c10193aeb793e180cb105d53701cf8)
+Full SHA: `8a019be7e0c10193aeb793e180cb105d53701cf8`
 
-**GitHub release:** To publish a named release, go to [github.com/kanwa2006/hkaiverse/releases](https://github.com/kanwa2006/hkaiverse/releases) → *Create a new release* → tag `v2.0-task2-final` → target `main` → publish. This requires GitHub authentication in a browser.
+**GitHub release:** To publish a named release, go to [github.com/kanwa2006/hkaiverse/releases](https://github.com/kanwa2006/hkaiverse/releases) → *Create a new release* → tag `v2.0-task2-final` → target `main` → publish.
 
 ---
 
