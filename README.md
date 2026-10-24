@@ -53,7 +53,10 @@
 
 ## Release and Commit URLs
 
-A named GitHub release containing both tasks will be created after Task 2 is complete. Release URL and final commit URL will be added here before submission.
+**Task 2 final commit:** [`4a982d2`](https://github.com/kanwa2006/hkaiverse/commit/4a982d2ae069c6e4064599f4a6b7bf82206fd69b)
+Full SHA: `4a982d2ae069c6e4064599f4a6b7bf82206fd69b`
+
+**GitHub release:** A named release (`v2.0-task2-final`) should be created at [github.com/kanwa2006/hkaiverse/releases](https://github.com/kanwa2006/hkaiverse/releases) targeting the commit above. To create it: go to the releases page → *Create a new release* → tag `v2.0-task2-final` → target `main` → publish.
 
 ---
 
