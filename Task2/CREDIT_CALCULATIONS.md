@@ -18,7 +18,7 @@
 | Semester V | CR301, CS301, CS302, CS303, CS304, DS303, DS304, HS301 | 1+3+4+3+3+3+4+0 = **21** |
 | Semester VI | CR302, CS305, CS306, CS307, DS201, DS307, SP301 | 1+3+4+4+3+3+3 = **21** |
 | Semester VII | CS415, DS306, DS311, DS401, MG401 | 3+4+3+3+3 = **16** |
-| **Mandatory IP-2** | [code to be confirmed] | **15** |
+| **Mandatory IP-2** | __ | **15** |
 | **TOTAL** | | **167** |
 
 **Working total: 167 credits.** This matches the student-supplied expected total.
