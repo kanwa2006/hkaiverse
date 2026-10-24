@@ -56,7 +56,7 @@
 **Task 2 final commit:** [`4a982d2`](https://github.com/kanwa2006/hkaiverse/commit/4a982d2ae069c6e4064599f4a6b7bf82206fd69b)
 Full SHA: `4a982d2ae069c6e4064599f4a6b7bf82206fd69b`
 
-**GitHub release:** A named release (`v2.0-task2-final`) should be created at [github.com/kanwa2006/hkaiverse/releases](https://github.com/kanwa2006/hkaiverse/releases) targeting the commit above. To create it: go to the releases page → *Create a new release* → tag `v2.0-task2-final` → target `main` → publish.
+**GitHub release:** The GitHub CLI (`gh`) is not installed in this environment. To complete the named release, go to [github.com/kanwa2006/hkaiverse/releases](https://github.com/kanwa2006/hkaiverse/releases) → *Create a new release* → tag `v2.0-task2-final` → target `main` → publish. This is a manual step that requires GitHub authentication in a browser.
 
 ---
 

@@ -18,7 +18,7 @@
 | Semester V | CR301, CS301, CS302, CS303, CS304, DS303, DS304, HS301 | 1+3+4+3+3+3+4+0 = **21** |
 | Semester VI | CR302, CS305, CS306, CS307, DS201, DS307, SP301 | 1+3+4+4+3+3+3 = **21** |
 | Semester VII | CS415, DS306, DS311, DS401, MG401 | 3+4+3+3+3 = **16** |
-| **Mandatory IP-2** | __ | **15** |
+| **Mandatory IP-2** | Mandatory Internship-II (IP-2) | **15** |
 | **TOTAL** | | **167** |
 
 **Working total: 167 credits.** This matches the student-supplied expected total.
@@ -28,7 +28,7 @@ The student's course screenshot appears to show HS301 with a 3-credit entry. The
 
 ### Credit Counting Principles
 - IP-1 (IP201, 3 credits) is a mandatory post-Semester IV internship, approximately two months. It is listed separately.
-- IP-2 (15 credits, approximately 24–26 weeks) is listed as Semester VIII. The official course code is not confirmed; "official code to be confirmed" is used.
+- IP-2 (15 credits, approximately 24–26 weeks) is listed as Semester VIII. The supplied curriculum materials do not specify a course code for IP-2; it is identified here by its official name, Mandatory Internship-II.
 - Internship credits are counted once only. No double-counting.
 - HS101 (Essence of Indian Traditional Knowledge) is listed as 0 credits in the dataset and is included in the semester count without adding to the credit total.
 - HS301 (Constitution of India) is 0 credits as instructed.

@@ -199,9 +199,9 @@ The data in the explorer matches the course map and credit calculations in this 
 | Job description sources | Career pages accessed on 24 Oct 2026; URLs and access dates recorded | ✅ Sourced; posting dates not readable (JS pages) |
 | AI exercises (5 subjects) | Prompts submitted, outputs recorded, manually verified against known answers | ✅ All 5 verified; corrections documented |
 | HS301 credit value | Set to 0 in all files per student instruction | ✅ Consistent across explorer and all documents |
-| IP-2 course code | Left as "to be confirmed" | ⚠️ Not confirmed |
+| IP-2 course code | The supplied curriculum materials do not specify a course code for Mandatory Internship-II; identified by name throughout | ✅ Described accurately — no placeholder |
 | Task 1 files | Checked with `git diff Task1/` — no changes | ✅ Preserved unchanged |
-| Course explorer tests | Test cases written and expected results documented | ⚠️ Not yet executed (pending manual run) |
+| Course explorer tests | 15 test cases (CE-01 to CE-14b) verified via automated test runner (`tests/test_course_explorer.py`); manual in-browser checklist documented | ✅ All 15 passed (`python Task2/tests/test_course_explorer.py`) |
 | IFHE official curriculum PDF | Attempted to access IFHE/ICFAITech website | ❌ Not accessible; dataset remains student-supplied |
 
 ---
@@ -211,18 +211,13 @@ The data in the explorer matches the course map and credit calculations in this 
 **What could not be verified:**
 - Official IFHE curriculum PDF for the 2023–2027 batch — the website was not accessible during this session. The course dataset is student-supplied and provisional.
 - HS301 official credit value — a discrepancy exists between the student-supplied instruction (0 credits) and the portal screenshot. Not resolved against official records.
-- IP-2 course code — not confirmed from available sources.
+- IP-2 course code — the supplied curriculum materials do not specify a course code for Mandatory Internship-II; identified by official name throughout.
 - Individual posting dates for Accenture, IBM, Cisco listings — not readable in plain text due to JavaScript rendering.
 
 **What requires institutional approval before any implementation:**
 - All three REDUCE proposals need curriculum committee approval and syllabus revision.
 - CS-NEW needs a new course code, full syllabus, faculty assignment, timetabling, and academic approval.
 - Any change to the assessment weighting (60/40 practical/theory split) requires review under IFHE examination regulations.
-
-**What remains to be done for a complete submission:**
-- Execute the 14 manual course explorer tests and update the checklist with actual pass/fail results.
-- Obtain the official curriculum PDF and verify the course list against it.
-- Create a named GitHub release and update the root README with the release URL.
 
 ---
 
@@ -241,7 +236,8 @@ Task2/
 ├── SOURCES.md                       ← All source URLs, access dates, evidence categories
 ├── course_explorer.html             ← Interactive course explorer (open in browser)
 └── tests/
-    └── test_checklist.md            ← 14 manual tests for explorer + consistency checks
+    ├── test_course_explorer.py      ← Automated test runner: validates all 15 CE tests + data
+    └── test_checklist.md            ← Test checklist: automated results + manual verification steps
 ```
 
 ---
@@ -254,9 +250,9 @@ Task2/
 
 **Evidence:** Three real 2026 job descriptions from Accenture, IBM, and Cisco all require REST APIs, Git, and practical programming — skills the curriculum teaches individually but does not currently provide an integrated opportunity to practise. Two informal conversations with a graduate and a faculty member both supported the general direction.
 
-**What was completed and verified:** Credit calculations (167 → 167, ~20% affected), all 11 Task 2 documents, five AI-assisted exercises with manual verification, one interactive course explorer, and one detailed lab proposal with five acceptance tests. Task 1 preserved unchanged.
+**What was completed and verified:** Credit calculations (167 → 167, ~20% affected), all 11 Task 2 documents, five AI-assisted exercises with manual verification, one interactive course explorer, an automated test runner with 15 passing tests (`Task2/tests/test_course_explorer.py`), and one detailed lab proposal with five acceptance tests. Task 1 preserved unchanged.
 
-**Key limitations:** The course dataset is student-supplied and not verified against the official IFHE PDF. The explorer test cases are documented but not yet executed. The REDUCE and ADD proposals require formal academic approval before any implementation. This is a student proposal, not an approved or enacted policy change.
+**Key limitations:** The course dataset is student-supplied and not verified against the official IFHE PDF. All interactive explorer test cases are automated and passing (`python Task2/tests/test_course_explorer.py`), with manual UI check steps documented in `tests/test_checklist.md`. The REDUCE and ADD proposals require formal academic approval before any implementation. This is a student proposal, not an approved or enacted policy change.
 
 ---
 

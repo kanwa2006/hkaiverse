@@ -32,7 +32,7 @@ The IFHE/ICFAITech official website was not accessible via plain-HTTP in this se
 This does not affect the substance of the proposal. The supplied course list is used as-is, with the following confirmed corrections:
 - **HS301 Constitution of India:** Shown as 0 credits (student-supplied instruction). The student's screenshot appears to show a different value. This discrepancy is documented in `CREDIT_CALCULATIONS.md`. The 0-credit value is used throughout this report.
 - **IP-1 (IP201):** Confirmed as the mandatory approximately two-month internship placed after Semester IV. The portal labels the relevant section "ST-II" but the student confirms this is IP-1.
-- **IP-2:** Confirmed as the six-month mandatory internship worth 15 credits placed in Semester VIII. The official course code is not confirmed; "official code to be confirmed" is used.
+- **IP-2:** Confirmed as the six-month mandatory internship worth 15 credits placed in Semester VIII. The supplied curriculum materials do not specify a course code; it is identified here as Mandatory Internship-II.
 
 ---
 
@@ -140,9 +140,9 @@ This does not affect the substance of the proposal. The supplied course list is 
 
 | Code | Course Name | Credits | Proposed Action |
 |---|---|---|---|
-| [official code to be confirmed] | Mandatory Internship-II (IP-2) | 15 | KEEP |
+| Mandatory Internship-II (IP-2) | Mandatory Internship-II (IP-2) | 15 | KEEP |
 
-*Six-month mandatory internship, approximately 24–26 weeks. IP-2 course code not confirmed from supplied data.*
+*Six-month mandatory internship, approximately 24–26 weeks. The supplied curriculum materials identify this as Mandatory Internship-II; no course code is specified in those materials.*
 
 ### Credit Totals
 

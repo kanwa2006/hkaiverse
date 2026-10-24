@@ -59,7 +59,7 @@ I did not invent feedback, statistics, job descriptions, or test results. Where 
 ### Curriculum Data Limitations
 - The course dataset is student-supplied. I do not have access to the official printed or PDF syllabus for the 2023–2027 batch.
 - HS301 is shown as 0 credits per my instruction; the screenshot shows a different value. The official regulation has not been verified.
-- IP-2 course code is not confirmed. I have used "official code to be confirmed."
+- IP-2 course code: the supplied curriculum materials do not specify a course code for Mandatory Internship-II. It is identified by name throughout this report.
 - Prerequisites listed in this report are recommended academic dependencies, not officially mandated prerequisites.
 
 ### Job Description Limitations
