@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Explorer — IFHE B.Tech CSE 2023–2027 | HKAIVERSE Task 2</title>
+<meta name="description" content="Interactive curriculum explorer for IFHE B.Tech CSE 2023–2027. Compare baseline and proposed credits, filter by semester and action, see net credit changes.">
+<style>
+  /* Design system */
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d2e;
+    --surface2: #252840;
+    --accent: #7c6cf8;
+    --accent2: #56cfb2;
+    --accent3: #f87c6c;
+    --accent4: #f8c56c;
+    --text: #e8eaf6;
+    --text-muted: #8f92b3;
+    --border: #2e3155;
+    --keep: #2e7d32;
+    --keep-bg: #1b3a1e;
+    --update: #1565c0;
+    --update-bg: #0d2a4a;
+    --reduce: #b71c1c;
+    --reduce-bg: #3a1010;
+    --add: #4a148c;
+    --add-bg: #1e0f38;
+    --radius: 10px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #1a1d2e 0%, #252840 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 20px 20px;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+  header p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-top: 4px;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.78rem;
+    color: var(--accent2);
+    margin-top: 8px;
+  }
+
+  /* Main layout */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--accent); }
+  .stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .stat-card.positive .stat-value { color: var(--accent2); }
+  .stat-card.negative .stat-value { color: var(--accent3); }
+  .stat-card.neutral .stat-value { color: var(--accent4); }
+
+  /* Controls */
+  .controls {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 160px;
+  }
+  .control-group label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  input[type="text"], select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="text"]:focus, select:focus {
+    border-color: var(--accent);
+  }
+  select option { background: var(--surface); }
+  .btn-reset {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    align-self: flex-end;
+  }
+  .btn-reset:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* Results count */
+  .results-count {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    padding: 0 4px;
+  }
+  .results-count span { color: var(--accent2); font-weight: 600; }
+
+  /* Table */
+  .table-wrapper {
+    overflow-x: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  thead th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+  thead th:hover { color: var(--text); }
+  thead th.sorted { color: var(--accent); }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  td {
+    padding: 10px 14px;
+    vertical-align: middle;
+  }
+  .code { font-family: monospace; font-size: 0.82rem; color: var(--accent2); }
+  .name { max-width: 260px; }
+  .semester-badge {
+    display: inline-block;
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 2px 9px;
+    font-size: 0.77rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .credit { text-align: center; font-weight: 600; }
+  .credit-change {
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .credit-change.pos { color: var(--accent2); }
+  .credit-change.neg { color: var(--accent3); }
+  .credit-change.zero { color: var(--text-muted); }
+
+  /* Action badges */
+  .action-badge {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .action-KEEP { background: var(--keep-bg); color: #66bb6a; border: 1px solid var(--keep); }
+  .action-UPDATE { background: var(--update-bg); color: #64b5f6; border: 1px solid var(--update); }
+  .action-REDUCE { background: var(--reduce-bg); color: #ef9a9a; border: 1px solid var(--reduce); }
+  .action-ADD { background: var(--add-bg); color: #ce93d8; border: 1px solid var(--add); }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    display: none;
+  }
+  .empty-state.visible { display: block; }
+  .empty-state svg { margin-bottom: 12px; opacity: 0.5; }
+
+  /* Calculation box */
+  .calc-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-top: 16px;
+  }
+  .calc-box h3 {
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .calc-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .calc-item .label { font-size: 0.77rem; color: var(--text-muted); }
+  .calc-item .value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .calc-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    header h1 { font-size: 1.2rem; }
+    td, th { padding: 8px 10px; }
+    .name { max-width: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎓 IFHE B.Tech CSE — Curriculum Course Explorer</h1>
+  <p>HKAIVERSE Round 2, Task 2 — Curriculum Audit and Redesign Proposal</p>
+  <div class="badge">2023–2027 Batch · Student-Supplied Dataset · Not an Official IFHE Document</div>
+</header>
+
+<div class="container">
+
+  <!-- Stats bar -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-card">
+      <div class="stat-value" id="statTotal">167</div>
+      <div class="stat-label">Baseline Credits</div>
+    </div>
+    <div class="stat-card positive">
+      <div class="stat-value" id="statProposed">167</div>
+      <div class="stat-label">Proposed Credits</div>
+    </div>
+    <div class="stat-card neutral">
+      <div class="stat-value" id="statNet">0</div>
+      <div class="stat-label">Net Change</div>
+    </div>
+    <div class="stat-card neutral">
+      <div class="stat-value" id="statPct">~20%</div>
+      <div class="stat-label">Credits Affected (Method A)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statFiltered">—</div>
+      <div class="stat-label">Showing (courses)</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="control-group" style="flex:2; min-width:200px;">
+      <label for="searchInput">🔍 Search</label>
+      <input type="text" id="searchInput" placeholder="Code, name, or notes…" aria-label="Search courses">
+    </div>
+    <div class="control-group">
+      <label for="semFilter">Semester</label>
+      <select id="semFilter" aria-label="Filter by semester">
+        <option value="">All Semesters</option>
+        <option value="1">Semester 1</option>
+        <option value="2">Semester 2</option>
+        <option value="3">Semester 3</option>
+        <option value="4">Semester 4</option>
+        <option value="IP-1">Mandatory IP-1</option>
+        <option value="5">Semester 5</option>
+        <option value="6">Semester 6</option>
+        <option value="7">Semester 7</option>
+        <option value="IP-2">Mandatory IP-2</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="actionFilter">Action</label>
+      <select id="actionFilter" aria-label="Filter by action">
+        <option value="">All Actions</option>
+        <option value="KEEP">KEEP</option>
+        <option value="UPDATE">UPDATE</option>
+        <option value="REDUCE">REDUCE</option>
+        <option value="ADD">ADD</option>
+      </select>
+    </div>
+    <button class="btn-reset" id="resetBtn" aria-label="Reset all filters">Reset Filters</button>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><span class="action-badge action-KEEP">KEEP</span> Retained as-is</div>
+    <div class="legend-item"><span class="action-badge action-UPDATE">UPDATE</span> Content / labs improved</div>
+    <div class="legend-item"><span class="action-badge action-REDUCE">REDUCE</span> Credit reduction proposed</div>
+    <div class="legend-item"><span class="action-badge action-ADD">ADD</span> New course proposed</div>
+  </div>
+
+  <!-- Results count -->
+  <div class="results-count" id="resultsCount"><span id="countNum">0</span> courses shown</div>
+
+  <!-- Table -->
+  <div class="table-wrapper">
+    <table id="courseTable" role="table">
+      <thead>
+        <tr>
+          <th data-col="code" title="Sort by code">Code</th>
+          <th data-col="name" title="Sort by name">Course Name</th>
+          <th data-col="sem" title="Sort by semester">Semester</th>
+          <th data-col="base" title="Sort by baseline credits">Baseline Cr.</th>
+          <th data-col="prop" title="Sort by proposed credits">Proposed Cr.</th>
+          <th data-col="delta" title="Sort by change">Change</th>
+          <th data-col="action" title="Sort by action">Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <div class="empty-state" id="emptyState">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <div>No courses match your filters.</div>
+      <div style="margin-top:6px; font-size:0.82rem;">Try clearing the search or changing the filters.</div>
+    </div>
+  </div>
+
+  <!-- Calculation box -->
+  <div class="calc-box">
+    <h3>Credit Calculation (filtered view)</h3>
+    <div class="calc-grid">
+      <div class="calc-item">
+        <div class="label">Baseline (filtered)</div>
+        <div class="value" id="calcBase">—</div>
+      </div>
+      <div class="calc-item">
+        <div class="label">Proposed (filtered)</div>
+        <div class="value" id="calcProp">—</div>
+      </div>
+      <div class="calc-item">
+        <div class="label">Net Change (filtered)</div>
+        <div class="value" id="calcNet">—</div>
+      </div>
+      <div class="calc-item">
+        <div class="label">Affected (REDUCE + ADD, filtered)</div>
+        <div class="value" id="calcAff">—</div>
+      </div>
+    </div>
+    <div class="calc-note">
+      <strong>Programme totals (all courses):</strong> Baseline = 167 cr · Proposed = 167 cr · Net = 0 · 
+      Credits affected (Method A, conservative): 33 / 167 = <strong>~19.8%</strong>.<br>
+      HS301 Constitution of India is shown as 0 credits per student instruction (see CREDIT_CALCULATIONS.md).
+      IP-2 course code is not confirmed; shown as "IP-2 [TBC]". These figures are based on the student-supplied dataset — not a verified official IFHE document.
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── Course Data ───────────────────────────────────────────────────────────────
+const COURSES = [
+  {code:"CHY101",name:"Chemistry",sem:"1",semLabel:"Semester 1",base:4,prop:4,action:"KEEP"},
+  {code:"CS101",name:"Computer Programming",sem:"1",semLabel:"Semester 1",base:4,prop:4,action:"UPDATE"},
+  {code:"EC101",name:"Basic Electronics",sem:"1",semLabel:"Semester 1",base:4,prop:4,action:"KEEP"},
+  {code:"EG101",name:"English Language Skills",sem:"1",semLabel:"Semester 1",base:3,prop:3,action:"KEEP"},
+  {code:"HS101",name:"Essence of Indian Traditional Knowledge",sem:"1",semLabel:"Semester 1",base:0,prop:0,action:"KEEP"},
+  {code:"MA101",name:"Linear Algebra and Ordinary Differential Equations",sem:"1",semLabel:"Semester 1",base:3,prop:3,action:"KEEP"},
+  {code:"MT101",name:"Digital Fabrication",sem:"1",semLabel:"Semester 1",base:3,prop:3,action:"KEEP"},
+  {code:"CH102",name:"Environmental Sciences",sem:"2",semLabel:"Semester 2",base:2,prop:2,action:"KEEP"},
+  {code:"CS102",name:"Data Structures",sem:"2",semLabel:"Semester 2",base:4,prop:4,action:"UPDATE"},
+  {code:"DS101",name:"Introduction to AI and DS",sem:"2",semLabel:"Semester 2",base:3,prop:3,action:"KEEP"},
+  {code:"EG102",name:"Professional Communication",sem:"2",semLabel:"Semester 2",base:3,prop:3,action:"KEEP"},
+  {code:"MA102",name:"Higher Calculus",sem:"2",semLabel:"Semester 2",base:3,prop:3,action:"KEEP"},
+  {code:"MT102",name:"Engineering Graphics",sem:"2",semLabel:"Semester 2",base:3,prop:3,action:"KEEP"},
+  {code:"PH101",name:"Physics",sem:"2",semLabel:"Semester 2",base:5,prop:4,action:"REDUCE"},
+  {code:"CR201",name:"Power Skills-I",sem:"3",semLabel:"Semester 3",base:1,prop:1,action:"KEEP"},
+  {code:"CS201",name:"Object Oriented Programming Concepts",sem:"3",semLabel:"Semester 3",base:4,prop:4,action:"KEEP"},
+  {code:"CS202",name:"Theory of Computation",sem:"3",semLabel:"Semester 3",base:3,prop:3,action:"KEEP"},
+  {code:"CS203",name:"Design and Analysis of Algorithms",sem:"3",semLabel:"Semester 3",base:3,prop:3,action:"KEEP"},
+  {code:"EC201",name:"Introduction to IoT",sem:"3",semLabel:"Semester 3",base:3,prop:3,action:"KEEP"},
+  {code:"MA201",name:"Integral Transforms and Probability & Statistics",sem:"3",semLabel:"Semester 3",base:3,prop:3,action:"KEEP"},
+  {code:"MA202",name:"Discrete Mathematics",sem:"3",semLabel:"Semester 3",base:3,prop:3,action:"KEEP"},
+  {code:"MG201",name:"Engineering Economics and Management",sem:"3",semLabel:"Semester 3",base:3,prop:2,action:"REDUCE"},
+  {code:"CR202",name:"Power Skills-II",sem:"4",semLabel:"Semester 4",base:1,prop:1,action:"KEEP"},
+  {code:"CS204",name:"Computer Organization and Architecture",sem:"4",semLabel:"Semester 4",base:3,prop:3,action:"KEEP"},
+  {code:"CS205",name:"Web-Enabled Technologies",sem:"4",semLabel:"Semester 4",base:4,prop:4,action:"UPDATE"},
+  {code:"CS206",name:"Database Management Systems",sem:"4",semLabel:"Semester 4",base:4,prop:4,action:"UPDATE"},
+  {code:"DS202",name:"Industry Coding Practice (Python/R)",sem:"4",semLabel:"Semester 4",base:3,prop:3,action:"KEEP"},
+  {code:"DS203",name:"Data Science",sem:"4",semLabel:"Semester 4",base:3,prop:3,action:"KEEP"},
+  {code:"EC102",name:"Fundamentals of Signal Processing",sem:"4",semLabel:"Semester 4",base:3,prop:3,action:"KEEP"},
+  {code:"HS201",name:"Dynamics of Social Change",sem:"4",semLabel:"Semester 4",base:3,prop:2,action:"REDUCE"},
+  {code:"IP201",name:"Mandatory Internship-I (IP-1)",sem:"IP-1",semLabel:"Mandatory IP-1",base:3,prop:3,action:"KEEP"},
+  {code:"CR301",name:"Power Skills-III",sem:"5",semLabel:"Semester 5",base:1,prop:1,action:"KEEP"},
+  {code:"CS301",name:"Principle of Cryptography",sem:"5",semLabel:"Semester 5",base:3,prop:3,action:"KEEP"},
+  {code:"CS302",name:"Operating Systems",sem:"5",semLabel:"Semester 5",base:4,prop:4,action:"UPDATE"},
+  {code:"CS303",name:"Programming Language and Compiler Construction",sem:"5",semLabel:"Semester 5",base:3,prop:3,action:"KEEP"},
+  {code:"CS304",name:"Software Engineering",sem:"5",semLabel:"Semester 5",base:3,prop:3,action:"UPDATE"},
+  {code:"DS303",name:"Blockchain Technology",sem:"5",semLabel:"Semester 5",base:3,prop:3,action:"KEEP"},
+  {code:"DS304",name:"Machine Learning",sem:"5",semLabel:"Semester 5",base:4,prop:4,action:"UPDATE"},
+  {code:"HS301",name:"Constitution of India",sem:"5",semLabel:"Semester 5",base:0,prop:0,action:"KEEP"},
+  {code:"CR302",name:"Power Skills-IV",sem:"6",semLabel:"Semester 6",base:1,prop:1,action:"KEEP"},
+  {code:"CS305",name:"Computer Vision",sem:"6",semLabel:"Semester 6",base:3,prop:3,action:"KEEP"},
+  {code:"CS306",name:"Computer Networks",sem:"6",semLabel:"Semester 6",base:4,prop:4,action:"KEEP"},
+  {code:"CS307",name:"Cloud Computing",sem:"6",semLabel:"Semester 6",base:4,prop:4,action:"UPDATE"},
+  {code:"DS201",name:"Artificial Intelligence",sem:"6",semLabel:"Semester 6",base:3,prop:3,action:"KEEP"},
+  {code:"DS307",name:"Big Data Systems",sem:"6",semLabel:"Semester 6",base:3,prop:3,action:"KEEP"},
+  {code:"SP301",name:"Special Project",sem:"6",semLabel:"Semester 6",base:3,prop:3,action:"KEEP"},
+  {code:"CS-NEW",name:"Applied Software Product Engineering Lab (proposed)",sem:"6",semLabel:"Semester 6",base:0,prop:3,action:"ADD"},
+  {code:"CS415",name:"Ethical Hacking",sem:"7",semLabel:"Semester 7",base:3,prop:3,action:"UPDATE"},
+  {code:"DS306",name:"Deep Learning",sem:"7",semLabel:"Semester 7",base:4,prop:4,action:"KEEP"},
+  {code:"DS311",name:"Natural Language Processing",sem:"7",semLabel:"Semester 7",base:3,prop:3,action:"KEEP"},
+  {code:"DS401",name:"Human Computer Interaction",sem:"7",semLabel:"Semester 7",base:3,prop:3,action:"KEEP"},
+  {code:"MG401",name:"Introduction to Entrepreneurship",sem:"7",semLabel:"Semester 7",base:3,prop:3,action:"KEEP"},
+  {code:"IP-2 [TBC]",name:"Mandatory Internship-II (IP-2)",sem:"IP-2",semLabel:"Mandatory IP-2",base:15,prop:15,action:"KEEP"}
+];
+
+// ─── State ──────────────────────────────────────────────────────────────────
+let filtered = [...COURSES];
+let sortCol = null;
+let sortAsc = true;
+
+// ─── Render ──────────────────────────────────────────────────────────────────
+function deltaClass(d) {
+  if (d > 0) return 'pos';
+  if (d < 0) return 'neg';
+  return 'zero';
+}
+function deltaText(d) {
+  if (d > 0) return `+${d}`;
+  if (d < 0) return `${d}`;
+  return '—';
+}
+
+function render() {
+  const tbody = document.getElementById('tableBody');
+  const empty = document.getElementById('emptyState');
+  const countNum = document.getElementById('countNum');
+  const calcBase = document.getElementById('calcBase');
+  const calcProp = document.getElementById('calcProp');
+  const calcNet = document.getElementById('calcNet');
+  const calcAff = document.getElementById('calcAff');
+
+  tbody.innerHTML = '';
+
+  if (filtered.length === 0) {
+    empty.classList.add('visible');
+    countNum.textContent = '0';
+    calcBase.textContent = '—';
+    calcProp.textContent = '—';
+    calcNet.textContent = '—';
+    calcAff.textContent = '—';
+    return;
+  }
+
+  empty.classList.remove('visible');
+  countNum.textContent = filtered.length;
+
+  let sumBase = 0, sumProp = 0, sumAff = 0;
+
+  filtered.forEach(c => {
+    const delta = c.prop - c.base;
+    sumBase += c.base;
+    sumProp += c.prop;
+    if (c.action === 'REDUCE' || c.action === 'ADD') sumAff += c.base + c.prop;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="code">${escHtml(c.code)}</span></td>
+      <td class="name">${escHtml(c.name)}</td>
+      <td><span class="semester-badge">${escHtml(c.semLabel)}</span></td>
+      <td class="credit">${c.base}</td>
+      <td class="credit">${c.prop}</td>
+      <td class="credit-change ${deltaClass(delta)}">${deltaText(delta)}</td>
+      <td><span class="action-badge action-${escHtml(c.action)}">${escHtml(c.action)}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  const net = sumProp - sumBase;
+  calcBase.textContent = sumBase;
+  calcProp.textContent = sumProp;
+  calcNet.textContent = deltaText(net);
+  // Affected = courses with non-zero delta in filtered set
+  const affCount = filtered.filter(c => c.action === 'REDUCE' || c.action === 'ADD').reduce((a,c) => a + c.base, 0);
+  calcAff.textContent = affCount > 0 ? affCount + ' cr (alloc. change)' : '0 cr';
+}
+
+// ─── Filtering ───────────────────────────────────────────────────────────────
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const sem = document.getElementById('semFilter').value;
+  const action = document.getElementById('actionFilter').value;
+
+  filtered = COURSES.filter(c => {
+    const matchSearch = !q ||
+      c.code.toLowerCase().includes(q) ||
+      c.name.toLowerCase().includes(q) ||
+      c.semLabel.toLowerCase().includes(q) ||
+      c.action.toLowerCase().includes(q);
+    const matchSem = !sem || c.sem === sem;
+    const matchAction = !action || c.action === action;
+    return matchSearch && matchSem && matchAction;
+  });
+
+  if (sortCol) {
+    filtered.sort((a, b) => {
+      let va = a[sortCol], vb = b[sortCol];
+      if (typeof va === 'string') va = va.toLowerCase();
+      if (typeof vb === 'string') vb = vb.toLowerCase();
+      if (va < vb) return sortAsc ? -1 : 1;
+      if (va > vb) return sortAsc ? 1 : -1;
+      return 0;
+    });
+  }
+
+  render();
+}
+
+// ─── Sorting ─────────────────────────────────────────────────────────────────
+const COL_MAP = {code:'code',name:'name',sem:'sem',base:'base',prop:'prop',delta:'delta',action:'action'};
+function addDelta(c) { return {...c, delta: c.prop - c.base}; }
+
+document.querySelectorAll('thead th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = COL_MAP[th.dataset.col];
+    if (!col) return;
+    if (sortCol === col) sortAsc = !sortAsc;
+    else { sortCol = col; sortAsc = true; }
+    document.querySelectorAll('thead th').forEach(t => t.classList.remove('sorted'));
+    th.classList.add('sorted');
+    // Re-sort with delta
+    filtered = filtered.map(addDelta).sort((a, b) => {
+      let va = a[col], vb = b[col];
+      if (typeof va === 'string') va = va.toLowerCase();
+      if (typeof vb === 'string') vb = vb.toLowerCase();
+      if (va < vb) return sortAsc ? -1 : 1;
+      if (va > vb) return sortAsc ? 1 : -1;
+      return 0;
+    });
+    render();
+  });
+});
+
+// ─── Events ──────────────────────────────────────────────────────────────────
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+document.getElementById('semFilter').addEventListener('change', applyFilters);
+document.getElementById('actionFilter').addEventListener('change', applyFilters);
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('semFilter').value = '';
+  document.getElementById('actionFilter').value = '';
+  sortCol = null; sortAsc = true;
+  document.querySelectorAll('thead th').forEach(t => t.classList.remove('sorted'));
+  filtered = [...COURSES];
+  render();
+});
+
+// ─── Utility ─────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+applyFilters();
+</script>
+</body>
+</html>
