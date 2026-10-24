@@ -97,11 +97,13 @@ flowchart TD
 
 ## Release and Commit
 
-- **Named release:** [v2.0-task2-final](https://github.com/kanwa2006/hkaiverse/releases/tag/v2.0-task2-final) (*HKAIVERSE Round 2 — Final Submission*)
-- **Preserved review commit:** [`8dc4a56`](https://github.com/kanwa2006/hkaiverse/commit/8dc4a5650eb8d4721f8717c6fadc85632e7da693)
-- **Full SHA:** `8dc4a5650eb8d4721f8717c6fadc85632e7da693`
+- **Named final release:** [v2.1-final-submission](https://github.com/kanwa2006/hkaiverse/releases/tag/v2.1-final-submission) (*HKAIVERSE Round 2 — Final Content, Safety and Release Audit*)
+- **Preserved content review commit:** [`151e371`](https://github.com/kanwa2006/hkaiverse/commit/151e371e894b6dd296a6c68209730da5624f9976)
+- **Full 40-character SHA:** `151e371e894b6dd296a6c68209730da5624f9976`
+- **Commit URL:** [https://github.com/kanwa2006/hkaiverse/commit/151e371e894b6dd296a6c68209730da5624f9976](https://github.com/kanwa2006/hkaiverse/commit/151e371e894b6dd296a6c68209730da5624f9976)
+- **Prior preserved release:** [v2.0-task2-final](https://github.com/kanwa2006/hkaiverse/releases/tag/v2.0-task2-final) (preserved historical review at commit [`8dc4a56`](https://github.com/kanwa2006/hkaiverse/commit/8dc4a5650eb8d4721f8717c6fadc85632e7da693))
 
-*Note on release tag:* The published release `v2.0-task2-final` permanently tags and preserves commit `8dc4a56` containing the complete deliverables for both Task 1 and Task 2. Any minor post-release documentation polish commit on the `main` branch is tracked transparently in the repository history.
+*Note on release tracking:* The published release tag `v2.1-final-submission` permanently marks and preserves the verified content audit commit `151e371e894b6dd296a6c68209730da5624f9976`. This follow-up documentation commit on `main` updates the release cross-reference in the README without altering the preserved audit content.
 
 ---
 
