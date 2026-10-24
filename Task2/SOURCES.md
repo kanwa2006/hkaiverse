@@ -18,9 +18,9 @@
 
 | # | Employer | Role | Evidence File | Access/Read Date | Posting Date | Notes |
 |---|---|---|---|---|---|---|
-| 1 | ACHNET | Software Engineer (SDE) | `job_descriptions/Detailed Job Description - Tescra.pdf` | 24 Oct 2026 | Not stated in document | On-campus recruitment opportunity. PDF read directly. Full-stack web, OOP, Data Structures, Python, Agile. |
-| 2 | JPMorgan Chase & Co. | Data Analyst — Fresher | `job_descriptions/JPMorgan_Chase_Data_Analyst_Fresher.pdf` | 24 Oct 2026 | Not stated in document | On-campus recruitment opportunity. PDF read directly. SQL, Python, Statistics, Excel, Power BI / Tableau, Git. |
-| 3 | Joveo | Software Engineering Intern (Full Stack) | `job_descriptions/Joveo_SE_Intern_JD.pdf` | 24 Oct 2026 | 2026 (Forbes badge in document) | On-campus recruitment opportunity. PDF read directly. React, Next.js, Node.js, PostgreSQL, REST API, Git, LLMs. |
+| 1 | ACHNET | Software Engineer (SDE) | `job_descriptions/Detailed Job Description - Tescra.pdf` | 24 Oct 2026 | Supplied on-campus document | On-campus recruitment opportunity. PDF read directly. Python, web technologies, OOP, data structures, NoSQL as a plus, SDLC, testing, deployment. |
+| 2 | JPMorgan Chase & Co. | Data Analyst — Fresher | `job_descriptions/JPMorgan_Chase_Data_Analyst_Fresher.pdf` | 24 Oct 2026 | Supplied on-campus document | On-campus recruitment opportunity. PDF read directly. SQL, Python, data cleaning, statistics, exploratory analysis, reporting/visualization; Git and cloud as good-to-have. |
+| 3 | Joveo | Software Engineering Intern (Full Stack) | `job_descriptions/Joveo_SE_Intern_JD.pdf` | 24 Oct 2026 | Supplied on-campus document | On-campus recruitment opportunity. PDF read directly. Frontend/backend, React/Next.js, Node/Express, TypeScript, PostgreSQL/Supabase, REST APIs, Git, LLMs. |
 
 ---
 

@@ -53,8 +53,7 @@ ResultFlow replaces opacity with clear stages, permissions, and safeguards:
 11. [How to Run](#11-how-to-run)
 12. [Repository Structure](#12-repository-structure)
 13. [Limitations and Risks](#13-limitations-and-risks)
-14. [Interview Talking Points](#14-interview-talking-points)
-15. [Final Summary](#15-final-summary)
+14. [Final Summary](#14-final-summary)
 
 ---
 
@@ -284,7 +283,7 @@ Outputs are saved in `evidence/` (generated 23 Oct 2026).
 ## 12. Repository Structure
 
 ```
-ResultFlow/
+Task1/
 ├── README.md                      <- Project summary and quick recruiter guide (this file)
 ├── TASK1_REPORT.md                <- Comprehensive 17-section investigation report
 ├── prototype/
@@ -312,26 +311,7 @@ ResultFlow/
 
 ---
 
-## 14. Interview Talking Points
-
-**1. What specific problem does ResultFlow address?**  
-The lack of visibility between Summer Term exams and result publication, and the ambiguity caused when placement forms label pending subjects as backlogs. In one documented case, a student waited 90 days with no status updates.
-
-**2. What direct evidence supports the project?**  
-Two primary observations: the 90-day wait (24 July to 22 October 2026) and a genuine placement-form screenshot (`evidence/Screenshort_Evidence.png`) stating pending Summer Term subjects are treated as backlogs. Eligibility criteria and grade-replacement rules were verbally reported.
-
-**3. What does ResultFlow propose?**  
-A role-governed workflow that gives students status visibility, restricts grade publishing to authorized approvers, separates current effective grades from pending attempts, and synchronizes with placement records safely.
-
-**4. What did the prototype prove?**  
-All 20 automated tests passed, confirming that pending attempts do not alter existing grades before approval, approved downgrades replace prior grades while preserving history, sync failures allow safe retries without creating duplicate or inconsistent updates, and unauthorized roles are blocked safely.
-
-**5. What are the key limitations?**  
-The investigation is based on one documented case, internal college stages are assumed, policy details were verbally confirmed without written source documents, and ROI savings are estimates rather than measured data.
-
----
-
-## 15. Final Summary
+## 14. Final Summary
 
 **Problem:** A pending grade-improvement result creates uncertainty about which grade is currently effective and how the pending subject appears in placement processing. One documented case recorded 90 elapsed days between the Summer Term exam and the evidence cutoff with no published result.
 

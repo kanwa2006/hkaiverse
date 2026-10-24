@@ -90,58 +90,57 @@ All data is synthetic. No real student IDs, names, grades, or personal informati
 
 ## 7. Capstone Acceptance Tests (Synthetic Data)
 
-These are the required test scenarios that every submission must pass. Data is entirely synthetic.
+These are the five required test scenarios that every student prototype must implement and pass, directly mirroring the core operational scenarios evaluated in ResultFlow. Data is entirely synthetic.
 
-### Test T1 — Duplicate Request Detection
+### Test T1 — Normal Workflow (Happy Path)
 
 | Field | Detail |
 |---|---|
-| **Scenario** | A student submits a grade review request. The same student submits the same request again. |
-| **Input** | Student ID: S001, Subject: CS101, Semester: 5 — submitted twice |
-| **Expected result** | First request accepted and assigned ID REQ-001. Second request rejected with status `DUPLICATE_DETECTED`. REQ-001 is processed only once. |
-| **Verification** | Check that only one record with (S001, CS101, Sem5) exists in the database after both submissions. |
-| **Pass condition** | Zero duplicate records; second submission returns an appropriate error message. |
+| **Scenario** | A student submits a complete, valid grade review request; coordinator approves it. |
+| **Input** | Student ID: S001, Subject: CS101, Reason: "Re-evaluation of final project component", Semester: 5 |
+| **Expected result** | Request accepted in `RECEIVED` status, advances to `UNDER_REVIEW`, and upon coordinator approval transitions to `APPROVED` with timestamp logged. |
+| **Verification** | State history shows sequential progression; final state is `APPROVED`; effective record is updated. |
+| **Pass condition** | Request successfully completes full lifecycle with authorized sign-off. |
 
 ### Test T2 — Missing Information Detection
 
 | Field | Detail |
 |---|---|
-| **Scenario** | A request is submitted without a required field (subject code is blank). |
-| **Input** | Student ID: S002, Subject: "", Reason: "I believe my answer was misread", Semester: 4 |
-| **Expected result** | Request is rejected at input stage with status `MISSING_FIELD: subject`. Request is not stored. |
-| **Verification** | Database has no entry for S002 from this submission. The response includes a clear error identifying the missing field. |
-| **Pass condition** | No partial record stored; error correctly identifies the missing field. |
+| **Scenario** | A request is submitted with missing or blank mandatory fields (e.g., empty subject code). |
+| **Input** | Student ID: S002, Subject: "", Reason: "Suspected tabulation error", Semester: 4 |
+| **Expected result** | Request is rejected at input validation with error code `MISSING_FIELD: subject`. No partial record is stored. |
+| **Verification** | Database contains no unvalidated or corrupted records for S002. |
+| **Pass condition** | Input rejected cleanly; informative error returned; database state unchanged. |
 
-### Test T3 — Unauthorized Approval Rejection
-
-| Field | Detail |
-|---|---|
-| **Scenario** | A user without the coordinator role attempts to approve a pending request. |
-| **Input** | Role: STUDENT, Action: APPROVE, Request ID: REQ-003 |
-| **Expected result** | Action is rejected with status `UNAUTHORIZED`. Request remains in `UNDER_REVIEW` status. |
-| **Verification** | REQ-003 status is still `UNDER_REVIEW` after the unauthorized attempt. |
-| **Pass condition** | Status unchanged; error logged; no approval applied. |
-
-### Test T4 — Failed Step Recovery
+### Test T3 — Duplicate Request Detection
 
 | Field | Detail |
 |---|---|
-| **Scenario** | A coordinator attempts to approve REQ-004 but a simulated database error occurs during the write. |
-| **Input** | Role: COORDINATOR, Action: APPROVE, Request ID: REQ-004 (simulate DB failure with a mock) |
-| **Expected result** | System catches the error, logs it with a timestamp, and leaves REQ-004 in `UNDER_REVIEW` (unchanged). The error is retrievable from a log query. |
-| **Verification** | REQ-004 status unchanged; error record visible in log; system remains operational. |
-| **Pass condition** | No data corruption; REQ-004 still processable; log entry present. |
+| **Scenario** | A student submits an active review request, then resubmits the same request while the first is still pending. |
+| **Input** | Resubmission of (S001, CS101, Semester 5) while first attempt is active |
+| **Expected result** | Second submission is rejected with status `DUPLICATE_DETECTED`. Original request remains active and unmodified. |
+| **Verification** | Exactly one active attempt record exists in database for the given student and subject. |
+| **Pass condition** | Duplicate blocked; no duplicate records created; idempotency preserved. |
 
-### Test T5 — Before-and-After Process Measure
+### Test T4 — Unauthorized Request Rejection
 
 | Field | Detail |
 |---|---|
-| **Scenario** | Illustrative estimate of time saving using synthetic assumptions. |
-| **Synthetic assumptions** | Before: each duplicate check is manual, estimated 10 minutes per request; 20 requests per week → 200 minutes/week on duplicate checking. After: automated duplicate detection handles this in <1 second. Saving: approximately 200 minutes/week (SYNTHETIC ESTIMATE — not a measured result). |
-| **Input** | Synthetic: 20 requests/week × 10 min/request manual duplicate check |
-| **Expected result** | Prototype eliminates manual duplicate checking, estimated saving: 200 min/week = ~3.3 hours/week |
-| **Honest label** | This is an illustrative synthetic estimate. Actual saving depends on real volume, which is not available. Students must label this as an estimate, not a fact. |
-| **Pass condition** | Student presents a clearly labelled estimate with stated assumptions. Claim is not presented as a measured result. |
+| **Scenario** | An unauthorized role (e.g., student or unprivileged user) attempts to approve or publish a review request. |
+| **Input** | Actor: "SYN-STUDENT-1", Role: `student`, Action: `APPROVE`, Target: REQ-001 |
+| **Expected result** | Action is rejected with error `UNAUTHORIZED_ROLE`. Request status remains `UNDER_REVIEW`. |
+| **Verification** | Audit log records unauthorized attempt; request status is unaltered. |
+| **Pass condition** | Strict role enforcement; unauthorized state mutation blocked. |
+
+### Test T5 — Failed Step and Recovery
+
+| Field | Detail |
+|---|---|
+| **Scenario** | A simulated database or service failure occurs during a state transition or external synchronization. |
+| **Input** | Coordinator triggers approval write under simulated storage failure |
+| **Expected result** | System catches the exception, rolls back partial changes, logs the failure with timestamp, and marks state as retryable without corrupting data. Subsequent authorized retry succeeds. |
+| **Verification** | No corrupted state; retry successfully completes the transition once the failure condition clears. |
+| **Pass condition** | Exception handled gracefully; no silent failure; recovery verified. |
 
 ---
 
@@ -201,16 +200,19 @@ These are **recommended academic prerequisites** based on the logical dependency
 
 ## 12. How This Connects to Task 1 (ResultFlow)
 
-Task 1 investigated a real workflow problem (result-publication delays at IFHE) and proposed a structured workflow (ResultFlow) with a Python prototype and 20 automated tests.
+The lab explicitly builds upon the architectural model developed in Task 1 (ResultFlow):
 
-This lab proposes that students learn the same *kind of thinking* — but by doing it themselves on a fresh scenario. The connection is methodological, not technical. Students are not required to build ResultFlow again. They are asked to apply the same approach:
-1. Observe a real-looking problem.
-2. Distinguish facts from assumptions.
-3. Design a workflow with clear statuses and roles.
-4. Build a prototype with tested error handling.
-5. Document honestly.
+1. **State-Machine Reference:** Students use ResultFlow's six-state progression (`REGISTERED → EXAM_COMPLETED → RESULT_PROCESSING → UNDER_VERIFICATION → AWAITING_APPROVAL → PUBLISHED`) as the standard reference architecture for workflow governance and transition integrity.
+2. **Persistence Layer:** Whereas the Task 1 prototype utilized an in-memory dictionary to prove business logic, students in this lab must design and connect a relational database (SQLite or PostgreSQL) with transactions, foreign keys, and status logs.
+3. **API & Interface:** Students expose the workflow via a lightweight REST API (FastAPI or Flask) with dedicated endpoints for request submission, status inquiry, and authorized coordinator approval.
+4. **Automated Verification:** Students implement automated test suites verifying the five foundational scenarios:
+   - *Normal Progression* (happy path lifecycle)
+   - *Missing Information* (payload validation)
+   - *Duplicate Request* (idempotency enforcement)
+   - *Unauthorized Request* (role-based access control)
+   - *Failed Step & Recovery* (safe rollback and retry)
 
-Task 1 is the existence proof that this kind of work is possible at the undergraduate level.
+> **Important note on status:** This lab curriculum is an academic proposal designed to bridge theoretical software engineering with integrated development practices. It is not an active, deployed, or university-sanctioned production system.
 
 ---
 

@@ -43,12 +43,13 @@ fib(4) returns 3
 ```
 
 ### Verification Procedure
-Manual verification using the Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, ...
-- fib(0) = 0 ✓
-- fib(1) = 1 ✓
-- fib(2) = fib(1) + fib(0) = 1 ✓
-- fib(3) = fib(2) + fib(1) = 2 ✓
-- fib(4) = fib(3) + fib(2) = 3 ✓
+1. **Manual Trace:** Using the Fibonacci sequence 0, 1, 1, 2, 3, 5, 8, ...
+   - fib(0) = 0 ✓
+   - fib(1) = 1 ✓
+   - fib(2) = fib(1) + fib(0) = 1 ✓
+   - fib(3) = fib(2) + fib(1) = 2 ✓
+   - fib(4) = fib(3) + fib(2) = 3 ✓
+2. **Local Python Execution (executed 24 October 2026):** The function was executed locally in Python (`fib(4)`); confirmed actual output: `3`.
 
 ### What Passed
 - The function logic is correct.
@@ -116,12 +117,13 @@ After pop():    [10],     removed = 20
 ```
 
 ### Verification Procedure
-Manual trace: LIFO means the last item pushed is the first removed.
-- push(10) → [10] ✓
-- push(20) → [10, 20] ✓
-- push(30) → [10, 20, 30] ✓
-- pop() removes 30 → [10, 20] ✓
-- pop() removes 20 → [10] ✓
+1. **Manual Trace:** LIFO means the last item pushed is the first removed.
+   - push(10) → [10] ✓
+   - push(20) → [10, 20] ✓
+   - push(30) → [10, 20, 30] ✓
+   - pop() removes 30 → [10, 20] ✓
+   - pop() removes 20 → [10] ✓
+2. **Local Python Execution (executed 24 October 2026):** List operations executed; confirmed first `pop()` returns `30` leaving `[10, 20]`, second `pop()` returns `20` leaving `[10]`.
 
 ### What Passed
 - The explanation of LIFO is correct.
@@ -201,6 +203,10 @@ Tracing the query manually:
 - JOIN matches: (Alice, CS), (Bob, Electronics), (Carol, CS)
 - WHERE filter: keeps Alice and Carol ✓
 
+**Local SQLite Execution (executed 24 October 2026):**  
+The exact schema and query were executed in an in-memory database using Python's standard `sqlite3` library.  
+Actual query output: `[(1, 'Alice', 'Computer Science'), (3, 'Carol', 'Computer Science')]` (matches expected result).
+
 ### What Passed
 - Query syntax is correct standard SQL.
 - JOIN logic is correct.
@@ -261,11 +267,21 @@ Manual calculation:
 - The algorithm is applied correctly as non-preemptive.
 
 ### What Required Attention
-- The AI correctly solved the problem but did not discuss the **convoy effect** — a known weakness of FCFS where a long process delays all shorter processes behind it.
-- Correction noted: The convoy effect makes FCFS potentially inefficient. This example would have lower average waiting time with Shortest Job First (SJF): P1=6ms, P3=2ms, P2=4ms → AWT would be different. Students should compare scheduling algorithms, not just calculate one.
+- The AI solved the requested FCFS calculation correctly, but omitted discussion of the **convoy effect** (where a long process like P1 delays shorter processes P2 and P3), and did not provide an alternative scheduling comparison.
+- **Detailed Non-Preemptive SJF Comparison:**
+  For the exact same process set (P1: arrival 0, burst 6; P2: arrival 2, burst 4; P3: arrival 4, burst 2):
+  - At $t=0$, only P1 is in the ready queue, so P1 runs non-preemptively from $t=0$ to $t=6$.
+  - At $t=6$, both P2 (burst 4) and P3 (burst 2) have arrived. Non-preemptive SJF selects P3 next because it has the shorter burst time.
+  - P3 runs from $t=6$ to $t=8$.
+  - P2 runs last from $t=8$ to $t=12$.
+  - **Individual Waiting Times for SJF:**
+    - P1: starts at $t=0$, arrived at $t=0$ $\rightarrow$ waiting time = $0 - 0 = \mathbf{0\text{ ms}}$
+    - P3: starts at $t=6$, arrived at $t=4$ $\rightarrow$ waiting time = $6 - 4 = \mathbf{2\text{ ms}}$
+    - P2: starts at $t=8$, arrived at $t=2$ $\rightarrow$ waiting time = $8 - 2 = \mathbf{6\text{ ms}}$
+  - **Average Waiting Time (SJF):** $(0 + 2 + 6) / 3 = \mathbf{8/3 \approx 2.67\text{ ms}}$, compared with **$3.33\text{ ms}$** for FCFS.
 
 ### Final Corrected Learning Result
-FCFS is simple and fair (no starvation) but can cause high average waiting times when a long process runs first. Comparing FCFS with SJF and Round Robin on the same process set is an important practical exercise.
+FCFS is straightforward and fair, but suffers from high average waiting times due to the convoy effect. Comparing FCFS against non-preemptive SJF on this exact process set demonstrates that scheduling P3 before P2 reduces average waiting time from $3.33\text{ ms}$ down to $2.67\text{ ms}$ ($8/3\text{ ms}$). Students must learn to evaluate algorithm trade-offs rather than calculate a single formula in isolation.
 
 ### Reflection
 The AI solved the numerical problem correctly. The educational value required the student to push further — asking "is this the best scheduling policy?" AI tools answer what is asked, not what should be asked. The habit of asking follow-up questions is a skill students should develop.
@@ -311,6 +327,7 @@ Conceptual check using known principles:
 - A model evaluated only on its training data can always score high by memorising, even with no genuine learning. This is a foundational ML principle taught in every standard textbook (e.g., Mitchell's *Machine Learning*, Goodfellow's *Deep Learning*). ✓
 - The train/test split methodology is standard and well-established. The code using `train_test_split` with `random_state=42` is reproducible. ✓
 - The example of 98% training accuracy vs. 60% test accuracy correctly illustrates the overfitting scenario. ✓
+- **Local Environment Verification Note (24 October 2026):** Code syntax and API parameters were verified against standard scikit-learn documentation. Because the local lightweight test runtime does not include the third-party `scikit-learn` package, verification was conducted through manual tracing and standard mathematical verification rather than fabricating synthetic execution timestamps.
 
 ### What Passed
 - The explanation of overfitting is correct.

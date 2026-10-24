@@ -350,7 +350,7 @@
       <div class="stat-label">Credits Affected (Method A)</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value" id="statFiltered">—</div>
+      <div class="stat-value" id="statFiltered">53</div>
       <div class="stat-label">Showing (courses)</div>
     </div>
   </div>
@@ -398,7 +398,7 @@
   </div>
 
   <!-- Results count -->
-  <div class="results-count" id="resultsCount"><span id="countNum">0</span> courses shown</div>
+  <div class="results-count" id="resultsCount"><span id="countNum">53</span> courses shown</div>
 
   <!-- Table -->
   <div class="table-wrapper">
@@ -429,19 +429,19 @@
     <div class="calc-grid">
       <div class="calc-item">
         <div class="label">Baseline (filtered)</div>
-        <div class="value" id="calcBase">—</div>
+        <div class="value" id="calcBase">167</div>
       </div>
       <div class="calc-item">
         <div class="label">Proposed (filtered)</div>
-        <div class="value" id="calcProp">—</div>
+        <div class="value" id="calcProp">167</div>
       </div>
       <div class="calc-item">
         <div class="label">Net Change (filtered)</div>
-        <div class="value" id="calcNet">—</div>
+        <div class="value" id="calcNet">0</div>
       </div>
       <div class="calc-item">
         <div class="label">Affected (REDUCE + ADD, filtered)</div>
-        <div class="value" id="calcAff">—</div>
+        <div class="value" id="calcAff">11 cr (alloc. change)</div>
       </div>
     </div>
     <div class="calc-note">
@@ -533,6 +533,7 @@ function render() {
   const tbody = document.getElementById('tableBody');
   const empty = document.getElementById('emptyState');
   const countNum = document.getElementById('countNum');
+  const statFiltered = document.getElementById('statFiltered');
   const calcBase = document.getElementById('calcBase');
   const calcProp = document.getElementById('calcProp');
   const calcNet = document.getElementById('calcNet');
@@ -543,6 +544,7 @@ function render() {
   if (filtered.length === 0) {
     empty.classList.add('visible');
     countNum.textContent = '0';
+    if (statFiltered) statFiltered.textContent = '0';
     calcBase.textContent = '—';
     calcProp.textContent = '—';
     calcNet.textContent = '—';
@@ -552,6 +554,7 @@ function render() {
 
   empty.classList.remove('visible');
   countNum.textContent = filtered.length;
+  if (statFiltered) statFiltered.textContent = filtered.length;
 
   let sumBase = 0, sumProp = 0, sumAff = 0;
 

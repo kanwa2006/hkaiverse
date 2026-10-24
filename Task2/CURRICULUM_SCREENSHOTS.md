@@ -16,7 +16,7 @@
 | [`assets/sem4_and_ip1.png`](assets/sem4_and_ip1.png) | IV + IP-1 | 2024–2025 | CS204, DS203, CS206, HS201, EC102, DS202, CR202, CS205; ST-II → IP201 |
 | [`assets/sem5_courses.png`](assets/sem5_courses.png) | V | 2025–2026 | DS303, HS301, DS304, CS302, CR301, CS301, CS303, CS304 |
 | [`assets/sem6_courses.png`](assets/sem6_courses.png) | VI | 2025–2026 | DS307, CS307, CS306, CS305, CR302, SP301, DS201 |
-| [`assets/sem7_courses.png`](assets/sem7_courses.png) | VII | 2027 | CS415, DS306, DS311, DS401, MG401 |
+| [`assets/sem7_courses.png`](assets/sem7_courses.png) | VII | 2026–2027 | CS415, DS306, DS311, DS401, MG401 |
 
 ---
 
@@ -41,13 +41,11 @@ No semester VII or VIII screenshot showing additional courses beyond CS415, DS30
 - The course codes, titles, and credit units visible in the portal for Semesters I–VII and IP-1.
 - That HS101 and HS301 are shown as 0 credits in the portal.
 - That PH101 carries 5 credits in the baseline.
-- The academic year assignment for each semester (2023–2024, 2024–2025, 2025–2026, 2027).
+- The academic year assignment for each semester (2023–2024, 2024–2025, 2025–2026, 2026–2027).
 
-**What they do not establish:**
-- The official IFHE batch-specific curriculum regulation or syllabus document.
-- Officially mandated prerequisites.
-- Assessment weightings or formal course regulations.
-- Details of courses not visible in the portal (IP-2 internship, elective tracks, if any).
+**Scope distinction:**
+- **Supplied Baseline Evidence:** Course codes, titles, semester placement, and baseline credit allocations are established directly from the student's authenticated portal registration records.
+- **Redesign Proposals:** The proposed KEEP/UPDATE/REDUCE/ADD classifications, practical syllabus updates, and new capstone lab represent student curriculum improvement recommendations that require institutional review before enactment.
 
 ---
 

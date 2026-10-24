@@ -1,10 +1,16 @@
 """
-Test suite for Task 2: Interactive Course Explorer & Curriculum Calculations
-Verifies:
-1. All 53 courses match between COURSE_MAP.csv and course_explorer.html
-2. All 14 Course Explorer test cases (CE-01 to CE-14b) logic and filtering
-3. Credit arithmetic (167 baseline, 167 proposed, 0 net delta, ~19.8% affected)
-4. Integrity and privacy constraints
+Automated Python test suite for Task 2: Course Explorer Data and Filter Logic
+
+Performs 15 automated programmatic checks of course dataset consistency and
+Python reimplementations of the explorer's filter, search, sort, and calculation logic:
+1. Alignment between COURSE_MAP.csv and course_explorer.html across all 53 rows
+2. All 15 Course Explorer test scenarios (CE-01 through CE-14b)
+3. Credit arithmetic (167 baseline, 167 proposed, 0 net delta, 19.8% primary method)
+4. Special cases (HS301 at 0 credits, IP-1, IP-2, CS-NEW)
+
+NOTE: This script executes under Python to validate data integrity and algorithmic
+correctness; it does not execute JavaScript inside a browser engine. Live UI rendering
+and browser interactions are validated by opening course_explorer.html in a web browser.
 """
 
 import csv

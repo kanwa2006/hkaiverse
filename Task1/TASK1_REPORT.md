@@ -55,7 +55,7 @@ All numeric volumes, time estimates, and ROI figures are illustrative assumption
 | Internal handoffs and owner unclear | ASSUMPTION — internal stages not directly observed | Processing accountability gap | Proposed accountable role at each stage; institution must confirm actual ownership |
 | Placement copy may not reflect newly published grade | ASSUMPTION — proposed concern, not an observed system defect | Risk of stale data reaching placement checks | Authorized sync after publication; SYNC_FAILED prevents false success; manual fallback |
 
-**An interviewer reading this table should immediately answer:**
+**Key summary of findings:**
 - **What is the problem?** Pending grade-improvement results create uncertainty about the effective grade and how the subject appears on the placement form.
 - **Who is affected?** Students awaiting Summer Term grade-improvement results, particularly those approaching placement deadlines.
 - **What evidence supports it?** One documented 90-day case as of 22 Oct 2026 (OBSERVED) and a placement-form screenshot (OBSERVED, `evidence/Screenshort_Evidence.png`, present in repository, shows "SUMMER TERM SUBJECTS ALSO TREATED AS BACKLOGS", no private data).
@@ -505,7 +505,7 @@ Full table: [`evidence/roi_results.md`](evidence/roi_results.md) | Script: [`pro
 - Supplied all dated observations (E-01 to E-04), the computed elapsed time (E-05), and the placement-form screenshot (E-03, present as `evidence/Screenshort_Evidence.png`).
 - Defined the workflow scope and the decision to label unverified internal stages as assumptions rather than assert them as facts.
 - Reviewed and approved all prototype logic, test cases, and report content.
-- Responsible for this document and able to explain every section in an interview.
+- Responsible for this document and prepared to defend every section and finding.
 
 **AI assistance:**
 - An AI coding assistant was used to help structure this report, implement the prototype code, write the test suite, and draft the ROI script.

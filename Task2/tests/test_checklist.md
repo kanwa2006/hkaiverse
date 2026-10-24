@@ -2,7 +2,10 @@
 
 > This checklist covers all manual and automated tests for Task 2.
 >
-> **Automated test suite:** An automated test runner (`Task2/tests/test_course_explorer.py`) programmatically validates all 15 course explorer test cases (CE-01 through CE-14b), dataset alignment with `COURSE_MAP.csv`, credit calculations, sorting, and filter logic. Run it with:
+> **Automated test suite:** An automated test runner (`Task2/tests/test_course_explorer.py`) performs 15 automated programmatic checks of course data and provides a Python reimplementation of the filter, search, sort, and calculation logic (CE-01 through CE-14b), validating alignment with `COURSE_MAP.csv` and credit totals.
+> *(Note: The Python runner tests dataset integrity and algorithmic filter correctness; it does not execute JavaScript inside a browser engine. Live UI rendering and browser DOM behavior are verified via manual review).*
+>
+> Run it with:
 > ```bash
 > python Task2/tests/test_course_explorer.py
 > ```
@@ -66,7 +69,7 @@ These checks verify that the course explorer data, credit calculations, and repo
 | Proposed total = 167 | Sum of all proposed credits | ✅ Verified in CREDIT_CALCULATIONS.md |
 | Net change = 0 | 167 − 167 = 0 | ✅ Verified |
 | CREDIT_CALCULATIONS.md matches explorer totals | Both show 167 / 167 / 0 | ✅ Consistent |
-| IP-2 described without TBC placeholder | "Mandatory Internship-II (IP-2), 15 credits" | ✅ Fixed in all files |
+| IP-2 credit and title consistency | "Mandatory Internship-II (IP-2), 15 credits" | ✅ Verified across all documents |
 
 ---
 
@@ -79,7 +82,7 @@ These checks verify that the course explorer data, credit calculations, and repo
 | Task2 README links all documents | All relative links use correct filenames | ✅ Verified by code review |
 | Root README links to both tasks | Task1 and Task2 sections present with links | ✅ Confirmed |
 | All Task2 files present | See file list below | ✅ Confirmed |
-| No unresolved TBC or draft markers | All placeholder phrases resolved | ✅ Fixed in this pass |
+| No unresolved placeholder markers | All entries verified and resolved | ✅ Confirmed |
 
 ### Required Task 2 Files
 

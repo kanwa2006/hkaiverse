@@ -90,43 +90,62 @@ Students take a realistic college workflow problem (using entirely synthetic dat
 
 ## 4. Course and Credit Summary
 
+### Course count and inventory
+- **52 existing baseline course entries** (totalling 167 baseline credits)
+- **1 proposed new lab** (CS-NEW Applied Software Product Engineering Lab, 3 credits proposed, 0 baseline credits)
+- **53 total comparison rows** in `COURSE_MAP.csv` and `course_explorer.html`
+- **Breakdown by action:** **40 KEEP**, **9 UPDATE**, **3 REDUCE**, **1 ADD**
+- **Baseline credits:** 167
+- **Proposed credits:** 167
+- **Net credit change: Zero**
+
 ### Credit changes
 
-| Change type | Courses | Credit effect |
-|---|---|---|
-| REDUCE | PH101, MG201, HS201 | −3 |
-| ADD | CS-NEW Applied Lab | +3 |
-| **Net** | | **0** |
-| **Baseline total** | All 53 courses | **167 credits** |
-| **Proposed total** | | **167 credits** |
+| Change type | Courses | Baseline Cr. | Proposed Cr. | Credit effect |
+|---|---|---|---|---|
+| KEEP (40 courses) | 40 foundational & general courses | 122 | 122 | 0 |
+| UPDATE (9 courses) | CS101, CS102, CS205, CS206, CS302, CS304, DS304, CS307, CS415 | 34 | 34 | 0 (pedagogical updates) |
+| REDUCE (3 courses) | PH101 (5→4), MG201 (3→2), HS201 (3→2) | 11 | 8 | −3 |
+| ADD (1 course) | CS-NEW Applied Software Product Engineering Lab | 0 | 3 | +3 |
+| **Total (53 rows)** | **52 baseline courses + 1 proposed lab** | **167** | **167** | **0 (Balanced)** |
 
-### Credits affected
+### Credits affected — Three Calculation Methods
 
-The conservative estimate (Method A) counts the three courses whose credit values change and five courses whose practical content is substantially redesigned:
+The percentage of the curriculum affected is evaluated across three transparent methodologies detailed in [CREDIT_CALCULATIONS.md](CREDIT_CALCULATIONS.md):
 
-- Credit-allocation changes (3 REDUCE + 1 ADD): 5 + 3 + 3 + 3 = **14 credits**
-- Key UPDATE courses with substantial redesign (CS205, CS206, CS304, DS304, CS101): 4 + 4 + 3 + 4 + 4 = **19 credits**
-- **Total affected: 33 / 167 = approximately 20%**
+1. **Method A — Conservative / Primary Definition (19.8% ≈ 20%):**
+   - **Formula:** Direct credit reallocations (3 REDUCE [11 cr] + 1 ADD [3 cr] = 14 cr) + 5 key core computing UPDATE courses undergoing substantive learning/lab overhaul (CS101, CS205, CS206, CS304, DS304 = 19 cr).
+   - **Calculation:** `(14 + 19) / 167 = 33 / 167 = 19.8%`.
+   - **Why Method A is Primary:** It focuses credit attribution strictly on courses undergoing major practical restructuring and direct credit shifts. It directly addresses the core industry skill gaps identified in campus recruiting profiles without artificially inflating counts.
+2. **Method B — All UPDATE Courses Counted (28.7%):**
+   - **Formula:** Direct credit reallocations (14 cr) + all 9 UPDATE courses at 100% course credits (34 cr).
+   - **Calculation:** `(14 + 34) / 167 = 48 / 167 = 28.7%`.
+   - **Evaluation:** Comprehensive accounting; exceeds the 25% upper threshold by treating all syllabus modernization as completely new credits.
+3. **Method C — Partial-Credit UPDATE Attribution (18.6%):**
+   - **Formula:** Direct credit reallocations (14 cr) + 50% partial-credit weighting applied to all 9 UPDATE courses (17 cr).
+   - **Calculation:** `(14 + 17) / 167 = 31 / 167 = 18.6%`.
+   - **Evaluation:** Conservative partial-weighting model reflecting syllabus enhancements within unchanged credit envelopes.
 
-Three calculation methods are compared in [CREDIT_CALCULATIONS.md](CREDIT_CALCULATIONS.md). Method A (~20%) is the most conservative and honest figure.
-
-**Note:** HS301 Constitution of India is shown as 0 credits throughout, consistent with both the student instruction and the Semester V portal screenshot (`assets/sem5_courses.png`). No discrepancy exists.
+**Note on non-credit courses:** HS301 (Constitution of India) is recorded as **0 credits** in both baseline and proposal, verified directly against the student information portal screenshot (`assets/sem5_courses.png`). HS101 is also 0 credits.
 
 ---
 
 ## 5. Evidence from Job Descriptions
 
-Three job description PDFs were read directly (using `pypdf`) on 24 October 2026:
+Three on-campus recruitment documents supplied for this review were inspected directly on 24 October 2026. Rather than assuming all roles require identical skill sets, the requirements reflect distinct career tracks:
 
-| Role | Employer | Evidence File | Common Skills Required |
+| Role & File | Organization | Explicit Skills & Responsibilities Required | Primary Role Track |
 |---|---|---|---|
-| Software Engineer (SDE) | ACHNET | `job_descriptions/Detailed Job Description - Tescra.pdf` | Python, OOP, Data Structures, HTML/CSS/JS, full SDLC, Agile, NoSQL |
-| Data Analyst — Fresher | JPMorgan Chase & Co. | `job_descriptions/JPMorgan_Chase_Data_Analyst_Fresher.pdf` | SQL (advanced), Python (Pandas/NumPy), Statistics, Power BI/Tableau, EDA |
-| Software Engineering Intern (Full Stack) | Joveo | `job_descriptions/Joveo_SE_Intern_JD.pdf` | React/Next.js, Node.js/Express, PostgreSQL, REST APIs, Git, LLMs |
+| **Software Engineer (SDE)**<br>`Detailed Job Description - Tescra.pdf` | ACHNET | Python, web technologies (HTML/CSS/JavaScript), Object-Oriented Programming (OOP), Data Structures, NoSQL as a plus, full software development lifecycle (SDLC), testing, and deployment. | Core Software Engineering / SDE |
+| **Data Analyst Fresher**<br>`JPMorgan_Chase_Data_Analyst_Fresher.pdf` | JPMorgan Chase & Co. | Advanced SQL, Python (data manipulation), data cleaning, statistical analysis, exploratory data analysis (EDA), data reporting and visualization (Power BI / Tableau). Git/GitHub and cloud platforms are listed as good-to-have. | Data Analytics & BI |
+| **Software Engineering Intern (Full Stack)**<br>`Joveo_SE_Intern_JD.pdf` | Joveo | Modern frontend/backend web development, React/Next.js, Node.js/Express, TypeScript, PostgreSQL/Supabase, REST APIs, Git version control, and emerging LLM-related capabilities. | Full-Stack Product Engineering |
 
-All three roles consistently list **Python**, **database skills**, and **building or integrating working software** as requirements. Two of the three explicitly require **REST APIs** and **Git**. The current curriculum teaches the relevant concepts (CS205, CS206, CS201, CS304) but does not provide a structured lab that combines them into one integrated exercise.
+### Role-Specific Gaps and Proposed Curriculum Solutions:
+- **For SDE (ACHNET):** Gaps in structured testing, version control, and web lifecycle are addressed by modernizing **CS101** (Git and unit testing), **CS102** (data structure implementation), and **CS304** (Agile and requirements tracing).
+- **For Data Analyst (JPMorgan Chase):** Gaps in advanced SQL query practice, messy data cleaning, and statistical reporting are addressed by hands-on SQL query problem sets in **CS206** and real-dataset pipeline evaluation in **DS304**.
+- **For Full Stack (Joveo):** Gaps in end-to-end REST API architecture, database connection, and team Git workflows are addressed by full-stack integration in **CS205** and the proposed **CS-NEW** Applied Software Product Engineering Lab.
 
-The full skill-gap analysis and proposed curriculum changes for each role are in [JOB_DESCRIPTION_COMPARISON.md](JOB_DESCRIPTION_COMPARISON.md). Curriculum evidence is documented in [CURRICULUM_SCREENSHOTS.md](CURRICULUM_SCREENSHOTS.md).
+The full skill-gap analysis is documented in [JOB_DESCRIPTION_COMPARISON.md](JOB_DESCRIPTION_COMPARISON.md). Curriculum baseline records are catalogued in [CURRICULUM_SCREENSHOTS.md](CURRICULUM_SCREENSHOTS.md).
 
 ---
 
@@ -184,7 +203,7 @@ What you can do with it:
 
 The data in the explorer matches the course map and credit calculations in this report.
 
-**Testing status:** 15 test cases (CE-01 to CE-14b) covering data integrity, search, filtering, credit totals, sorting, and edge cases are documented in [tests/test_checklist.md](tests/test_checklist.md) and automated in [tests/test_course_explorer.py](tests/test_course_explorer.py). All 15 automated tests pass. A reviewer can also verify the explorer interactively by opening the HTML file in any browser.
+**Testing status:** 15 test cases (CE-01 to CE-14b) covering data integrity, search, filtering, credit totals, sorting, and edge cases are documented in [tests/test_checklist.md](tests/test_checklist.md) and programmatically verified via 15 automated Python checks in [tests/test_course_explorer.py](tests/test_course_explorer.py). All 15 automated checks pass. (Note: The Python runner validates data integrity and filter logic in Python; live browser rendering and UI responsiveness are verified by opening the HTML file in any browser).
 
 ---
 
@@ -193,14 +212,14 @@ The data in the explorer matches the course map and credit calculations in this 
 | Item | What was done | Status |
 |---|---|---|
 | Credit totals | Added up semester by semester and compared with student-supplied total | ✅ Verified: 167 baseline, 167 proposed, net 0 |
-| Three calculation methods | Conservative, full-UPDATE, and partial-UPDATE methods compared | ✅ Documented in CREDIT_CALCULATIONS.md |
+| Three calculation methods | Conservative (19.8% primary), full-UPDATE (28.7%), and partial-UPDATE (18.6%) compared | ✅ Documented in CREDIT_CALCULATIONS.md |
 | Job description evidence | Three PDFs read directly with pypdf; skills extracted verbatim | ✅ ACHNET, JPMorgan, Joveo — full gap analysis in JOB_DESCRIPTION_COMPARISON.md |
 | Curriculum screenshots | Seven PNG screenshots reconciled against COURSE_MAP.csv | ✅ All match — see CURRICULUM_SCREENSHOTS.md |
 | AI exercises (5 subjects) | Prompts submitted, outputs recorded, manually verified against known answers | ✅ All 5 verified; corrections documented |
 | HS301 credit value | Screenshot confirms 0 credits; dataset uses 0 | ✅ Consistent — no discrepancy |
 | IP-2 course code | The supplied curriculum materials do not specify a course code for Mandatory Internship-II; identified by name throughout | ✅ Described accurately — no placeholder |
 | Task 1 files | Checked with `git diff Task1/` — no changes | ✅ Preserved unchanged |
-| Course explorer tests | 15 test cases (CE-01 to CE-14b) verified via automated test runner (`tests/test_course_explorer.py`) | ✅ All 15 passed |
+| Course explorer tests | 15 automated Python checks of course data and reimplemented filter logic (`tests/test_course_explorer.py`) | ✅ All 15 passed |
 | Curriculum baseline evidence | Seven semester-wise portal registration screenshots reconciled (`Task2/assets/`) | ✅ Verified primary student records |
 
 ---

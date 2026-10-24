@@ -184,32 +184,34 @@ Each document was read using `pypdf`. Skills, responsibilities, and qualificatio
 
 ---
 
-## Common Skills Across All Three Job Descriptions
+---
 
-| Skill | ACHNET SDE | JPMorgan Data Analyst | Joveo SWE Intern |
+## Cross-Role Skill Comparison Across the Three On-Campus Opportunities
+
+| Skill Area | ACHNET SDE | JPMorgan Data Analyst | Joveo SWE Intern (Full Stack) |
 |---|---|---|---|
-| Python | ✓ | ✓ | ✓ |
-| REST API / Web backend | ✓ | — | ✓ |
-| SQL / Databases | ✓ (NoSQL focus) | ✓ (SQL depth) | ✓ (PostgreSQL) |
-| Git / version control | — | ✓ (good to have) | ✓ (required) |
-| OOP | ✓ | — | ✓ |
-| Cloud / deployment | — | ✓ (good to have) | ✓ |
-| Full-stack / integration | ✓ | — | ✓ |
-| Statistics / ML | ✓ (good to have) | ✓ (statistics + ML) | ✓ (LLMs) |
-| Data structures | ✓ | ✓ | ✓ |
-| Agile / team process | ✓ | ✓ | ✓ |
+| **Python** | ✓ Required (programming & frameworks) | ✓ Required (Pandas, NumPy, EDA) | ✓ Required |
+| **Web Technologies / Frontend** | ✓ HTML, CSS, JavaScript | — | ✓ React, Next.js, TypeScript |
+| **Backend & REST APIs** | ✓ OOP & web application backend | — | ✓ Node.js, Express, REST APIs |
+| **Databases & Querying** | ✓ NoSQL (Redis, MongoDB as a plus) | ✓ Advanced SQL (Joins, CTEs, Window Functions) | ✓ PostgreSQL, Supabase |
+| **Data Analysis & Visualization** | — | ✓ Statistics, EDA, Excel, Power BI / Tableau | — |
+| **Data Structures & OOP** | ✓ Strong data structures & OOP design | ✓ Analytical problem-solving | ✓ Systems problem-solving |
+| **Version Control (Git/GitHub)** | — | ✓ Listed as good-to-have | ✓ Required (collaborative workflow) |
+| **Cloud & Deployment** | ✓ Deployment in SDLC | ✓ Cloud platforms listed as good-to-have | ✓ AWS advantageous |
+| **Software Lifecycle & Ownership** | ✓ Full SDLC (analysis → test → deploy) | ✓ Data validation & analytical reporting | ✓ Full-stack ownership (whiteboard to ship) |
+| **AI / ML / LLMs** | ✓ Good to have (YOLO, LLMs, NER) | ✓ AI/ML fundamentals (good-to-have) | ✓ LLMs, embeddings, pgvector |
 
-### Key Takeaway
+### Key Takeaway: Distinct Role Tracks and Targeted Curriculum Solutions
 
-All three roles require **Python**, **database skills**, and **building or integrating something real**. Two of the three explicitly require **REST APIs** and **Git**. The JPMorgan role requires **SQL depth** that goes beyond basic queries. The Joveo role is the most explicit about the gap: it requires students who have already **shipped something real** and can work end-to-end.
+The three on-campus recruitment documents demonstrate that graduate employment paths diverge into distinct functional roles rather than a single homogeneous profile:
 
-The three most consistent gaps across the current curriculum:
-1. **REST API design and consumption** — taught conceptually in CS205 but no hands-on integration lab exists.
-2. **Git-based collaborative workflow** — appears in CS304 context but not as a systematically assessed, practical lab.
-3. **Integrated application development** — students study the components in isolation; no current course requires building and deploying a working full-stack application end-to-end.
-
-The proposed **CS-NEW Applied Software Product Engineering Lab** and the **UPDATE changes to CS205, CS206, CS304, and CS307** directly address these three gaps for all three employer profiles.
+1. **Software Development Engineer (ACHNET):** Focuses on core programming (Python, OOP, data structures), web development, and the end-to-end SDLC.
+   - *Curriculum Response:* Strengthened programming and unit testing in **CS101**, data structure benchmarking in **CS102**, and structured engineering process in **CS304**.
+2. **Data Analyst (JPMorgan Chase):** Focuses heavily on deep relational database querying (CTEs, window functions, aggregations), exploratory data analysis (EDA), and data reporting. Git and cloud are explicitly listed as good-to-have advantages.
+   - *Curriculum Response:* Advanced SQL query exercises and schema design in **CS206**, probability/statistics in **MA201**, and dataset cleaning and model evaluation labs in **DS304**.
+3. **Full-Stack Engineering Intern (Joveo):** Demands integrated full-stack construction connecting modern frontend, backend, PostgreSQL database, REST APIs, and collaborative Git workflows.
+   - *Curriculum Response:* REST API design and testing in **CS205**, Git branching and pull-request lab in **CS304**, cloud deployment in **CS307**, and the integrated prototype build in **CS-NEW** (Applied Software Product Engineering Lab).
 
 ---
 
-*JOB_DESCRIPTION_COMPARISON.md | Task 2 | HKAIVERSE Round 2 | Evidence read from PDF files on 24 October 2026*
+*JOB_DESCRIPTION_COMPARISON.md | Task 2 | HKAIVERSE Round 2 | Evaluated against supplied on-campus recruitment materials (reviewed 24 October 2026)*

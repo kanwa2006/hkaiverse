@@ -103,7 +103,7 @@ I did not invent feedback, statistics, job descriptions, or test results. Where 
 
 ### Interactive Component
 - The course explorer is a static HTML/CSS/JS file that runs locally in a browser without any server or external API dependency.
-- All 15 functional test cases (CE-01 to CE-14b) are automated and verified via `Task2/tests/test_course_explorer.py`.
+- All 15 functional test cases (CE-01 to CE-14b) are programmatically checked in Python via `Task2/tests/test_course_explorer.py` (validating dataset integrity and filter logic; browser rendering and DOM behavior are verified by opening the HTML file in any browser).
 
 ### AI Exercise Scope
 - All five exercises were conducted on 24 October 2026.
@@ -124,7 +124,7 @@ I did not invent feedback, statistics, job descriptions, or test results. Where 
 | Curriculum screenshots vs. COURSE_MAP.csv | ✓ Verified — all seven screenshots reconciled in `CURRICULUM_SCREENSHOTS.md` |
 | HS301 credit value | ✓ Consistent — screenshot confirms 0 credits; dataset uses 0 |
 | Credit calculation (baseline and proposed) | ✓ Verified — automated test CE-08 confirms 167 / 167 / net 0 |
-| Course explorer data alignment | ✓ Verified — all 15 automated test cases pass (`test_course_explorer.py`) |
+| Course explorer data alignment & filter logic | ✓ Verified — all 15 automated Python checks pass (`test_course_explorer.py`) |
 | Job description skills vs. curriculum map | ✓ Done — three PDFs read directly; gap analysis in `JOB_DESCRIPTION_COMPARISON.md` |
 | IP-2 course code | Not specified in portal materials — identified by official name throughout |
 | Batch syllabus alignment | ✓ Verified against 7 semester-wise portal registration screenshots (Semesters I–VII) |

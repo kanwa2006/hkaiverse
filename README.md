@@ -58,7 +58,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A([Course portal\nscreenshots\nSems I–VII]) --> B[53-course baseline\nCOURSE_MAP.csv]
+    A([Course portal\nscreenshots\nSems I–VII]) --> B[52 baseline courses\n+ 1 proposed lab\n(53 comparison rows)]
     B --> C[Audit 12 redesign\nreasons — CURRICULUM_AUDIT.md]
     C --> D{Decision per course}
     D -->|KEEP| E[40 courses unchanged]
@@ -74,22 +74,22 @@ flowchart TD
 
 **Key documents:**
 - [`Task2/README.md`](Task2/README.md) — main entry point: problem statement, proposed changes, evidence summary, and all links
-- [`Task2/CURRICULUM_AUDIT.md`](Task2/CURRICULUM_AUDIT.md) — full course map, 12 redesign reasons, KEEP/UPDATE/REDUCE/ADD decisions
-- [`Task2/CREDIT_CALCULATIONS.md`](Task2/CREDIT_CALCULATIONS.md) — transparent credit calculations (baseline 167 cr → proposed 167 cr, ~20% affected)
-- [`Task2/JOB_DESCRIPTION_COMPARISON.md`](Task2/JOB_DESCRIPTION_COMPARISON.md) — three job description PDFs (ACHNET, JPMorgan, Joveo) compared to existing courses
-- [`Task2/AI_EXERCISES.md`](Task2/AI_EXERCISES.md) — five AI-assisted exercises with verification and reflections
-- [`Task2/LAB_CAPSTONE_PROPOSAL.md`](Task2/LAB_CAPSTONE_PROPOSAL.md) — Applied Software Product Engineering Lab proposal
+- [`Task2/CURRICULUM_AUDIT.md`](Task2/CURRICULUM_AUDIT.md) — full course map (52 baseline + 1 proposed lab = 53 rows), 12 redesign reasons, KEEP/UPDATE/REDUCE/ADD decisions
+- [`Task2/CREDIT_CALCULATIONS.md`](Task2/CREDIT_CALCULATIONS.md) — transparent credit calculations (baseline 167 cr → proposed 167 cr, 19.8% primary method)
+- [`Task2/JOB_DESCRIPTION_COMPARISON.md`](Task2/JOB_DESCRIPTION_COMPARISON.md) — three on-campus job descriptions (ACHNET, JPMorgan, Joveo) compared across distinct role tracks
+- [`Task2/AI_EXERCISES.md`](Task2/AI_EXERCISES.md) — five AI-assisted exercises with verification, live execution outputs, and reflections
+- [`Task2/LAB_CAPSTONE_PROPOSAL.md`](Task2/LAB_CAPSTONE_PROPOSAL.md) — Applied Software Product Engineering Lab proposal (building on ResultFlow state-machine design)
 - [`Task2/course_explorer.html`](Task2/course_explorer.html) — interactive course explorer (open locally in any browser)
 - [`Task2/CURRICULUM_SCREENSHOTS.md`](Task2/CURRICULUM_SCREENSHOTS.md) — index and reconciliation of semester-wise course portal screenshots
 - [`Task2/SOURCES.md`](Task2/SOURCES.md) — all sources, access dates, evidence categories
 - [`Task2/FEEDBACK_AND_LIMITATIONS.md`](Task2/FEEDBACK_AND_LIMITATIONS.md) — feedback, personal contribution, limitations, validation status
-- [`Task2/tests/test_course_explorer.py`](Task2/tests/test_course_explorer.py) — automated test suite (15/15 tests pass)
+- [`Task2/tests/test_course_explorer.py`](Task2/tests/test_course_explorer.py) — automated test suite (15 automated Python checks pass)
 
 **Evidence files:**
 - [`Task2/assets/`](Task2/assets/) — 7 semester-wise course portal screenshots (Sems I–VII)
 - [`Task2/job_descriptions/`](Task2/job_descriptions/) — 3 job description PDFs: ACHNET SDE, JPMorgan Data Analyst, Joveo Full-Stack Intern
 
-**Test command:** `python Task2/tests/test_course_explorer.py` (15/15 tests pass; validates course data, filter logic, credit arithmetic, and zero-credit courses).
+**Test command:** `python Task2/tests/test_course_explorer.py` (15/15 automated programmatic checks pass; validates course data, filter logic, credit arithmetic, and zero-credit courses).
 
 **Status:** Complete. Proposal only — not an approved IFHE policy document.
 

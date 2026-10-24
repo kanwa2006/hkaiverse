@@ -7,17 +7,17 @@
 
 ## Table of Contents
 
-1. [Background and Applicable Curriculum Version](#1-background)
-2. [Baseline Course and Credit Map](#2-course-map)
-3. [Reasons for Redesign](#3-reasons)
-4. [Proposed Changes: KEEP, UPDATE, REDUCE, ADD](#4-changes)
-5. [Assessment Improvement Proposal](#5-assessment)
-6. [Prerequisite and Regulatory Conditions](#6-prerequisites)
-7. [Proposed Credit Summary](#7-credit-summary)
+1. [Background and Applicable Curriculum Version](#1-background-and-applicable-curriculum-version)
+2. [Baseline Course and Credit Map](#2-baseline-course-and-credit-map)
+3. [Reasons for Redesign](#3-reasons-for-redesign)
+4. [Proposed Changes: KEEP, UPDATE, REDUCE, ADD](#4-proposed-changes-keep-update-reduce-add)
+5. [Assessment Improvement Proposal](#5-assessment-improvement-proposal)
+6. [Prerequisite and Regulatory Conditions](#6-prerequisite-and-regulatory-conditions)
+7. [Proposed Credit Summary](#7-proposed-credit-summary)
 
 ---
 
-## 1. Background and Applicable Curriculum Version {#1-background}
+## 1. Background and Applicable Curriculum Version
 
 ### Programme Details (Student-Supplied)
 - **Institution:** ICFAI Foundation for Higher Education (IFHE), Hyderabad
@@ -36,7 +36,7 @@ The supplied course list is used as-is, with the following confirmed records:
 
 ---
 
-## 2. Baseline Course and Credit Map {#2-course-map}
+## 2. Baseline Course and Credit Map
 
 ### Semester I (Total: 21 credits)
 
@@ -163,7 +163,7 @@ The supplied course list is used as-is, with the following confirmed records:
 
 ---
 
-## 3. Reasons for Redesign {#3-reasons}
+## 3. Reasons for Redesign
 
 ### Reason 1 — Students Learn Components but Not Integration
 Current courses teach programming, databases, web, and networks separately. Students may pass all of them without ever building a working application that connects a frontend, a REST API, a database, and error handling in one system. This gap shows up immediately in a first job.
@@ -207,13 +207,18 @@ SP301 Special Project in Semester VI provides a project experience. The proposed
 
 ---
 
-## 4. Proposed Changes: KEEP, UPDATE, REDUCE, ADD {#4-changes}
+## 4. Proposed Changes: KEEP, UPDATE, REDUCE, ADD
 
-### KEEP Courses (no change)
+### KEEP Courses (40 courses unchanged)
 
-All core CS fundamentals are retained: CS101, CS102 (UPDATE only), CS201, CS202, CS203, CS204, CS206 (UPDATE), CS302 (UPDATE), CS303, CS305, CS306, DS101, DS201, DS303, DS304 (UPDATE), DS306, DS307, DS311, DS401, MA101, MA102, MA201, MA202, CH102, CHY101, EC101, EC102, EC201, EG101, EG102, MT101, MT102, CR201, CR202, CR301, CR302, HS101, HS301, MG401, DS203, SP301, IP201, IP-2.
+The 40 baseline courses retained without modification are:
+- **Core Computer Science and Data Science (18 courses):** CS201 (Object-Oriented Programming), CS202 (Discrete Structures), CS203 (Computer Organization and Architecture), CS204 (Theory of Computation), CS301 (Design and Analysis of Algorithms), CS303 (Programming Language and Compiler Construction), CS305 (Computer Vision), CS306 (Computer Networks), DS101 (Python for Data Science), DS201 (Artificial Intelligence), DS202 (Data Science Programming), DS203 (Data Science Essentials), DS303 (Blockchain Technology), DS306 (Deep Learning), DS307 (Big Data Systems), DS311 (Natural Language Processing), DS401 (Data Mining), SP301 (Special Project).
+- **Mathematics and Basic Sciences (10 courses):** MA101, MA102, MA201, MA202, CH102, CHY101, MT101, MT102, EG101, EG102.
+- **Engineering Sciences and Electronics (3 courses):** EC101, EC102, EC201.
+- **Professional Skills and Humanities (7 courses):** CR201, CR202, CR301, CR302, HS101, HS301, MG401.
+- **Mandatory Internships (2 entries):** IP201 (Internship Programme-I, 3 cr), Mandatory Internship-II (IP-2, 15 cr).
 
-Foundation subjects (Physics, Chemistry, Environmental Sciences, Engineering Graphics, Signal Processing) are retained. The proposal reduces Physics by one credit but does not eliminate the course. Social sciences (Dynamics of Social Change, Engineering Economics) are retained with one-credit reductions proposed for each.
+*(Note: The 9 UPDATE courses—CS101, CS102, CS205, CS206, CS302, CS304, DS304, CS307, CS415—and the 3 REDUCE courses—PH101, MG201, HS201—are listed separately in their respective sections below.)*
 
 ### UPDATE Courses (content or practical emphasis improved)
 
@@ -245,7 +250,7 @@ Foundation subjects (Physics, Chemistry, Environmental Sciences, Engineering Gra
 
 ---
 
-## 5. Assessment Improvement Proposal {#5-assessment}
+## 5. Assessment Improvement Proposal
 
 ### Current Pattern (Student-Reported Understanding)
 
@@ -280,7 +285,7 @@ A student who can explain a linked list in a written answer but cannot implement
 
 ---
 
-## 6. Prerequisite and Regulatory Conditions {#6-prerequisites}
+## 6. Prerequisite and Regulatory Conditions
 
 ### Prerequisite Table for Proposed Changes
 
@@ -308,12 +313,12 @@ All proposed credit reductions and the new course addition require:
 3. Syllabus revision approval for any REDUCE course.
 4. New course code assignment, syllabus, faculty assignment, and lab resource planning for CS-NEW.
 5. Review of the updated assessment pattern against university examination regulations.
-
+ 
 This report does not claim that any of these approvals have been obtained. The proposals are student recommendations requiring formal institutional review.
 
 ---
 
-## 7. Proposed Credit Summary {#7-credit-summary}
+## 7. Proposed Credit Summary
 
 | Change Type | Courses | Credits Affected |
 |---|---|---|
