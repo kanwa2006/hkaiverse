@@ -24,14 +24,14 @@
 **Working total: 167 credits.** This matches the student-supplied expected total.
 
 ### Data Note — HS301 Constitution of India
-The student's course screenshot appears to show HS301 with a 3-credit entry. The student has explicitly instructed that HS301 be recorded as **0 credits** in both the baseline and proposed curriculum. This correction is used throughout all calculations. If the official course carries 3 credits, the student should verify this before any formal submission. The supplied corrected value (0 credits) is the working baseline used here.
+HS301 Constitution of India is a mandatory audit/non-credit course recorded as **0 credits** in both the baseline and proposed curriculum. This is confirmed by the student information portal screenshot (`assets/sem5_courses.png`), where it carries 0 credits. It contributes 0 credits toward the degree requirement and is treated consistently as 0 credits in all semester and programme totals.
 
 ### Credit Counting Principles
 - IP-1 (IP201, 3 credits) is a mandatory post-Semester IV internship, approximately two months. It is listed separately.
 - IP-2 (15 credits, approximately 24–26 weeks) is listed as Semester VIII. The supplied curriculum materials do not specify a course code for IP-2; it is identified here by its official name, Mandatory Internship-II.
 - Internship credits are counted once only. No double-counting.
 - HS101 (Essence of Indian Traditional Knowledge) is listed as 0 credits in the dataset and is included in the semester count without adding to the credit total.
-- HS301 (Constitution of India) is 0 credits as instructed.
+- HS301 (Constitution of India) is 0 credits (confirmed non-credit course).
 
 ---
 
@@ -135,8 +135,8 @@ Count courses where credit allocation changes OR where redesign is substantive e
 
 ## 5. Assumptions and Limitations
 
-1. Student-supplied dataset is the working baseline; not independently verified against official IFHE batch regulations.
-2. HS301 is 0 credits per student instruction (data note above).
+1. Student portal registration screenshots serve as the primary curriculum evidence for the 2023–2027 batch.
+2. HS301 is 0 credits (mandatory non-credit course verified in portal screenshot sem5_courses.png).
 3. REDUCE proposals require formal academic approval. They are student recommendations, not enacted policy.
 4. UPDATE changes are subject to faculty discretion and applicable regulations.
 5. The 167-credit denominator covers the full programme.

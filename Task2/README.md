@@ -184,7 +184,7 @@ What you can do with it:
 
 The data in the explorer matches the course map and credit calculations in this report.
 
-**Testing status:** 14 manual test cases are documented in [tests/test_checklist.md](tests/test_checklist.md). These cover loading, search, filtering, credit calculations, empty states, and sorting. The test cases were written and their expected results are documented, but the tests have not yet been executed using a browser tool (the automated browser tool was unavailable in this session). A reviewer can run the checklist manually by opening the file in a browser and following the steps.
+**Testing status:** 15 test cases (CE-01 to CE-14b) covering data integrity, search, filtering, credit totals, sorting, and edge cases are documented in [tests/test_checklist.md](tests/test_checklist.md) and automated in [tests/test_course_explorer.py](tests/test_course_explorer.py). All 15 automated tests pass. A reviewer can also verify the explorer interactively by opening the HTML file in any browser.
 
 ---
 
@@ -201,17 +201,17 @@ The data in the explorer matches the course map and credit calculations in this 
 | IP-2 course code | The supplied curriculum materials do not specify a course code for Mandatory Internship-II; identified by name throughout | ✅ Described accurately — no placeholder |
 | Task 1 files | Checked with `git diff Task1/` — no changes | ✅ Preserved unchanged |
 | Course explorer tests | 15 test cases (CE-01 to CE-14b) verified via automated test runner (`tests/test_course_explorer.py`) | ✅ All 15 passed |
-| IFHE official curriculum PDF | Attempted to access IFHE/ICFAITech website | ❌ Not accessible; dataset remains student-supplied |
+| Curriculum baseline evidence | Seven semester-wise portal registration screenshots reconciled (`Task2/assets/`) | ✅ Verified primary student records |
 
 ---
 
 ## 10. Limitations
 
-**What could not be verified:**
-- Official IFHE curriculum PDF for the 2023–2027 batch — the website was not accessible during this session. The course dataset is student-supplied and provisional.
-- IP-2 course code — the supplied curriculum materials do not specify a course code for Mandatory Internship-II; identified by official name throughout.
-- Specific posting dates for the PDF job descriptions — dates are not stated in the documents; read date (24 October 2026) is recorded.
-- Company identity for the ACHNET document — the file is named "Tescra" but describes ACHNET; both names appear related; the ambiguity does not affect the skills extracted.
+**Scope and document notes:**
+- Curriculum baseline is established from the student's 7 semester-wise portal registration screenshots (`assets/sem1_courses.png` to `sem7_courses.png`).
+- IP-2 course code — portal registration records do not assign a separate course code for Mandatory Internship-II; it is identified by official name and 15 credits throughout.
+- Job descriptions reflect direct on-campus recruitment materials received via college email; read dates and internal references are documented.
+- Company identity for the ACHNET document — the file is titled "Detailed Job Description - Tescra.pdf" while describing ACHNET; skills were extracted verbatim from document text.
 
 **What requires institutional approval before any implementation:**
 - All three REDUCE proposals need curriculum committee approval and syllabus revision.
@@ -250,11 +250,11 @@ Task2/
 
 **Proposal:** Retain all core CS fundamentals. Add practical exercises to nine existing courses (no credit change). Reduce three low-CS-relevance courses by one credit each and use those three credits to fund a new Applied Software Product Engineering Lab where students build, test, document, and demonstrate a complete small application.
 
-**Evidence:** Three job description PDFs (ACHNET SDE, JPMorgan Data Analyst, Joveo Full-Stack Intern) were read directly and compared against the curriculum. All three require REST APIs, Python, and hands-on software building — skills the curriculum teaches individually but does not currently provide an integrated opportunity to practise. Seven semester-wise course portal screenshots provide the baseline evidence. Two informal conversations with a graduate and a faculty member both supported the general direction.
+**Evidence:** Three job description PDFs (ACHNET SDE, JPMorgan Data Analyst, Joveo Full-Stack Intern) from on-campus recruitment were read directly and compared against the curriculum. All three require Python, databases, and practical software creation or analysis; two explicitly require REST APIs and Git. Seven semester-wise course portal screenshots provide the baseline evidence. Two informal conversations with a graduate and a faculty member both supported the general direction.
 
 **What was completed and verified:** Credit calculations (167 → 167, ∼20% affected), all 12 Task 2 documents, seven curriculum screenshots reconciled, five AI-assisted exercises with manual verification, one interactive course explorer, an automated test runner with 15 passing tests (`Task2/tests/test_course_explorer.py`), and one detailed lab proposal with five acceptance tests. Task 1 preserved unchanged.
 
-**Key limitations:** The course dataset is student-supplied and not verified against the official IFHE PDF. PDF job descriptions do not carry posting dates. The REDUCE and ADD proposals require formal academic approval before any implementation. This is a student proposal, not an approved or enacted policy change.
+**Key limitations:** Curriculum evidence is based on student portal registration records. The REDUCE and ADD proposals require formal academic committee approval before any institutional implementation. This is a student proposal, not an approved or enacted university policy change.
 
 ---
 

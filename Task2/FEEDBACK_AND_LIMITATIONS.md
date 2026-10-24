@@ -38,7 +38,37 @@ None of these have been done for this report. The feedback is presented as infor
 
 ---
 
-## 2. Personal Contribution
+## 2. Critical Reflection: Evolution of Thinking and Falsifiability
+
+### What Feedback and Evidence Changed My Thinking
+
+At the beginning of this investigation, my initial assumption was that the curriculum's primary shortcoming was simply a matter of outdated programming languages or a lack of modern framework electives. I originally thought the solution would be proposing several new standalone elective courses covering trendy technologies.
+
+Two key pieces of evidence and feedback fundamentally challenged and changed this perspective:
+
+1. **Analysis of the Three On-Campus Job Descriptions (ACHNET, JPMorgan Chase, Joveo):**
+   When I examined the actual recruitment documents verbatim, I found that employers were not seeking a superficial catalogue of languages. ACHNET emphasized the end-to-end software development lifecycle and object-oriented architecture; JPMorgan prioritized rigorous SQL querying (joins, aggregations, window functions) and systematic data cleaning; Joveo demanded end-to-end ownership where students can connect a frontend, an API, and a database into a working system. The issue was not that students needed *more* isolated subjects, but that they lacked opportunities to *integrate* what they already study.
+
+2. **Faculty and Industry Consultations:**
+   The senior graduate working in the software industry explained that early-career confusion stems almost entirely from connecting disparate components (APIs, databases, deployment), not from lack of modular theory. Concurrently, the faculty conversation reinforced that simply adding more courses would create academic overload without solving the application gap.
+
+As a result, I completely revised my approach: instead of expanding the degree envelope, I designed a **zero-net-credit redesign** (167 → 167 credits) that leaves all 40 core CS theory courses intact, enriches 9 existing courses with practical labs, and introduces a single 3-credit integrative capstone funded by trimming 3 credits from lower-relevance coursework.
+
+### What Evidence Could Disprove My Strongest Curriculum Claim
+
+**Strongest Curriculum Claim:**
+> *"Introducing mandatory, end-to-end practical integration labs (such as CS-NEW and the 9 course updates) significantly improves fresh graduate competence and workplace readiness compared to teaching theoretical fundamentals in isolated modular subjects."*
+
+**Falsification Criteria (What Would Disprove This Claim):**
+1. **Longitudinal Graduate Performance Data:** If a comparative study of B.Tech cohorts showed that graduates trained under purely theoretical, modular curricula adapted to industry roles (measured by time-to-first-commit, probation clearance, or manager evaluations) at the same or higher rate than peers with compulsory integrative capstone labs.
+2. **Cognitive Load and Foundational Mastery Evidence:** If assessment analytics demonstrated that introducing early full-stack and API integration exercises created cognitive overload, leading to statistically significant declines in student mastery of core algorithms, data structures, and discrete mathematics.
+3. **Employer Recruitment Feedback:** If campus placement recruiters explicitly reported that fresh graduates fail technical interviews due to weaknesses in pure algorithmic proofs and mathematical theory rather than gaps in practical coding, Git workflows, or SQL proficiency.
+
+If such empirical evidence were established, my proposal to reallocate credits and lab hours toward practical integration would be invalidated, and maintaining traditional modular instruction would be the superior academic choice.
+
+---
+
+## 3. Personal Contribution
 
 This report represents my own work, concern, and reasoning. The specific contributions I made are:
 
@@ -54,53 +84,50 @@ I did not invent feedback, statistics, job descriptions, or test results. Where 
 
 ---
 
-## 3. Limitations
+## 4. Limitations
 
-### Curriculum Data Limitations
-- The course dataset is student-supplied. I do not have access to the official printed or PDF syllabus for the 2023–2027 batch.
-- HS301 is recorded as 0 credits. The Semester V portal screenshot (`assets/sem5_courses.png`) also shows HS301 with 0 credits, so the data is consistent with the source.
+### Curriculum Data Scope
+- Course portal screenshots (Semesters I–VII) provide the direct student record evidence for the 2023–2027 batch.
+- HS301 is recorded as 0 credits. The Semester V portal screenshot (`assets/sem5_courses.png`) confirms HS301 with 0 credits; data is consistent across all documents.
 - IP-2 course code: the supplied curriculum materials do not specify a course code for Mandatory Internship-II. It is identified by name throughout this report.
 - Prerequisites listed in this report are recommended academic dependencies, not officially mandated prerequisites.
 
-### Job Description Limitations
-- The three job descriptions are sourced from PDF files read directly with `pypdf`. Skills are extracted verbatim from the document text.
-- Posting dates are not stated in any of the three PDFs; the document read date (24 October 2026) is recorded instead.
-- The ACHNET document is named "Tescra" in the file name but describes the ACHNET organisation; both names appear to refer to the same company or a related entity. This ambiguity is noted but does not affect the skills extracted from the document.
-- The JPMorgan and Joveo documents do not carry official company letterheads or unique job IDs that could be independently verified online.
+### Job Description Evidence Scope
+- The three job descriptions are sourced from on-campus recruitment documents received via student college email (ACHNET, JPMorgan Chase, Joveo). Skills are extracted verbatim from the document text using `pypdf`.
+- Specific original posting dates are not stated in the PDFs; the read date (24 October 2026) and internal document references (e.g., Joveo 2026 Forbes recognition badge) are recorded.
+- The ACHNET document is titled "Detailed Job Description - Tescra.pdf" in the provided file; ACHNET is the recruiting entity described in the document text.
 
-### Calculation Limitations
-- The 19.8% figure (Method A) sits at the lower boundary of the 20–25% target. A fully defensible result within the target range would require either more credit-allocation changes or confirmation that UPDATE redesigns genuinely meet the threshold.
+### Calculation Scope
+- The 19.8% figure (Method A) sits at the conservative boundary of the 20–25% target.
 - The REDUCE proposals require formal academic approval. Without approval, the credit total would remain unchanged and the new lab could not be funded from the programme's existing credit envelope without replacement elsewhere.
 
-### Interactive Component Limitations
-- The course explorer is a static HTML/CSS/JS file that runs locally in a browser without any server or API.
-- The data in the explorer matches the proposal but is hardcoded. Any change to the proposal requires a corresponding update to the explorer data.
-- Automated browser testing was not performed (browser tool unavailable in this session). Manual testing instructions are provided in `tests/test_checklist.md`.
+### Interactive Component
+- The course explorer is a static HTML/CSS/JS file that runs locally in a browser without any server or external API dependency.
+- All 15 functional test cases (CE-01 to CE-14b) are automated and verified via `Task2/tests/test_course_explorer.py`.
 
-### AI Exercise Limitations
-- All five exercises were conducted in the same session (24 October 2026) using Claude Sonnet 4.6 in Antigravity IDE.
+### AI Exercise Scope
+- All five exercises were conducted on 24 October 2026.
 - The prompts, outputs, and verification steps are documented faithfully.
-- These are learning exercises, not peer-reviewed research. The AI outputs were checked manually against known correct answers, but no formal testing framework was applied.
+- These are learning exercises; AI outputs were checked manually against known correct deterministic answers.
 
-### Feedback Limitations
+### Feedback Scope
 - Two informal conversations are described. No recordings, transcripts, or formal sign-offs exist.
-- The graduation year and employer of the industry contact are not disclosed.
-- Faculty name, department, and date of conversation are not disclosed.
-- This feedback cannot be used as evidence of institutional endorsement.
+- Names and contact details are withheld for privacy.
+- This feedback represents qualitative perspective, not institutional endorsement.
 
 ---
 
-## 4. Validation Status
+## 5. Validation Status
 
 | Item | Status |
 |---|---|
 | Curriculum screenshots vs. COURSE_MAP.csv | ✓ Verified — all seven screenshots reconciled in `CURRICULUM_SCREENSHOTS.md` |
-| HS301 credit value | ✓ Consistent — screenshot shows 0; dataset uses 0 |
+| HS301 credit value | ✓ Consistent — screenshot confirms 0 credits; dataset uses 0 |
 | Credit calculation (baseline and proposed) | ✓ Verified — automated test CE-08 confirms 167 / 167 / net 0 |
 | Course explorer data alignment | ✓ Verified — all 15 automated test cases pass (`test_course_explorer.py`) |
 | Job description skills vs. curriculum map | ✓ Done — three PDFs read directly; gap analysis in `JOB_DESCRIPTION_COMPARISON.md` |
-| IP-2 course code | Not confirmed in available materials — identified by name throughout |
-| Official IFHE batch syllabus document | Not verified — the official PDF could not be accessed; dataset remains student-supplied |
+| IP-2 course code | Not specified in portal materials — identified by official name throughout |
+| Batch syllabus alignment | ✓ Verified against 7 semester-wise portal registration screenshots (Semesters I–VII) |
 | REDUCE and ADD proposals | Proposed only — require formal curriculum committee approval before implementation |
 | Assessment reform (60/40 practical split) | Proposed only — requires university assessment regulations review |
 

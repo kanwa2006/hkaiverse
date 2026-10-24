@@ -41,10 +41,10 @@ flowchart LR
 **Key documents:**
 - [`Task1/README.md`](Task1/README.md) — full project overview, evidence log, workflow design, and test summary
 - [`Task1/TASK1_REPORT.md`](Task1/TASK1_REPORT.md) — detailed investigation report
-- [`Task1/prototype/`](Task1/prototype/) — Python prototype (resultflow.py), test suite (test_resultflow.py), and ROI script
+- [`Task1/prototype/`](Task1/prototype/) — Python prototype (`resultflow.py`), test suite (`test_resultflow.py`), and ROI script
 - [`Task1/evidence/`](Task1/evidence/) — screenshot evidence, pytest output, case results, and ROI output
 
-**Test status:** 20/20 tests pass (pytest, Python 3.12, 23 Oct 2026).
+**Test command:** `python -m pytest Task1/prototype/ -q` (20/20 automated tests pass; validates state machine transitions, idempotent sync retries, duplicate rejection, and role-based permissions).
 
 ---
 
@@ -52,7 +52,7 @@ flowchart LR
 
 **Topic:** Auditing the B.Tech CSE curriculum at IFHE Hyderabad (batch 2023–2027) and proposing a balanced redesign that retains strong theoretical foundations while adding more practical, project-based learning aligned with entry-level industry requirements.
 
-**Problem in one line:** Students can complete every subject individually without ever building a frontend, backend, API, and database into one working application — yet every graduate job description requires exactly this.
+**Problem in one line:** Students can complete individual subjects in isolation without structured opportunities to integrate them — whereas industry roles require practical end-to-end integration (APIs, databases, and version control for software roles; hands-on SQL and data modeling for analytics roles).
 
 **How the audit was structured:**
 
@@ -61,7 +61,7 @@ flowchart TD
     A([Course portal\nscreenshots\nSems I–VII]) --> B[53-course baseline\nCOURSE_MAP.csv]
     B --> C[Audit 12 redesign\nreasons — CURRICULUM_AUDIT.md]
     C --> D{Decision per course}
-    D -->|KEEP| E[31 courses unchanged]
+    D -->|KEEP| E[40 courses unchanged]
     D -->|UPDATE| F[9 courses improved]
     D -->|REDUCE| G[3 courses reduced\n-3 credits]
     D -->|ADD| H[1 new lab added\n+3 credits]
@@ -89,7 +89,7 @@ flowchart TD
 - [`Task2/assets/`](Task2/assets/) — 7 semester-wise course portal screenshots (Sems I–VII)
 - [`Task2/job_descriptions/`](Task2/job_descriptions/) — 3 job description PDFs: ACHNET SDE, JPMorgan Data Analyst, Joveo Full-Stack Intern
 
-**Test status:** 15/15 course explorer tests pass (Python 3.11, 24 Oct 2026). 20/20 Task 1 tests continue to pass.
+**Test command:** `python Task2/tests/test_course_explorer.py` (15/15 tests pass; validates course data, filter logic, credit arithmetic, and zero-credit courses).
 
 **Status:** Complete. Proposal only — not an approved IFHE policy document.
 
@@ -97,10 +97,11 @@ flowchart TD
 
 ## Release and Commit
 
-**Final commit (HEAD):** [`7249481`](https://github.com/kanwa2006/hkaiverse/commit/7249481f39343adc6e7db9fd9bb82076564e2cbd)
-Full SHA: `7249481f39343adc6e7db9fd9bb82076564e2cbd`
+- **Named release:** [v2.0-task2-final](https://github.com/kanwa2006/hkaiverse/releases/tag/v2.0-task2-final) (*HKAIVERSE Round 2 — Final Submission*)
+- **Preserved review commit:** [`8dc4a56`](https://github.com/kanwa2006/hkaiverse/commit/8dc4a5650eb8d4721f8717c6fadc85632e7da693)
+- **Full SHA:** `8dc4a5650eb8d4721f8717c6fadc85632e7da693`
 
-**GitHub release:** Go to [github.com/kanwa2006/hkaiverse/releases/new](https://github.com/kanwa2006/hkaiverse/releases/new) → tag `v2.0-task2-final` → target `main` → title *"HKAIVERSE Round 2 — Final Submission"* → publish.
+*Note on release tag:* The published release `v2.0-task2-final` permanently tags and preserves commit `8dc4a56` containing the complete deliverables for both Task 1 and Task 2. Any minor post-release documentation polish commit on the `main` branch is tracked transparently in the repository history.
 
 ---
 

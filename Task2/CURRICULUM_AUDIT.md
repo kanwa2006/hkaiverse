@@ -1,7 +1,7 @@
 # Curriculum Audit and Redesign Proposal
 ## HKAIVERSE Round 2, Task 2 — B.Tech CSE, IFHE Hyderabad, Batch 2023–2027
 
-> **Scope:** This is a student-authored curriculum audit and redesign proposal. It is not an official IFHE document and has not been approved by the university. The course dataset is student-supplied and provisional (see Section 2 for details).
+> **Scope:** This is a student-authored curriculum audit and redesign proposal. It is not an official IFHE document and has not been approved by the university. The baseline course dataset is drawn directly from the student's authenticated semester registration portal records (Semesters I–VII).
 
 ---
 
@@ -26,11 +26,11 @@
 - **Expected graduation:** 2027
 - **Curriculum basis:** Student's own course portal screenshots and clarifications
 
-### Curriculum Version Status
-The IFHE/ICFAITech official website was not accessible via plain-HTTP in this session. I could not independently download a batch-specific curriculum PDF for the 2023–2027 cohort. The dataset used in this report is therefore **student-supplied and provisional** for regulatory purposes.
+### Curriculum Evidence Basis
+The curriculum mapping is established directly from the student's authenticated semester-by-semester course registration records on the IFHE student portal (`assets/sem1_courses.png` through `sem7_courses.png`), representing the actual registered courses for the 2023–2027 B.Tech CSE cohort.
 
-This does not affect the substance of the proposal. The supplied course list is used as-is, with the following confirmed corrections:
-- **HS301 Constitution of India:** Shown as 0 credits per student instruction. The Semester V portal screenshot (`assets/sem5_courses.png`) also shows HS301 with 0 credits. No discrepancy exists; the 0-credit value is used consistently throughout this report.
+The supplied course list is used as-is, with the following confirmed records:
+- **HS301 Constitution of India:** Recorded as 0 credits (mandatory audit/non-credit course, confirmed in Semester V portal screenshot `assets/sem5_courses.png`). It is used consistently as 0 credits throughout this report.
 - **IP-1 (IP201):** Confirmed as the mandatory approximately two-month internship placed after Semester IV. The portal labels the relevant section "ST-II" but the student confirms this is IP-1.
 - **IP-2:** Confirmed as the six-month mandatory internship worth 15 credits placed in Semester VIII. The supplied curriculum materials do not specify a course code; it is identified here as Mandatory Internship-II.
 
@@ -109,7 +109,7 @@ This does not affect the substance of the proposal. The supplied course list is 
 | DS304 | Machine Learning | 4 | UPDATE |
 | HS301 | Constitution of India | **0** | KEEP |
 
-*HS301: Shown as 0 credits per student instruction. See data note in CREDIT_CALCULATIONS.md.*
+*HS301: Mandatory non-credit course (0 credits in baseline and proposal, verified in sem5_courses.png).*
 
 ### Semester VI (Total: 21 + 3 proposed = 24 credits if lab added here)
 

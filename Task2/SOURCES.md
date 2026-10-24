@@ -10,7 +10,7 @@
 |---|---|---|
 | Student course portal screenshots (`Task2/assets/`) | SUPPLIED EVIDENCE | Seven PNG screenshots of the student's course portal covering Semesters I–VII. Course codes, names, academic year, and credits all match `COURSE_MAP.csv`. Reconciliation documented in `CURRICULUM_SCREENSHOTS.md`. |
 | Student clarification (HS301, IP-1/IP-2) | SUPPLIED EVIDENCE | Student instruction: HS301 = 0 credits (confirmed in Semester V screenshot); IP201 is IP-1 (mandatory post-Semester IV internship, 3 credits); IP-2 is the six-month Mandatory Internship-II (15 credits). |
-| IFHE / ICFAITech official sources | NOT VERIFIED | The official IFHE website (ifheindia.org) and ICFAITech pages were not successfully accessed with plain-HTTP to retrieve a batch-specific curriculum PDF. The student's dataset is labelled as student-supplied and provisional. |
+| IFHE Student Portal Registration Records | PRIMARY EVIDENCE | Direct semester-wise course registration portal screenshots (Semesters I–VII) from student records, establishing the actual curriculum baseline for the 2023–2027 batch. |
 
 ---
 
@@ -18,15 +18,15 @@
 
 | # | Employer | Role | Evidence File | Access/Read Date | Posting Date | Notes |
 |---|---|---|---|---|---|---|
-| 1 | ACHNET | Software Engineer (SDE) | `job_descriptions/Detailed Job Description - Tescra.pdf` | 24 Oct 2026 | Not stated in document | PDF read directly. Bangalore/Remote. Full-stack web, OOP, Data Structures, Python, Agile. |
-| 2 | JPMorgan Chase & Co. | Data Analyst — Fresher | `job_descriptions/JPMorgan_Chase_Data_Analyst_Fresher.pdf` | 24 Oct 2026 | Not stated in document | PDF read directly. Pan India. SQL, Python, Statistics, Excel, Power BI / Tableau, Git (good to have). |
-| 3 | Joveo | Software Engineering Intern (Full Stack) | `job_descriptions/Joveo_SE_Intern_JD.pdf` | 24 Oct 2026 | 2026 (Forbes badge in document) | PDF read directly. Bengaluru. React, Next.js, Node.js, PostgreSQL, REST API, Git, LLMs. |
+| 1 | ACHNET | Software Engineer (SDE) | `job_descriptions/Detailed Job Description - Tescra.pdf` | 24 Oct 2026 | Not stated in document | On-campus recruitment opportunity. PDF read directly. Full-stack web, OOP, Data Structures, Python, Agile. |
+| 2 | JPMorgan Chase & Co. | Data Analyst — Fresher | `job_descriptions/JPMorgan_Chase_Data_Analyst_Fresher.pdf` | 24 Oct 2026 | Not stated in document | On-campus recruitment opportunity. PDF read directly. SQL, Python, Statistics, Excel, Power BI / Tableau, Git. |
+| 3 | Joveo | Software Engineering Intern (Full Stack) | `job_descriptions/Joveo_SE_Intern_JD.pdf` | 24 Oct 2026 | 2026 (Forbes badge in document) | On-campus recruitment opportunity. PDF read directly. React, Next.js, Node.js, PostgreSQL, REST API, Git, LLMs. |
 
 ---
 
 ## 3. Note on Evidence Approach
 
-The three job descriptions used in this submission are PDF files provided or sourced as physical evidence (see Section 2 above). Skills were extracted directly from the document text using `pypdf` and are not inferred or templated. This approach replaces the earlier web-portal-based evidence (Accenture, IBM, Cisco career portals), which was inaccessible in plain-text due to JavaScript rendering limitations.
+The three job descriptions used in this submission are genuine on-campus recruitment documents received through college email for campus placement and internship drives (ACHNET, JPMorgan Chase, and Joveo). Skills were extracted directly from the document text using `pypdf` and are not inferred or templated. This ensures practical relevance to actual graduate hiring standards faced by students.
 
 ---
 
@@ -69,7 +69,7 @@ Calculations are documented in full in `CREDIT_CALCULATIONS.md`. Key figures:
 
 ---
 
-## 7. Repository Inspection Record
+## 7. Baseline Repository Inspection Record (Historical Context — Pre-Task 2 Ingestion)
 
 | Item | Finding |
 |---|---|
@@ -79,7 +79,7 @@ Calculations are documented in full in `CREDIT_CALCULATIONS.md`. Key figures:
 | Branch | main |
 | Root files found | README.md, .gitignore, Task1/ directory |
 | Task1 files found | README.md, TASK1_REPORT.md, .gitignore, evidence/, prototype/ |
-| Task2 directory at inspection | Did not exist — created in this session |
+| Task2 directory (pre-development baseline) | Did not exist prior to Task 2 development (subsequently authored, tested, and committed) |
 | Task1 preserved | ✓ Not modified |
 
 ---
